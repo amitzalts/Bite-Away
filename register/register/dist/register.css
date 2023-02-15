@@ -10,7 +10,7 @@ body, html {
   color: #fff;
 }
 
-.login-container {
+.register-container {
   overflow: hidden;
   padding: 16px 32px;
   background-color: #6060af;
@@ -19,43 +19,38 @@ body, html {
   width: 100vw;
   height: 100vh;
 }
-.login-container__header {
+.register-container__header {
   display: grid;
   place-items: center;
   height: calc(50% - 75px );
 }
-.login-container__main {
+.register-container__main {
   display: grid;
   place-items: center;
   height: calc(50% - 75px );
   margin-bottom: 20px;
 }
-.login-container__footer {
+.register-container__footer {
   height: 70px;
 }
-.login-container__logo {
+.register-container__logo {
   font-size: 5rem;
   text-decoration: none;
   color: white;
 }
-.login-container__container-btn {
+.register-container__container-btn {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
-.login-container__btn {
+.register-container__btn {
+  padding: 10px 20px;
   width: 150px;
   height: 50px;
   border-radius: 10px;
   cursor: pointer;
 }
-.login-container__btn a {
-  text-decoration: none;
-  color: black;
-  width: 150px;
-  height: 50px;
-}
-.login-container__btn:active {
+.register-container__btn:active {
   background-color: #0f0d0f;
   color: #fff;
 }
