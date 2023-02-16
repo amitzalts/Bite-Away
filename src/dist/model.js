@@ -16,8 +16,6 @@ function count() {
         }
     }, 1000);
 }
-count();
-console.log(count());
 // --------------------------- User Classes ------
 var Customer = /** @class */ (function () {
     function Customer(name, password, email, address, creditCard) {
@@ -26,35 +24,32 @@ var Customer = /** @class */ (function () {
         this.email = email;
         this.address = address;
         this.creditCard = creditCard;
-        this.uid = "1" + uid();
-        // uid:uid() -- function randon id
+        this.uid = "100" + uid();
     }
     return Customer;
 }());
 var Restaurant = /** @class */ (function () {
-    function Restaurant(name, password, email, address, BankAccount, type) {
+    function Restaurant(name, password, email, address, type, BankAccount) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.address = address;
-        this.BankAccount = BankAccount;
         this.type = type;
-        // this.uid = `2${uid()}`
-        // uid:uid() -- function randon id
+        this.BankAccount = BankAccount;
+        this.uid = "200" + uid();
     }
     return Restaurant;
 }());
 var Courier = /** @class */ (function () {
-    function Courier(name, password, email, area, BankAccount, vehicle, age) {
+    function Courier(name, password, email, area, vehicle, age, BankAccount) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.area = area;
-        this.BankAccount = BankAccount;
         this.vehicle = vehicle;
         this.age = age;
-        // this.uid = `3${uid()}`
-        // uid:uid() -- function randon id
+        this.BankAccount = BankAccount;
+        this.uid = "300" + uid();
     }
     return Courier;
 }());
@@ -69,9 +64,8 @@ var Course = /** @class */ (function () {
         this.courier = courier;
         this.destination = destination;
         this.status = status;
-        this.uid = "01" + uid();
+        this.uid = "101" + uid();
         this.date = new Date(); // date right now
-        // uid:uid() -- function randon id
     }
     return Course;
 }());
@@ -83,8 +77,11 @@ var Order = /** @class */ (function () {
         this.restaurant = restaurant;
         this.price = price;
         this.description = description;
-        // this.uid = `01${uid()}`
-        // uid:uid() -- function randon id
+        this.uid = "201" + uid();
     }
     return Order;
 }());
+// --------------------------- Array ------
+var customers = [];
+var restaurants = [];
+var couriers = [];

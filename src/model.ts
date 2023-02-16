@@ -12,19 +12,15 @@ let currentNumber = 0;
 const clicked = false
         function count(): void {
             const intervalId = setInterval(() => {
-                
               currentNumber++;
               if (clicked) {
-              
                 clearInterval(intervalId);
                 console.log(currentNumber); // return the sec after clicked
                 return currentNumber
               }
             }, 1000);
           }
-          count()
 
-          console.log(count());
 
 
 // --------------------------- User Classes ------
@@ -35,10 +31,9 @@ class Customer {
         public password:string , 
         public email:string ,
         public address:string , 
-        public creditCard:string,
+        public creditCard?:string,
     ){
-this.uid = `1${uid()}`
-  // uid:uid() -- function randon id
+this.uid = `100${uid()}`
     }
 }
 
@@ -49,11 +44,10 @@ class Restaurant {
         public password:string , 
         public email:string ,
         public address:string , 
-        public BankAccount:string,
         public type:string,
+        public BankAccount?:string,
     ){
-// this.uid = `2${uid()}`
-  // uid:uid() -- function randon id
+this.uid = `200${uid()}`
     }
 }
 
@@ -64,20 +58,20 @@ class Courier {
         public password:string , 
         public email:string ,
         public area:string,
-        public BankAccount:string,
         public vehicle?:string ,
         public age?:number,
+        public BankAccount?:string,
 
     ){
-// this.uid = `3${uid()}`
-  // uid:uid() -- function randon id
+  this.uid = `300${uid()}`
+
     }
 }
 
 // --------------------------- non User Classes ------
 class Course {
-    uid:string ,
-    date:Date
+    uid:string;
+    date:Date;
     constructor(
         public name:string,
         public password:string , 
@@ -91,11 +85,12 @@ class Course {
         
 
     ){
-this.uid = `01${uid()}`
+this.uid = `101${uid()}`
 this.date = new Date();  // date right now
-  // uid:uid() -- function randon id
+
     }
 }
+
 class Order {
     uid:string
     constructor(
@@ -106,7 +101,13 @@ class Order {
         public price:number,
         public description:string,
     ){
-// this.uid = `01${uid()}`
-  // uid:uid() -- function randon id
+this.uid = `201${uid()}`
+
     }
 }
+
+// --------------------------- Array ------
+
+const customers:Customer[] = [];
+const restaurants:Restaurant[] = [];
+const couriers:Courier[] = [];

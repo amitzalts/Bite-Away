@@ -1,70 +1,108 @@
+// reset
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-    // reset
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    
-    // main
-    
-    body , html {
-        font-size: 16px;
-        background-color: rgb(250, 250, 250);
-        color: #fff;
-    }
-    
-    // containerPage
-    
-    .register-container{
-        overflow: hidden;
+// main
+
+body,
+html {
+    font-size: 16px;
+    background-color: rgb(250, 250, 250);
+    color: #fff;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.4rem;
+}
+// containerPage
+
+.register-container {
+    & {
+        overflow-y: hidden;
         padding: 16px 32px;
         background-color: rgb(96, 96, 175);
         text-align: center;
         justify-content: space-between;
         width: 100vw;
         height: 100vh;
+    }
+    // main containers
+    &__header {
+        display: grid;
+        place-items: center;
+        margin-bottom: 25px;
+    }
+
+    &__main {
+        display: grid;
+        place-items: center;
+        margin: 20px;
+    }
+
+    &__footer {
+        height: 70px;
+    }
+
+    &__des {
+        font-size: 1.5rem;
+    }
+
+    &__choose-Type {
     
-        // main containers
-        &__header{
-            display: grid;
-            place-items: center;
-            height: calc(50% - 75px );
+        margin: 50px;
+
+        select,
+        label {
+            font-size: 1.4rem;
+            padding: 10px 20px;
         }
-    
-        &__main {
-            display: grid;
-            place-items: center;
-            height: calc(50% - 75px );
-            margin-bottom: 20px;
-        }
-        &__footer{
-            height:70px;
-        }
-    
-        &__logo{
+    }
+
+    &__choose-Type-btn {
+        padding: 10px 20px;
+        font-size: 1.5rem;
+    }
+
+    &__logo {
         font-size: 5rem;
         text-decoration: none;
         color: white;
-        }
-    
-        &__container-btn{
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-    
-        }
-    
-        &__btn{
-            padding: 10px 20px;
-            width: 150px;
-            height: 50px;
-            border-radius: 10px;
-            cursor: pointer;
-            
-            &:active{
-                background-color: rgb(15, 13, 15);
-                color: #fff;
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-direction: column;
+
+        input,
+        select {
+            display: none;
+            width: 100%;
+            padding: 10px 16px;
+
+            &.active {
+                display: block;
             }
         }
+
     }
+
+    &__btn {
+        padding: 10px 20px;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:active {
+            background-color: rgb(15, 13, 15);
+            color: #fff;
+        }
+    }
+}

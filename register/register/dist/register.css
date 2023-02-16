@@ -4,14 +4,20 @@
   box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
   font-size: 16px;
   background-color: #fafafa;
   color: #fff;
 }
 
+button {
+  padding: 10px 20px;
+  font-size: 1.4rem;
+}
+
 .register-container {
-  overflow: hidden;
+  overflow-y: hidden;
   padding: 16px 32px;
   background-color: #6060af;
   text-align: center;
@@ -22,26 +28,52 @@ body, html {
 .register-container__header {
   display: grid;
   place-items: center;
-  height: calc(50% - 75px );
+  margin-bottom: 25px;
 }
 .register-container__main {
   display: grid;
   place-items: center;
-  height: calc(50% - 75px );
-  margin-bottom: 20px;
+  margin: 20px;
 }
 .register-container__footer {
   height: 70px;
+}
+.register-container__des {
+  font-size: 1.5rem;
+}
+.register-container__choose-Type {
+  margin: 50px;
+}
+.register-container__choose-Type select,
+.register-container__choose-Type label {
+  font-size: 1.4rem;
+  padding: 10px 20px;
+}
+.register-container__choose-Type-btn {
+  padding: 10px 20px;
+  font-size: 1.5rem;
 }
 .register-container__logo {
   font-size: 5rem;
   text-decoration: none;
   color: white;
 }
-.register-container__container-btn {
+.register-container__form {
+  width: 100%;
   display: flex;
   gap: 10px;
   justify-content: center;
+  flex-direction: column;
+}
+.register-container__form input,
+.register-container__form select {
+  display: none;
+  width: 100%;
+  padding: 10px 16px;
+}
+.register-container__form input.active,
+.register-container__form select.active {
+  display: block;
 }
 .register-container__btn {
   padding: 10px 20px;
