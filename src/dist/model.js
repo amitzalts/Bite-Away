@@ -55,10 +55,8 @@ var Courier = /** @class */ (function () {
 }());
 // --------------------------- non User Classes ------
 var Course = /** @class */ (function () {
-    function Course(name, password, email, restaurant, price, courier, destination, status) {
+    function Course(name, restaurant, price, courier, destination, status) {
         this.name = name;
-        this.password = password;
-        this.email = email;
         this.restaurant = restaurant;
         this.price = price;
         this.courier = courier;

@@ -71,16 +71,13 @@ class Courier {
 // --------------------------- non User Classes ------
 class Course {
     uid:string;
-    date:Date;
     constructor(
-        public name:string,
-        public password:string , 
-        public email:string ,
-        public restaurant:string , 
+        public name:string, 
+        public restaurant:string, 
         public price:number,
-        public courier:string,
-        public destination:string,
-        public status:string,
+        public courier?:string,
+        public destination?:string,
+        public status?:string,
 
         
 
