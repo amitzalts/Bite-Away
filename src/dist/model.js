@@ -80,6 +80,30 @@ var Order = /** @class */ (function () {
     return Order;
 }());
 // --------------------------- Array ------
-var customers = [];
-var restaurants = [];
-var couriers = [];
+var customers = getInfoFromStorage("customers");
+var restaurants = getInfoFromStorage("restaurants");
+var couriers = getInfoFromStorage("couriers");
+// --------------------------- LocalStorage ------
+function saveInLocalStorage(array, name) {
+    try {
+        if (!array)
+            throw new Error("the Array no Found ");
+        localStorage.setItem(name, JSON.stringify(array));
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function getInfoFromStorage(arrayName) {
+    try {
+        var dataJson = localStorage.getItem(arrayName);
+        if (!dataJson)
+            throw new Error("the " + arrayName + " not found in localStorage");
+        var data = JSON.parse(dataJson);
+        return data;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
+    }
+}
