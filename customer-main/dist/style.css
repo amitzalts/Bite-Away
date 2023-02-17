@@ -88,9 +88,9 @@ body {
 }
 
 .menu {
-  width: 20rem;
-  height: 20rem;
-  position: absolute;
+  width: 40rem;
+  height: auto;
+  position: relative;
   bottom: 0rem;
   left: 0rem;
   border-radius: 1rem;
@@ -102,4 +102,12 @@ body {
   flex-direction: column;
   z-index: 2;
   background-color: aliceblue;
+}
+.menu__close {
+  height: 1rem;
+  width: 1rem;
+  position: relative;
+  color: black;
+  border: 0.1rem solid black;
+  z-index: 3;
 }

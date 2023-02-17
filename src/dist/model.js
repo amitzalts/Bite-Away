@@ -36,6 +36,7 @@ var Restaurant = /** @class */ (function () {
         this.address = address;
         this.type = type;
         this.BankAccount = BankAccount;
+        this.menu = [];
         this.uid = "200" + uid();
     }
     return Restaurant;

@@ -1,4 +1,20 @@
-restaurants.push(new Restaurant("amit", "a", "b", "c", "d"), new Restaurant("orel", "e", "f", "g", "h"), new Restaurant("dor", "i", "j", "k", "l"), new Restaurant("zalts", "m", "n", "o", "p"), new Restaurant("karak", "q", "r", "s", "t"), new Restaurant("book", "u", "v", "w", "x"));
+var amit = new Restaurant("amit", "a", "b", "c", "d");
+var orel = new Restaurant("orel", "e", "f", "g", "h");
+var dor = new Restaurant("dor", "i", "j", "k", "l");
+var zalts = new Restaurant("zalts", "m", "n", "o", "p");
+var karako = new Restaurant("karako", "q", "r", "s", "t");
+var book = new Restaurant("book", "u", "v", "w", "x");
+restaurants.push(amit, orel, dor, zalts, karako, book);
+var pasta = new Course("pasta", amit, 10);
+var pizza = new Course("pizza", amit, 20);
+var ravioli = new Course("ravioli", amit, 30);
+var teramisu = new Course("teramisu", amit, 40);
+//we get a menu (Course[]), from another page.
+if (!restaurants[0].menu)
+    throw new Error("menu undefined");
+restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
+console.log("amitMenu", restaurants[0].menu);
+restaurants[1].menu.push(new Course("eggroll", orel, 50), new Course("pad thai", orel, 60), new Course("sushi", orel, 70), new Course("cake", orel, 80));
 function renderRestaurants() {
     try {
         var restaurantRoot = document.querySelector("#restaurantRoot");
@@ -14,25 +30,39 @@ function renderRestaurants() {
 }
 function openMenu(uid) {
     try {
-        console.log("uid", uid);
         var menu = document.querySelector("#uid-" + uid + "Root");
         if (!menu)
             throw new Error("could not find root");
-        console.log("menu", menu);
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        menu.innerHTML = "\n       <div id=uid-" + uid + "MenuRoot class=\"menu\">" + restaurants[index].name + " </div>\n       <button onclick=\"closeMenu('uid-" + uid + "MenuRoot')\">close</button>\n       ";
+        menu.innerHTML = "\n       <div class=\"menu\">" + restaurants[index].name + " \n            <button class=\"menu__close\" onclick=\"closeMenu('" + uid + "')\">close</button>\n            <div id=menuRoot" + uid + "></div>\n       </div>\n       ";
+        var menuRoot = document.querySelector("#menuRoot" + uid);
+        if (menuRoot)
+            menuRoot.innerHTML = renderMenuForCustomer(uid);
     }
     catch (error) {
         console.error(error);
     }
 }
+function renderMenuForCustomer(uid) {
+    try {
+        var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
+        var html = restaurants[index].menu
+            .map(function (course) {
+            return "\n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + "</div>\n            </div>\n            ";
+        })
+            .join(" ");
+        return html;
+    }
+    catch (error) {
+        console.error(error);
+        return "";
+    }
+}
 function closeMenu(uid) {
     try {
-        console.log("uid", uid);
-        var menu = document.querySelector("#uid-" + uid + "MenuRoot");
+        var menu = document.querySelector("#uid-" + uid + "Root");
         if (!menu)
             throw new Error("could not find root");
-        console.log("menu", menu);
         menu.innerHTML = "";
     }
     catch (error) {

@@ -1,5 +1,5 @@
 
-const menu: Course[] = [];
+const menu: Course[] = []; //change to the relevant menu of the logged in resataurant
 
 const courseRoot = document.querySelector("#courseRoot"); //view
 const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader"); //view
@@ -15,7 +15,7 @@ function loggedInRestaurant(): Restaurant {
     } else {
       return restaurant;
     }
-  }
+}
 
 
 function handleAddCourse(ev: any) {
@@ -24,8 +24,7 @@ function handleAddCourse(ev: any) {
 
         const name = ev.target.elements.name.value;
         const price = ev.target.elements.price.valueAsNumber;
-        const _restaurant = loggedInRestaurant();
-        const restaurant: string | Restaurant = _restaurant.name;///////
+        const restaurant = loggedInRestaurant();
 
         menu.push(new Course(name, restaurant, price));
 
@@ -68,7 +67,7 @@ function renderMenu(menu: Course[]): string {
                 <h3>${course.name}</h3>
                 <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>
                 <div>uid: ${course.uid}</div>
-                <div>restaurant: ${course.restaurant}</div>
+                <div>restaurant: ${course.restaurant.name}</div>
                 <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
             </div>
             `;
