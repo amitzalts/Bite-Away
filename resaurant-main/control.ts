@@ -1,6 +1,23 @@
+
 const menu: Course[] = [];
 
 const courseRoot = document.querySelector("#courseRoot"); //view
+const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader"); //view
+
+restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela 5', 'italian'));
+console.log(restaurants[0].uid);
+
+function loggedInRestaurant(): Restaurant {
+    
+    const restaurant = restaurants.find((restaurant) => restaurant.uid); 
+    console.log("restaurant", restaurant);
+    if (!restaurant) {
+      throw new Error("could not find logged in restaurant");
+    } else {
+      return restaurant;
+    }
+  }
+
 
 function handleAddCourse(ev: any) {
     try {
@@ -8,8 +25,8 @@ function handleAddCourse(ev: any) {
 
         const name = ev.target.elements.name.value;
         const price = ev.target.elements.price.valueAsNumber;
-        const description = ev.target.elements.description.value;
-        const restaurant: string | Restaurant = "examle"; //need to change to the loded in restaurant
+        const _restaurant = loggedInRestaurant();
+        const restaurant: string | Restaurant = _restaurant.name;///////
 
         menu.push(new Course(name, restaurant, price));
 
@@ -24,29 +41,45 @@ function handleAddCourse(ev: any) {
     }
 }
 
-
+function renderRestaurantHeader() {
+    try {
+        const restaurant: Restaurant = loggedInRestaurant();
+        if (restaurant && restaurantHeader) {
+            restaurantHeader.innerText = `${restaurant.name}`    
+        }
+    } catch (error) {
+        console.error(error);
+        return "";
+    }
+}
 
 
 function renderMenu(menu: Course[]): string {
     try {
-        if (!menu || !Array.isArray(menu))
-            throw new Error("items is not an array");
+        const restaurant: Restaurant = loggedInRestaurant();
+        if (!restaurant) throw new Error("logged in restaurant not found");
 
-        const html = menu
-            .map((course) => {
-                console.log(`${course.uid}`);
-                return `
+
+            if (!menu || !Array.isArray(menu))
+                throw new Error("menu is not an array");
+
+            const html = menu
+                .map((course) => {
+                    return `
             <div class="course">
                 <h3>${course.name}</h3>
                 <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>
                 <div>uid: ${course.uid}</div>
+                <div>restaurant: ${course.restaurant}</div>
                 <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
             </div>
             `;
-            })
-            .join(" ");
-        console.log(html);
-        return html;
+                })
+                .join(" ");
+
+            return html;
+        
+        
     } catch (error) {
         console.error(error);
         return "";

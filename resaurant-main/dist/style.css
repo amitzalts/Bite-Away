@@ -9,3 +9,9 @@
   height: 10rem;
   border: 0.1rem solid black;
 }
+
+.activeOrders {
+  width: 30rem;
+  height: auto;
+  border: 0.1rem solid black;
+}
