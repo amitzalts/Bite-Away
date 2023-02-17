@@ -105,6 +105,31 @@ this.uid = `201${uid()}`
 
 // --------------------------- Array ------
 
-const customers:Customer[] = [];
-const restaurants:Restaurant[] = [];
-const couriers:Courier[] = [];
+const customers = getInfoFromStorage("customers") as Customer[] | [];
+const restaurants = getInfoFromStorage("restaurants") as Restaurant[] | [] ;
+const couriers = getInfoFromStorage("couriers") as Courier[] | [];
+
+
+// --------------------------- LocalStorage ------
+
+function saveInLocalStorage(array:Customer[] | Restaurant[] | Courier[] , name:string){
+    try {
+            if(!array) throw new Error("the Array no Found ")
+            localStorage.setItem(name , JSON.stringify(array)) 
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function getInfoFromStorage(arrayName:string) :Customer[] | Restaurant[] | Courier[] | []{
+    try {
+            const dataJson = localStorage.getItem(arrayName)
+            if(!dataJson) throw new Error(`the ${arrayName} not found in localStorage`);
+            const data = JSON.parse(dataJson) as Customer[] | Restaurant[] | Courier[]
+            return data
+            
+    } catch (error) {
+        console.error(error)
+        return []
+    }
+}

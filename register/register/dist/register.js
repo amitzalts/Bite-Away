@@ -63,12 +63,15 @@ function handleSubmitFormRegister(ev) {
         switch (handleGetTypeRegister()) {
             case "customer":
                 customers.push(new Customer(name.value, password.value, email.value, address.value));
+                saveInLocalStorage(customers, "customers");
                 break;
             case "restaurant":
                 restaurants.push(new Restaurant(name.value, password.value, email.value, address.value, restaurant_type.value));
+                saveInLocalStorage(restaurants, "restaurants");
                 break;
             case "courier":
                 couriers.push(new Courier(name.value, password.value, email.value, area.value, vehicle.value, parseInt(age.value)));
+                saveInLocalStorage(couriers, "couriers");
                 break;
         }
         ev.target.reset();
