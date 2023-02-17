@@ -133,3 +133,5 @@ function getInfoFromStorage(arrayName:string) :Customer[] | Restaurant[] | Couri
         return []
     }
 }
+
+

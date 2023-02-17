@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  position: relative;
+  background-color: wheat;
+}
+
+.container {
+  position: relative;
+  margin: 0;
+}
+
+.header {
+  width: 30rem;
+  height: 3rem;
+  position: relative;
+  top: 1rem;
+  left: 40rem;
+  font-size: 5rem;
+  color: #3811ba;
+  font-weight: 800;
+}
+
+.searchBox {
+  width: 30rem;
+  height: 3rem;
+  position: relative;
+  top: 5rem;
+  left: 38rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  background-color: #2a2929;
+  color: white;
+}
+
+.results {
+  width: 50rem;
+  height: 200rem;
+  position: relative;
+  top: 5rem;
+  left: 30rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.results__restaurant {
+  width: 40rem;
+  height: auto;
+  position: relative;
+  top: 0rem;
+  left: 3rem;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0.7rem;
+}
+.results__restaurant__wrapper {
+  width: 39rem;
+  height: 11rem;
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.5rem;
+  margin-top: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  color: #140ad8;
+  font-weight: 600;
+  gap: 1rem;
+}
+
+.cart {
+  width: 20rem;
+  height: 50rem;
+  position: relative;
+  bottom: 200rem;
+  left: 7rem;
+  border-radius: 1rem;
+  border: 0.1rem solid black;
+  font-size: 1.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
