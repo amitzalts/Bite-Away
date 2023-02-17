@@ -2,10 +2,8 @@ var menu = [];
 var courseRoot = document.querySelector("#courseRoot"); //view
 var restaurantHeader = document.querySelector("#restaurantHeader"); //view
 restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela 5', 'italian'));
-console.log(restaurants[0].uid);
 function loggedInRestaurant() {
     var restaurant = restaurants.find(function (restaurant) { return restaurant.uid; });
-    console.log("restaurant", restaurant);
     if (!restaurant) {
         throw new Error("could not find logged in restaurant");
     }
@@ -39,7 +37,6 @@ function renderRestaurantHeader() {
     }
     catch (error) {
         console.error(error);
-        return "";
     }
 }
 function renderMenu(menu) {
@@ -63,7 +60,6 @@ function renderMenu(menu) {
 }
 function handleDeleteItem(uid) {
     try {
-        console.log(uid);
         var index = menu.findIndex(function (item) { return item.uid === uid; });
         if (index === -1)
             throw new Error("course not found");

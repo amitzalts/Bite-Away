@@ -86,3 +86,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.menu {
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  bottom: 0rem;
+  left: 0rem;
+  border-radius: 1rem;
+  border: 0.1rem solid black;
+  font-size: 1.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  background-color: aliceblue;
+}

@@ -11,23 +11,56 @@ restaurants.push(
 
 
 function renderRestaurants() {
-    const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
-    if (restaurantRoot) {
-        for (let i = 0; i < restaurants.length; i++) {
-            const restaurant = document.createElement("div");
-            restaurant.innerHTML = `
-          <div id=${restaurants[i].uid} class="results__restaurant">
-              <div class="results__restaurant__wrapper">
-                  <span>Name: ${restaurants[i].name} </span>
-                  <span>Address: ${restaurants[i].address} </span>
-                  <span>Type: ${restaurants[i].type} </span>
-              </div>
-              <button onclick="openMenu()">open menu</button>    
-          </div>`;
-            document.querySelector("#restaurantRoot")?.appendChild(restaurant); //change to += inner html
+    try {
+        const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
+        if (restaurantRoot) {
+            for (let i = 0; i < restaurants.length; i++) {
+                restaurantRoot.innerHTML += `
+                <div id=uid-${restaurants[i].uid} class="results__restaurant">
+                <div id=uid-${restaurants[i].uid}Root ></div>
+                    <div class="results__restaurant__wrapper">
+                        <span>Name: ${restaurants[i].name} </span>
+                        <span>Address: ${restaurants[i].address} </span>
+                        <span>Type: ${restaurants[i].type} </span>
+                    </div>
+                    <button onclick="openMenu('${restaurants[i].uid}')">open menu</button>    
+                </div>`;
+            }
         }
     }
+    catch (error) {
+        console.error(error);
+    }
 }
+
+function openMenu(uid: string){
+    try {
+        console.log("uid", uid);
+       const menu: HTMLElement | null = document.querySelector(`#uid-${uid}Root`);
+       if (!menu) throw new Error ("could not find root");
+       console.log("menu", menu);
+       const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
+       menu.innerHTML=`
+       <div id=uid-${uid}MenuRoot class="menu">${restaurants[index].name} </div>
+       <button onclick="closeMenu('uid-${uid}MenuRoot')">close</button>
+       `
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function closeMenu(uid: string){
+    try {
+        console.log("uid", uid);
+       const menu: HTMLElement | null = document.querySelector(`#uid-${uid}MenuRoot`);
+       if (!menu) throw new Error ("could not find root");
+       console.log("menu", menu);
+       menu.innerHTML="";
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 
 
