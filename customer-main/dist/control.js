@@ -22,6 +22,7 @@ function renderRestaurants() {
             for (var i = 0; i < restaurants.length; i++) {
                 restaurantRoot.innerHTML += "\n                <div id=uid-" + restaurants[i].uid + " class=\"results__restaurant\">\n                <div id=uid-" + restaurants[i].uid + "Root ></div>\n                    <div class=\"results__restaurant__wrapper\">\n                        <span>Name: " + restaurants[i].name + " </span>\n                        <span>Address: " + restaurants[i].address + " </span>\n                        <span>Type: " + restaurants[i].type + " </span>\n                    </div>\n                    <button onclick=\"openMenu('" + restaurants[i].uid + "')\">open menu</button>    \n                </div>";
             }
+            saveInLocalStorage(restaurants, "restaurants");
         }
     }
     catch (error) {

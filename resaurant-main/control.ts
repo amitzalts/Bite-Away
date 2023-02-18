@@ -33,6 +33,7 @@ function handleAddCourse(ev: any) {
         if (!courseRoot) throw new Error("courseRoot is null");
 
         courseRoot.innerHTML = renderMenu(menu);
+        saveInLocalStorage(restaurants, "restaurants");
 
     } catch (error) {
         console.error(error);
@@ -63,7 +64,7 @@ function renderMenu(menu: Course[]): string {
             const html = menu
                 .map((course) => {
                     return `
-                    
+
             <div class="course">
                 <h3>${course.name}</h3>
                 <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>
@@ -94,6 +95,9 @@ function handleDeleteItem(uid: string) {
 
         if (!courseRoot) throw new Error("courseRoot is undefined");
         courseRoot.innerHTML = renderMenu(menu);
+
+        saveInLocalStorage(restaurants, "restaurants");
+
     } catch (error) {
         console.error(error);
     }

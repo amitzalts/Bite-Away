@@ -90,8 +90,7 @@ class Order {
     uid:string;
     courses: Course[] = [];
     constructor(
-        public name:string,
-        public password:string, 
+        public name:string, 
         public restaurant:Restaurant,
         public courier?:Courier, 
         public destination?:string,
@@ -106,13 +105,14 @@ this.uid = `201${uid()}`
 // --------------------------- Array ------
 
 const customers = getInfoFromStorage("customers") as Customer[] | [];
-const restaurants = getInfoFromStorage("restaurants") as Restaurant[] | [] ;
+const restaurants = getInfoFromStorage("restaurants") as Restaurant[] | [];
 const couriers = getInfoFromStorage("couriers") as Courier[] | [];
+const orders = getInfoFromStorage("orders") as Order[] | [];
 
 
 // --------------------------- LocalStorage ------
 
-function saveInLocalStorage(array:Customer[] | Restaurant[] | Courier[] , name:string){
+function saveInLocalStorage(array:Customer[] | Restaurant[] | Courier[] | Order[], name:string){
     try {
             if(!array) throw new Error("the Array no Found ")
             localStorage.setItem(name , JSON.stringify(array)) 
@@ -121,7 +121,7 @@ function saveInLocalStorage(array:Customer[] | Restaurant[] | Courier[] , name:s
     }
 }
 
-function getInfoFromStorage(arrayName:string) :Customer[] | Restaurant[] | Courier[] | []{
+function getInfoFromStorage(arrayName:string) :Customer[] | Restaurant[] | Courier[] | Order[] | []{
     try {
             const dataJson = localStorage.getItem(arrayName)
             if(!dataJson) throw new Error(`the ${arrayName} not found in localStorage`);

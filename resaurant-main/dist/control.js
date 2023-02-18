@@ -22,6 +22,7 @@ function handleAddCourse(ev) {
         if (!courseRoot)
             throw new Error("courseRoot is null");
         courseRoot.innerHTML = renderMenu(menu);
+        saveInLocalStorage(restaurants, "restaurants");
     }
     catch (error) {
         console.error(error);
@@ -47,7 +48,7 @@ function renderMenu(menu) {
             throw new Error("menu is not an array");
         var html = menu
             .map(function (course) {
-            return "\n                    \n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                <div>uid: " + course.uid + "</div>\n                <div>restaurant: " + course.restaurant.name + "</div>\n                <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n            </div>\n            ";
+            return "\n\n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                <div>uid: " + course.uid + "</div>\n                <div>restaurant: " + course.restaurant.name + "</div>\n                <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n            </div>\n            ";
         })
             .join(" ");
         return html;
@@ -66,6 +67,7 @@ function handleDeleteItem(uid) {
         if (!courseRoot)
             throw new Error("courseRoot is undefined");
         courseRoot.innerHTML = renderMenu(menu);
+        saveInLocalStorage(restaurants, "restaurants");
     }
     catch (error) {
         console.error(error);

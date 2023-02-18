@@ -66,9 +66,8 @@ var Course = /** @class */ (function () {
     return Course;
 }());
 var Order = /** @class */ (function () {
-    function Order(name, password, restaurant, courier, destination, status) {
+    function Order(name, restaurant, courier, destination, status) {
         this.name = name;
-        this.password = password;
         this.restaurant = restaurant;
         this.courier = courier;
         this.destination = destination;
@@ -82,6 +81,7 @@ var Order = /** @class */ (function () {
 var customers = getInfoFromStorage("customers");
 var restaurants = getInfoFromStorage("restaurants");
 var couriers = getInfoFromStorage("couriers");
+var orders = getInfoFromStorage("orders");
 // --------------------------- LocalStorage ------
 function saveInLocalStorage(array, name) {
     try {

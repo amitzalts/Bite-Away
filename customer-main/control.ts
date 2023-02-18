@@ -30,6 +30,7 @@ restaurants[1].menu.push(
 )
 
 
+
 function renderRestaurants() {
     try {
         const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
@@ -46,6 +47,7 @@ function renderRestaurants() {
                     <button onclick="openMenu('${restaurants[i].uid}')">open menu</button>    
                 </div>`;
             }
+            saveInLocalStorage(restaurants, "restaurants");
         }
     }
     catch (error) {
