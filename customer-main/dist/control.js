@@ -13,8 +13,31 @@ var teramisu = new Course("teramisu", amit, 40);
 if (!restaurants[0].menu)
     throw new Error("menu undefined");
 restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
-console.log("amitMenu", restaurants[0].menu);
 restaurants[1].menu.push(new Course("eggroll", orel, 50), new Course("pad thai", orel, 60), new Course("sushi", orel, 70), new Course("cake", orel, 80));
+var customer1 = new Customer("customer1", "134", "email", "destination");
+var customer2 = new Customer("customer2", "135", "email2", "destination2");
+customers.push(customer1, customer2);
+function loggedInCustomer() {
+    var customer = customers.find(function (customer) { return customer.uid; });
+    if (!customer) {
+        throw new Error("could not find logged in restaurant");
+    }
+    else {
+        return customer;
+    }
+}
+function renderCustomerHeader() {
+    try {
+        var customerHeader = document.querySelector("#customerHeader");
+        var customer = loggedInCustomer();
+        if (customer && customerHeader) {
+            customerHeader.innerText = "" + customer.name;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 function renderRestaurants() {
     try {
         var restaurantRoot = document.querySelector("#restaurantRoot");
@@ -49,7 +72,7 @@ function renderMenuForCustomer(uid) {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
         var html = restaurants[index].menu
             .map(function (course) {
-            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3 type=\"text\" name=\"name\">" + course.name + "  </h3>\n                    <div type=\"number\" name=\"price\">Price: " + course.price + "  </div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"submit\" value=\"Add to Cart\" />\n                </div>\n            </form>    \n            ";
+            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3 type=\"text\" name=\"" + course.name + "\">" + course.name + "</h3>\n                    <div type=\"number\" name=\"price\">Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"submit\" value=\"Add to Cart\" />\n                </div>\n            </form>    \n            ";
         })
             .join(" ");
         return html;
@@ -63,10 +86,11 @@ function handleAddToCart(ev) {
     try {
         ev.preventDefault();
         var name = ev.target.elements.name.value;
-        var price = ev.target.elements.price.valueAsNumber;
-        var restaurant = loggedInRestaurant();
-        menu.push(new Course(name, restaurant, price));
-        // ev.target.reset();
+        var qty = ev.target.elements.qty.valueAsNumber;
+        var customer = loggedInCustomer();
+        var currentOrder = customer.orders.length - 1;
+        customer.orders[currentOrder].courses.push(new Course(name, restaurant, price));
+        console.log(customer);
         if (!courseRoot)
             throw new Error("courseRoot is null");
         // courseRoot.innerHTML = renderMenu(menu);

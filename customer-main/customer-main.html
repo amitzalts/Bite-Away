@@ -12,9 +12,9 @@
     <title>my profile</title>
 </head>
 
-<body onload="renderRestaurants()">
+<body onload="renderRestaurants() , renderCustomerHeader()">
     <div class="container">
-        <div class="header" >logged in user</div> 
+        <div id="customerHeader" class="header" >logged in user</div> 
         <input type="text" id="userInput" class="searchBox" onkeyup="search()" placeholder="Search restaurants...">
     
         <div class="results">

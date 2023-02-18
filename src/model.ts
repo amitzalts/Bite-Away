@@ -25,12 +25,13 @@ const clicked = false
 
 // --------------------------- User Classes ------
 class Customer {
-    uid:string
+    uid:string;
+    orders: Order[];
     constructor(
         public name:string,
-        public password:string , 
-        public email:string ,
-        public address:string , 
+        public password:string, 
+        public email:string,
+        public address:string, 
         public creditCard?:string,
     ){
 this.uid = `100${uid()}`

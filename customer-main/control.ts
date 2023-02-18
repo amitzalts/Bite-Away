@@ -18,9 +18,6 @@ const teramisu = new Course("teramisu", amit, 40);
 if(!restaurants[0].menu) throw new Error("menu undefined");
 restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
 
-console.log("amitMenu", restaurants[0].menu);
-
-
 
 restaurants[1].menu.push(
     new Course("eggroll", orel, 50),
@@ -29,7 +26,35 @@ restaurants[1].menu.push(
     new Course("cake", orel, 80),
 )
 
+const customer1 = new Customer("customer1", "134", "email", "destination");
+const customer2 = new Customer("customer2", "135", "email2", "destination2");
+customers.push(customer1, customer2);
 
+
+
+
+function loggedInCustomer(): Customer {
+    
+    const customer = customers.find((customer) => customer.uid); 
+    if (!customer) {
+      throw new Error("could not find logged in restaurant");
+    } else {
+      return customer;
+    }
+}
+
+
+function renderCustomerHeader() {
+    try {
+        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader"); 
+        const customer: Customer = loggedInCustomer();
+        if (customer && customerHeader) {
+            customerHeader.innerText = `${customer.name}`    
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 function renderRestaurants() {
     try {
@@ -69,10 +94,14 @@ function openMenu(uid: string) {
        `
        const menuRoot = document.querySelector(`#menuRoot${uid}`)
         if(menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
+       
     } catch (error) {
         console.error(error);
+    
     }
 }
+
+
 
 function renderMenuForCustomer(uid): string {
     try {
@@ -83,8 +112,8 @@ function renderMenuForCustomer(uid): string {
                 return `
             <form onsubmit="handleAddToCart(event)">    
                 <div class="course">
-                    <h3 type="text" name="name">${course.name}  </h3>
-                    <div type="number" name="price">Price: ${course.price}  </div>
+                    <h3 type="text" name="${course.name}">${course.name}</h3>
+                    <div type="number" name="price">Price: ${course.price}</div>
                     <input type="number" name="qty" placeholder="0" required>
                     <input type="submit" value="Add to Cart" />
                 </div>
@@ -105,13 +134,16 @@ function handleAddToCart(ev: any) {
     try {
         ev.preventDefault();
 
+        
         const name = ev.target.elements.name.value;
-        const price = ev.target.elements.price.valueAsNumber;
-        const restaurant = loggedInRestaurant();
+        const qty = ev.target.elements.qty.valueAsNumber;
+        
+        const customer = loggedInCustomer();
+        const currentOrder = customer.orders.length-1;
 
-        menu.push(new Course(name, restaurant, price));
-
-        // ev.target.reset();
+        customer.orders[currentOrder].courses.push(new Course(name, restaurant, price))
+        console.log(customer);
+        
 
         if (!courseRoot) throw new Error("courseRoot is null");
 

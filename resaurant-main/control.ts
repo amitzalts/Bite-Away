@@ -2,7 +2,6 @@
 const menu: Course[] = []; //change to the relevant menu of the logged in resataurant
 
 const courseRoot = document.querySelector("#courseRoot"); //view
-const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader"); //view
 
 restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela 5', 'italian'));
 
@@ -40,8 +39,10 @@ function handleAddCourse(ev: any) {
     }
 }
 
+
 function renderRestaurantHeader() {
     try {
+        const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader"); 
         const restaurant: Restaurant = loggedInRestaurant();
         if (restaurant && restaurantHeader) {
             restaurantHeader.innerText = `${restaurant.name}`    
