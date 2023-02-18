@@ -56,13 +56,10 @@ var Courier = /** @class */ (function () {
 }());
 // --------------------------- non User Classes ------
 var Course = /** @class */ (function () {
-    function Course(name, restaurant, price, courier, destination, status) {
+    function Course(name, restaurant, price) {
         this.name = name;
         this.restaurant = restaurant;
         this.price = price;
-        this.courier = courier;
-        this.destination = destination;
-        this.status = status;
         this.uid = "101" + uid();
         this.date = new Date(); // date right now
     }
