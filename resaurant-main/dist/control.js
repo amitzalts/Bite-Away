@@ -47,7 +47,7 @@ function renderMenu(menu) {
             throw new Error("menu is not an array");
         var html = menu
             .map(function (course) {
-            return "\n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                <div>uid: " + course.uid + "</div>\n                <div>restaurant: " + course.restaurant.name + "</div>\n                <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n            </div>\n            ";
+            return "\n                    \n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                <div>uid: " + course.uid + "</div>\n                <div>restaurant: " + course.restaurant.name + "</div>\n                <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n            </div>\n            ";
         })
             .join(" ");
         return html;

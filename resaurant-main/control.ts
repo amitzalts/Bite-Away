@@ -63,6 +63,7 @@ function renderMenu(menu: Course[]): string {
             const html = menu
                 .map((course) => {
                     return `
+                    
             <div class="course">
                 <h3>${course.name}</h3>
                 <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>

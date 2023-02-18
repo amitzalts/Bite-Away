@@ -39,7 +39,7 @@ this.uid = `100${uid()}`
 
 class Restaurant {
     uid:string;
-    menu: Course[]=[];
+    menu: Course[] = [];
     constructor(
         public name:string,
         public password:string , 
@@ -79,7 +79,6 @@ class Course {
         public courier?:string,
         public destination?:string,
         public status?:string,
-
         
 
     ){
@@ -90,14 +89,16 @@ this.date = new Date();  // date right now
 }
 
 class Order {
-    uid:string
+    uid:string;
+    courses: Course[] = [];
     constructor(
         public name:string,
-        public password:string , 
-        public courses:string ,
-        public restaurant:string , 
-        public price:number,
-        public description:string,
+        public password:string, 
+        public restaurant:Restaurant, 
+        public courier:Courier, 
+        public destination:string, 
+        public status:string, 
+        
     ){
 this.uid = `201${uid()}`
 

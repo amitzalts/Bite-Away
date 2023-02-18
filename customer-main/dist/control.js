@@ -48,7 +48,7 @@ function renderMenuForCustomer(uid) {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
         var html = restaurants[index].menu
             .map(function (course) {
-            return "\n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + "</div>\n            </div>\n            ";
+            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3 type=\"text\" name=\"name\">" + course.name + "  </h3>\n                    <div type=\"number\" name=\"price\">Price: " + course.price + "  </div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"submit\" value=\"Add to Cart\" />\n                </div>\n            </form>    \n            ";
         })
             .join(" ");
         return html;
@@ -56,6 +56,22 @@ function renderMenuForCustomer(uid) {
     catch (error) {
         console.error(error);
         return "";
+    }
+}
+function handleAddToCart(ev) {
+    try {
+        ev.preventDefault();
+        var name = ev.target.elements.name.value;
+        var price = ev.target.elements.price.valueAsNumber;
+        var restaurant = loggedInRestaurant();
+        menu.push(new Course(name, restaurant, price));
+        // ev.target.reset();
+        if (!courseRoot)
+            throw new Error("courseRoot is null");
+        // courseRoot.innerHTML = renderMenu(menu);
+    }
+    catch (error) {
+        console.error(error);
     }
 }
 function closeMenu(uid) {

@@ -69,13 +69,14 @@ var Course = /** @class */ (function () {
     return Course;
 }());
 var Order = /** @class */ (function () {
-    function Order(name, password, courses, restaurant, price, description) {
+    function Order(name, password, restaurant, courier, destination, status) {
         this.name = name;
         this.password = password;
-        this.courses = courses;
         this.restaurant = restaurant;
-        this.price = price;
-        this.description = description;
+        this.courier = courier;
+        this.destination = destination;
+        this.status = status;
+        this.courses = [];
         this.uid = "201" + uid();
     }
     return Order;

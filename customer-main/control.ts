@@ -79,16 +79,19 @@ function renderMenuForCustomer(uid): string {
         const html = restaurants[index].menu
             .map((course) => {
                 return `
-            <div class="course">
-                <h3>${course.name}</h3>
-                <div>Price: ${course.price}</div>
-            </div>
+            <form onsubmit="handleAddToCart(event)">    
+                <div class="course">
+                    <h3 type="text" name="name">${course.name}  </h3>
+                    <div type="number" name="price">Price: ${course.price}  </div>
+                    <input type="number" name="qty" placeholder="0" required>
+                    <input type="submit" value="Add to Cart" />
+                </div>
+            </form>    
             `;
             })
             .join(" ");
 
         return html;
-
 
     } catch (error) {
         console.error(error);
@@ -96,6 +99,26 @@ function renderMenuForCustomer(uid): string {
     }
 }
 
+function handleAddToCart(ev: any) {
+    try {
+        ev.preventDefault();
+
+        const name = ev.target.elements.name.value;
+        const price = ev.target.elements.price.valueAsNumber;
+        const restaurant = loggedInRestaurant();
+
+        menu.push(new Course(name, restaurant, price));
+
+        // ev.target.reset();
+
+        if (!courseRoot) throw new Error("courseRoot is null");
+
+        // courseRoot.innerHTML = renderMenu(menu);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
 
