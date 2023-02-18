@@ -1,20 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../src/dist/helper.js" defer></script>
-    <script src="../src/dist/model.js" defer></script>
-    <title>LogIn</title>
+    <!-- Link JavaScript Files -->
+
+    <script src=".././src/dist/helper.js"></script>
+    <script src=".././src/dist/model.js" defer></script>
+    <script src="./dist/login.js" defer></script>
+    <!-- Link Css Files -->
+    <link rel="stylesheet" href="./dist/login.css" >
+
+    <title>Intro Page</title>
 </head>
+
 <body>
-  <div class="container-login">
-    <h1>Login Page</h1>
-    <form class="container-form">
-        <input type="text" placeholder="ENTER you email" name="email">
-        <input type="text" placeholder="ENTER you Password" name="password" >
-    </form>
-  </div>
+    <section class="login-container">
+        <!-- header -->
+
+        <header login-container__header">
+            <a class="login-container__logo" href="#">Login Page</a>
+        </header>
+
+        <!-- main -->
+
+        <main class="login-container__main">
+            <h4 class="login-container__des">
+                Description of this page
+            </h4>
+
+            <form action="" class="login-container__form" onsubmit=" handleSubmitLogIn(event)"
+                id="formLogin">
+                <input type="email" class="email" name="email" placeholder="Enter Email">
+                <input type="password" class="password" name="password" placeholder="Enter Password">
+                <button type="submit">LOGIN</button>
+            </form>
+
+        </main>
+
+        <!-- footer -->
+
+        <footer class="login-container__footer">
+            <h3 class="login-container__footer-title">Lorem ipsum dolor sit amet consectetur,
+                adipisicing elit. Esse, temporibus!
+            </h3>
+            <button class="login-container__footer-btn">loremloremlorem</button>
+        </footer>
+
+    </section>
 </body>
+
 </html>
