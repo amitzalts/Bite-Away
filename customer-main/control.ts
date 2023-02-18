@@ -112,10 +112,11 @@ function renderMenuForCustomer(uid): string {
                 return `
             <form onsubmit="handleAddToCart(event)">    
                 <div class="course">
-                    <h3 type="text" name="${course.name}">${course.name}</h3>
-                    <div type="number" name="price">Price: ${course.price}</div>
+                    <h3>${course.name}</h3>
+                    <div>Price: ${course.price}</div>
                     <input type="number" name="qty" placeholder="0" required>
-                    <input type="submit" value="Add to Cart" />
+                    <input type="hidden" id="testtest" name="${course.name}" value="${course.name}">
+                    <input type="submit" value="Add to Cart">
                 </div>
             </form>    
             `;
@@ -130,23 +131,27 @@ function renderMenuForCustomer(uid): string {
     }
 }
 
-function handleAddToCart(ev: any) {
+function handleAddToCart(ev: any) { //wip
     try {
         ev.preventDefault();
 
         
-        const name = ev.target.elements.name.value;
+        const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
+        const name = _name?.value 
         const qty = ev.target.elements.qty.valueAsNumber;
         
         const customer = loggedInCustomer();
-        const currentOrder = customer.orders.length-1;
-
-        customer.orders[currentOrder].courses.push(new Course(name, restaurant, price))
+        const currentOrder = customer.orders.length;
         console.log(customer);
+        console.log(currentOrder);
+        console.log(name); //works
         
-
-        if (!courseRoot) throw new Error("courseRoot is null");
-
+        if(name) customer.orders.push(new Order(name, amit))//need to finish //problem here
+        if(name) customer.orders[currentOrder].courses.push(new Course(name, amit, 10))//need to finish //problem here
+        console.log(customer.orders[currentOrder]);
+        console.log(customer.orders[currentOrder].courses[0]);
+        
+    
         // courseRoot.innerHTML = renderMenu(menu);
 
     } catch (error) {

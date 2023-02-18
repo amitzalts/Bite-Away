@@ -26,7 +26,7 @@ const clicked = false
 // --------------------------- User Classes ------
 class Customer {
     uid:string;
-    orders: Order[];
+    orders: Order[] = [];
     constructor(
         public name:string,
         public password:string, 

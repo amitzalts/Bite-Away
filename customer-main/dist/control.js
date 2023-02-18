@@ -72,7 +72,7 @@ function renderMenuForCustomer(uid) {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
         var html = restaurants[index].menu
             .map(function (course) {
-            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3 type=\"text\" name=\"" + course.name + "\">" + course.name + "</h3>\n                    <div type=\"number\" name=\"price\">Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"submit\" value=\"Add to Cart\" />\n                </div>\n            </form>    \n            ";
+            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"hidden\" id=\"testtest\" name=\"" + course.name + "\" value=\"" + course.name + "\">\n                    <input type=\"submit\" value=\"Add to Cart\">\n                </div>\n            </form>    \n            ";
         })
             .join(" ");
         return html;
@@ -85,14 +85,20 @@ function renderMenuForCustomer(uid) {
 function handleAddToCart(ev) {
     try {
         ev.preventDefault();
-        var name = ev.target.elements.name.value;
+        var _name = document.querySelector("#testtest"); //fix
+        var name = _name === null || _name === void 0 ? void 0 : _name.value;
         var qty = ev.target.elements.qty.valueAsNumber;
         var customer = loggedInCustomer();
-        var currentOrder = customer.orders.length - 1;
-        customer.orders[currentOrder].courses.push(new Course(name, restaurant, price));
+        var currentOrder = customer.orders.length;
         console.log(customer);
-        if (!courseRoot)
-            throw new Error("courseRoot is null");
+        console.log(currentOrder);
+        console.log(name); //works
+        if (name)
+            customer.orders.push(new Order(name, amit)); //need to finish //problem here
+        if (name)
+            customer.orders[currentOrder].courses.push(new Course(name, amit, 10)); //need to finish //problem here
+        console.log(customer.orders[currentOrder]);
+        console.log(customer.orders[currentOrder].courses[0]);
         // courseRoot.innerHTML = renderMenu(menu);
     }
     catch (error) {

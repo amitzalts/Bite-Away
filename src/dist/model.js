@@ -24,6 +24,7 @@ var Customer = /** @class */ (function () {
         this.email = email;
         this.address = address;
         this.creditCard = creditCard;
+        this.orders = [];
         this.uid = "100" + uid();
     }
     return Customer;
