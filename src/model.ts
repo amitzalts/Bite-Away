@@ -76,9 +76,7 @@ class Course {
         public name:string, 
         public restaurant:Restaurant, 
         public price:number,
-        public courier?:string,
-        public destination?:string,
-        public status?:string,
+        
         
 
     ){
@@ -94,11 +92,11 @@ class Order {
     constructor(
         public name:string,
         public password:string, 
-        public restaurant:Restaurant, 
-        public courier:Courier, 
-        public destination:string, 
-        public status:string, 
-        
+        public restaurant:Restaurant,
+        public courier?:Courier, 
+        public destination?:string,
+        public status?:string,  
+         
     ){
 this.uid = `201${uid()}`
 
