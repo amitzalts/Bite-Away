@@ -11,11 +11,11 @@ const courier3 = new Courier("dor", "1234", "email", "ashkelon");
 const courier4 = new Courier("dor", "1234", "email", "ashkelon");
 const courier5 = new Courier("dor", "1234", "email", "ashkelon");
 
-const order1 = new Order("name", resataurant, courier1, "address", "ready");
-const order2 = new Order("name", resataurant, courier2, "address", "ready");
-const order3 = new Order("name", resataurant, courier3, "address", "ready");
-const order4 = new Order("name", resataurant, courier4, "address", "ready");
-const order5 = new Order("name", resataurant, courier5, "address", "ready");
+const order1 = new Order("Tal", resataurant, courier1, "Yafe Nof 34", "ready");
+const order2 = new Order("Yuval", resataurant, courier2, "Aharon 21", "ready");
+const order3 = new Order("Oren", resataurant, courier3, "Ben Gurion 32", "ready");
+const order4 = new Order("Moses", resataurant, courier4, "Balfour 10", "ready");
+const order5 = new Order("Gil", resataurant, courier5, "Tel Nof 21", "ready");
 
 
 const orders1: Order[] = [];
