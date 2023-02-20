@@ -1,21 +1,84 @@
-* {
-  padding: 0;
-  margin: 0;
-}
-
 body {
-  position: relative;
-  background-color: azure;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-#delieveryPool {
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
 }
 
-#orderWrapper {
-  max-width: 450px;
-  max-height: 450px;
-  border: 1px solid greenyellow;
+nav {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  padding: 5px;
+}
+
+main {
+  padding: 20px;
+}
+
+.open-orders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.order {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+}
+
+.order h3 {
+  margin-top: 0;
+}
+
+.pick-up-btn, .finish-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.active-orders {
+  display: flex;
+  margin-top: 50px;
+}
+
+.active-orders .order {
+  background-color: #eee;
+}
+
+.completed-orders {
+  display: flex;
+  margin-top: 50px;
+}
+
+.completed-orders .order {
+  background-color: #eeeeee;
 }
