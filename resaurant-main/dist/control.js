@@ -1,6 +1,6 @@
 var menu = []; //change to the relevant menu of the logged in resataurant
 var courseRoot = document.querySelector("#courseRoot"); //view
-restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela 5', 'italian'));
+restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela', 'italian'));
 function loggedInRestaurant() {
     var restaurant = restaurants.find(function (restaurant) { return restaurant.uid; });
     if (!restaurant) {
@@ -73,7 +73,7 @@ function handleDeleteItem(uid) {
         console.error(error);
     }
 }
-// // USER SETTING OREL
+// USER SETTING OREL
 // function checkMatchUserDetails(emailUser: string, passwordUser: string , array:Restaurant[] | Customer[] | Courier[]): boolean{
 //     try {
 //          const userType= array.findIndex(user=>emailUser.toLowerCase() === user.email.toLowerCase() && passwordUser === user.password)

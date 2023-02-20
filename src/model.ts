@@ -82,14 +82,14 @@ class Course {
 
     ){
 this.uid = `101${uid()}`
-this.date = new Date();  // date right now
+// this.date = new Date();  // date right now
 
     }
 }
 
 class Order {
     uid:string;
-    courses: Course[] = [];
+    courses:any
     constructor(
         public name:string, 
         public restaurant:Restaurant,
@@ -99,16 +99,16 @@ class Order {
          
     ){
 this.uid = `201${uid()}`
-
+this.courses = [];
     }
 }
 
 // --------------------------- Array ------
 
-const customers = getInfoFromStorage("customers") as Customer[] | [];
-const restaurants = getInfoFromStorage("restaurants") as Restaurant[] | [];
-const couriers = getInfoFromStorage("couriers") as Courier[] | [];
-const orders = getInfoFromStorage("orders") as Order[] | [];
+const customers = getInfoFromStorage("customers") as Customer[] ;
+const restaurants = getInfoFromStorage("restaurants") as Restaurant[] ;
+const couriers = getInfoFromStorage("couriers") as Courier[] ;
+const orders = getInfoFromStorage("orders") as Order[] ;
 
 
 // --------------------------- LocalStorage ------

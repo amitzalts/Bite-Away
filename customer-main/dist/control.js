@@ -4,7 +4,11 @@ var dor = new Restaurant("dor", "i", "j", "k", "l");
 var zalts = new Restaurant("zalts", "m", "n", "o", "p");
 var karako = new Restaurant("karako", "q", "r", "s", "t");
 var book = new Restaurant("book", "u", "v", "w", "x");
-restaurants.push(amit, orel, dor, zalts, karako, book);
+var rest = [amit, orel, dor, zalts, karako, book];
+//@ts-ignore
+restaurants.push.apply(restaurants, rest);
+saveInLocalStorage(restaurants, "restaurants");
+console.log(restaurants);
 var pasta = new Course("pasta", amit, 10);
 var pizza = new Course("pizza", amit, 20);
 var ravioli = new Course("ravioli", amit, 30);
@@ -45,7 +49,6 @@ function renderRestaurants() {
             for (var i = 0; i < restaurants.length; i++) {
                 restaurantRoot.innerHTML += "\n                <div id=uid-" + restaurants[i].uid + " class=\"results__restaurant\">\n                <div id=uid-" + restaurants[i].uid + "Root ></div>\n                    <div class=\"results__restaurant__wrapper\">\n                        <span>Name: " + restaurants[i].name + " </span>\n                        <span>Address: " + restaurants[i].address + " </span>\n                        <span>Type: " + restaurants[i].type + " </span>\n                    </div>\n                    <button onclick=\"openMenu('" + restaurants[i].uid + "')\">open menu</button>    \n                </div>";
             }
-            saveInLocalStorage(restaurants, "restaurants");
         }
     }
     catch (error) {
@@ -67,12 +70,17 @@ function openMenu(uid) {
         console.error(error);
     }
 }
+function getUidFromRestaurant(uid) {
+    console.log(uid);
+}
 function renderMenuForCustomer(uid) {
     try {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
+        console.log(index);
         var html = restaurants[index].menu
             .map(function (course) {
-            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"hidden\" id=\"testtest\" name=\"" + course.name + "\" value=\"" + course.name + "\">\n                    <input type=\"submit\" value=\"Add to Cart\">\n                </div>\n            </form>    \n            ";
+            console.log(course.uid);
+            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"hidden\" id=\"" + course.uid + "\" name=\"" + course.name + "\" value=\"" + course.name + "\">\n                    <input type=\"submit\" value=\"Add to Cart\">\n                </div>\n            </form>    \n            ";
         })
             .join(" ");
         return html;
@@ -82,8 +90,24 @@ function renderMenuForCustomer(uid) {
         return "";
     }
 }
+function newOrderByRes(restaurantUid, restaurant) {
+    try {
+        customers[0].orders.push(new Order(restaurantUid, amit, undefined, undefined, "initialized")); //need to finish      
+        saveInLocalStorage(orders, "orders");
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function newCourseByRes(name, restaurant, price) {
+    try {
+        customers[0].orders[0].courses.push(new Course(name, restaurant, price));
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 function handleAddToCart(ev) {
-    var _a;
     try {
         ev.preventDefault();
         var _name = document.querySelector("#testtest"); //fix
@@ -91,17 +115,22 @@ function handleAddToCart(ev) {
         var qty = ev.target.elements.qty.valueAsNumber;
         var customer = loggedInCustomer();
         var currentOrder = customer.orders.length;
-        // console.log(customer);
-        // console.log("currentOrder", currentOrder);
-        // console.log(name); //works
-        if (name) {
-            if ((currentOrder === 0) || (((_a = customer === null || customer === void 0 ? void 0 : customer.orders[currentOrder]) === null || _a === void 0 ? void 0 : _a.status) !== "initialized")) { //the orders array is empty or the current order's status is undefined
-                customer.orders.push(new Order(name, amit, undefined, undefined, "initialized")); //need to finish      
-            }
-            customer.orders[currentOrder].courses.push(new Course(name, amit, 10)); //need to finish
-            console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
-            console.log("currentOrder", currentOrder);
-        }
+        //     customer.orders[0].name === 
+        // // console.log(customer);
+        // // console.log("currentOrder", currentOrder);
+        // // console.log(name); //works
+        // if (name) {
+        //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
+        //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
+        //  if(customer.orders[0].name = )
+        //     }   
+        //  //need to finish
+        //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
+        //     // console.log("currentOrder", currentOrder);
+        //              console.log(customer);
+        // }
+        newCourseByRes("Orel", amit, 50);
+        console.log(customer);
         // courseRoot.innerHTML = renderMenu(menu);
     }
     catch (error) {

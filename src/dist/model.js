@@ -62,7 +62,7 @@ var Course = /** @class */ (function () {
         this.restaurant = restaurant;
         this.price = price;
         this.uid = "101" + uid();
-        this.date = new Date(); // date right now
+        // this.date = new Date();  // date right now
     }
     return Course;
 }());
@@ -73,8 +73,8 @@ var Order = /** @class */ (function () {
         this.courier = courier;
         this.destination = destination;
         this.status = status;
-        this.courses = [];
         this.uid = "201" + uid();
+        this.courses = [];
     }
     return Order;
 }());

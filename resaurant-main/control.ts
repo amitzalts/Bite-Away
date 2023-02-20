@@ -3,7 +3,7 @@ const menu: Course[] = []; //change to the relevant menu of the logged in resata
 
 const courseRoot = document.querySelector("#courseRoot"); //view
 
-restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela 5', 'italian'));
+restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela', 'italian'));
 
 
 function loggedInRestaurant(): Restaurant {
@@ -106,7 +106,7 @@ function handleDeleteItem(uid: string) {
 
 
 
-// // USER SETTING OREL
+// USER SETTING OREL
 
 // function checkMatchUserDetails(emailUser: string, passwordUser: string , array:Restaurant[] | Customer[] | Courier[]): boolean{
 //     try {
