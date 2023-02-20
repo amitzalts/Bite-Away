@@ -15,7 +15,7 @@ const ravioli = new Course("ravioli", amit, 30);
 const teramisu = new Course("teramisu", amit, 40);
 
 //we get a menu (Course[]), from another page.
-if(!restaurants[0].menu) throw new Error("menu undefined");
+if (!restaurants[0].menu) throw new Error("menu undefined");
 restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
 
 
@@ -34,22 +34,22 @@ customers.push(customer1, customer2);
 
 
 function loggedInCustomer(): Customer {
-    
-    const customer = customers.find((customer) => customer.uid); 
+
+    const customer = customers.find((customer) => customer.uid);
     if (!customer) {
-      throw new Error("could not find logged in restaurant");
+        throw new Error("could not find logged in restaurant");
     } else {
-      return customer;
+        return customer;
     }
 }
 
 
 function renderCustomerHeader() {
     try {
-        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader"); 
+        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
         const customer: Customer = loggedInCustomer();
         if (customer && customerHeader) {
-            customerHeader.innerText = `${customer.name}`    
+            customerHeader.innerText = `${customer.name}`
         }
     } catch (error) {
         console.error(error);
@@ -92,12 +92,12 @@ function openMenu(uid: string) {
             <div id=menuRoot${uid}></div>
        </div>
        `
-       const menuRoot = document.querySelector(`#menuRoot${uid}`)
-        if(menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
-       
+        const menuRoot = document.querySelector(`#menuRoot${uid}`)
+        if (menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
+
     } catch (error) {
         console.error(error);
-    
+
     }
 }
 
@@ -106,7 +106,7 @@ function openMenu(uid: string) {
 function renderMenuForCustomer(uid): string {
     try {
         const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-        
+
         const html = restaurants[index].menu
             .map((course) => {
                 return `
@@ -135,23 +135,28 @@ function handleAddToCart(ev: any) { //wip
     try {
         ev.preventDefault();
 
-        
         const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
-        const name = _name?.value 
+        const name = _name?.value
         const qty = ev.target.elements.qty.valueAsNumber;
-        
+
         const customer = loggedInCustomer();
         const currentOrder = customer.orders.length;
-        console.log(customer);
-        console.log(currentOrder);
-        console.log(name); //works
-        
-        if(name) customer.orders.push(new Order(name, amit))//need to finish //problem here
-        if(name) customer.orders[currentOrder].courses.push(new Course(name, amit, 10))//need to finish //problem here
-        console.log(customer.orders[currentOrder]);
-        console.log(customer.orders[currentOrder].courses[0]);
-        
-    
+        // console.log(customer);
+        // console.log("currentOrder", currentOrder);
+        // console.log(name); //works
+
+        if (name) {
+            if ((currentOrder === 0) || (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
+                customer.orders.push(new Order(name, amit, undefined, undefined, "initialized"))//need to finish      
+            }
+            customer.orders[currentOrder].courses.push(new Course(name, amit, 10))//need to finish
+            console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
+            console.log("currentOrder", currentOrder);
+        }
+
+
+
+
         // courseRoot.innerHTML = renderMenu(menu);
 
     } catch (error) {

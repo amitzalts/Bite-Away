@@ -83,6 +83,7 @@ function renderMenuForCustomer(uid) {
     }
 }
 function handleAddToCart(ev) {
+    var _a;
     try {
         ev.preventDefault();
         var _name = document.querySelector("#testtest"); //fix
@@ -90,15 +91,17 @@ function handleAddToCart(ev) {
         var qty = ev.target.elements.qty.valueAsNumber;
         var customer = loggedInCustomer();
         var currentOrder = customer.orders.length;
-        console.log(customer);
-        console.log(currentOrder);
-        console.log(name); //works
-        if (name)
-            customer.orders.push(new Order(name, amit)); //need to finish //problem here
-        if (name)
-            customer.orders[currentOrder].courses.push(new Course(name, amit, 10)); //need to finish //problem here
-        console.log(customer.orders[currentOrder]);
-        console.log(customer.orders[currentOrder].courses[0]);
+        // console.log(customer);
+        // console.log("currentOrder", currentOrder);
+        // console.log(name); //works
+        if (name) {
+            if ((currentOrder === 0) || (((_a = customer === null || customer === void 0 ? void 0 : customer.orders[currentOrder]) === null || _a === void 0 ? void 0 : _a.status) !== "initialized")) { //the orders array is empty or the current order's status is undefined
+                customer.orders.push(new Order(name, amit, undefined, undefined, "initialized")); //need to finish      
+            }
+            customer.orders[currentOrder].courses.push(new Course(name, amit, 10)); //need to finish
+            console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
+            console.log("currentOrder", currentOrder);
+        }
         // courseRoot.innerHTML = renderMenu(menu);
     }
     catch (error) {
