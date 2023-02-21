@@ -48,7 +48,6 @@ function loggedInCustomer(): Customer {
     }
 }
 
-
 function renderCustomerHeader() {
     try {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
@@ -106,7 +105,6 @@ function openMenu(uid: string) {
     }
 }
 
-
 function getUidFromRestaurant(uid:string):void{
     console.log(uid);
 }
@@ -139,7 +137,6 @@ console.log(index);
     }
 }
 
-
 function newOrderByRes(restaurantUid:string , restaurant:Restaurant[]){
     try {
 
@@ -162,7 +159,6 @@ function newCourseByRes(name:string , restaurant:Restaurant , price:number){
         console.error(error);
     }
 }
-
 
 function handleAddToCart(ev: any) { //wip
     try {
@@ -205,8 +201,6 @@ function handleAddToCart(ev: any) { //wip
     }
 }
 
-
-
 function closeMenu(uid: string) {
     try {
         const menu: HTMLElement | null = document.querySelector(`#uid-${uid}Root`);
@@ -216,7 +210,6 @@ function closeMenu(uid: string) {
         console.error(error);
     }
 }
-
 
 function search(): void {
     try {
