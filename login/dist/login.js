@@ -14,12 +14,3 @@ function checksIfUserExists(emailUser) {
         return false;
     }
 }
-function handleSubmitLogIn(ev) {
-    try {
-        ev.preventDefault();
-        var _a = ev.target.elements, email = _a.email, password = _a.password;
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
