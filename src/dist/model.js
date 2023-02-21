@@ -107,3 +107,16 @@ function getInfoFromStorage(arrayName) {
         return [];
     }
 }
+function getInfoFromStorageType() {
+    try {
+        var data = localStorage.getItem("TypeUser");
+        if (!data)
+            throw new Error("no found TypeUser in localstorage");
+        console.log(data);
+        return data;
+    }
+    catch (error) {
+        console.error(error);
+        return "";
+    }
+}

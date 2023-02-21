@@ -1,24 +1,26 @@
 // USER SETTING OREL
 
-function checkMatchUserDetails(emailUser: string, passwordUser: string ){
+function checkMatchUserDetails(emailUser: string, passwordUser: string ):boolean | undefined{
     try {
+        localStorage.setItem("TypeUser", "")
         let TypeUser : string;
         if(findTypeUserLogin(emailUser) === undefined) throw new Error("the user not exist")
         const startUid = Number(findTypeUserLogin(emailUser)?.uid.slice(0 , 3));
-
-
         if(findTypeUserLogin(emailUser)!.email === emailUser && findTypeUserLogin(emailUser)!.password === passwordUser ){
-        
+            
             if(startUid === 100) {
                 TypeUser = "customer"
                 localStorage.setItem("TypeUser", TypeUser)
+                return true
             } else if (startUid === 200){
                 TypeUser = "restaurant"
                 localStorage.setItem("TypeUser", TypeUser)
+                return true
             } else if (startUid === 300){
                 TypeUser = "courier"
                 localStorage.setItem("TypeUser", TypeUser)
-            } 
+                return true
+            }
         } else {
                 throw new Error("no match in detail user")
         }
@@ -67,7 +69,8 @@ function findTypeUserLogin(email: string): Customer | Restaurant | Courier | und
         const searchInRestaurant = restaurants.find(restaurant => restaurant.email === email) as Restaurant | undefined
         const searchInCourier = couriers.find(courier => courier.email === email) as Courier | undefined
         if (searchInCustomer) {
-            return  searchInCustomer
+
+            return  searchInCustomer 
         } else if (searchInRestaurant) {
             return searchInRestaurant
 
@@ -107,8 +110,9 @@ function handleSubmitLogIn(ev:any) {
         }
 
         if (checkMatchUserDetails(email.value, password.value)) {
+            directToCurTypePage()
             ev.target.reset()
-            return location.href = './index.html';
+        
         } else {
             const textWarning = document.getElementById('pNotLoginSucc')! as HTMLParagraphElement
             textWarning.innerHTML =
@@ -131,3 +135,17 @@ function logOut(): void {
         console.error(error);
     }
 }
+
+function directToCurTypePage(){
+if(getInfoFromStorageType() === "customer") {
+    let newUrl = "./../customer-main/customer-main.html";
+    window.location.replace(newUrl);
+} else if (getInfoFromStorageType() === "restaurant"){
+    let newUrl = "./../resaurant-main/restaurant-main.html";
+    window.location.replace(newUrl);
+}else if(getInfoFromStorageType() === "courier"){
+    let newUrl = "./../courier-main/courier-main.html";
+    window.location.replace(newUrl);
+}
+}
+console.log(findTypeUserLogin("orekarako@gmail.com"));

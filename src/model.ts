@@ -135,5 +135,18 @@ function getInfoFromStorage(arrayName:string) :Customer[] | Restaurant[] | Couri
     }
 }
 
+function getInfoFromStorageType():string{
+    try {
+        const data = localStorage.getItem("TypeUser");
+        if(!data) throw new Error("no found TypeUser in localstorage")
+        console.log(data);
+        return data
+    } catch (error) {
+        console.error(error);
+        return ""
+    }
+}
+
+
 
 

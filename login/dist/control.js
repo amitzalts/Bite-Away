@@ -2,6 +2,7 @@
 function checkMatchUserDetails(emailUser, passwordUser) {
     var _a;
     try {
+        localStorage.setItem("TypeUser", "");
         var TypeUser = void 0;
         if (findTypeUserLogin(emailUser) === undefined)
             throw new Error("the user not exist");
@@ -10,14 +11,17 @@ function checkMatchUserDetails(emailUser, passwordUser) {
             if (startUid === 100) {
                 TypeUser = "customer";
                 localStorage.setItem("TypeUser", TypeUser);
+                return true;
             }
             else if (startUid === 200) {
                 TypeUser = "restaurant";
                 localStorage.setItem("TypeUser", TypeUser);
+                return true;
             }
             else if (startUid === 300) {
                 TypeUser = "courier";
                 localStorage.setItem("TypeUser", TypeUser);
+                return true;
             }
         }
         else {
@@ -111,8 +115,8 @@ function handleSubmitLogIn(ev) {
             errorMsgPasswordInputLog.parentElement.classList.remove("empty");
         }
         if (checkMatchUserDetails(email.value, password.value)) {
+            directToCurTypePage();
             ev.target.reset();
-            return location.href = './index.html';
         }
         else {
             var textWarning = document.getElementById('pNotLoginSucc');
@@ -133,3 +137,18 @@ function logOut() {
         console.error(error);
     }
 }
+function directToCurTypePage() {
+    if (getInfoFromStorageType() === "customer") {
+        var newUrl = "./../customer-main/customer-main.html";
+        window.location.replace(newUrl);
+    }
+    else if (getInfoFromStorageType() === "restaurant") {
+        var newUrl = "./../resaurant-main/restaurant-main.html";
+        window.location.replace(newUrl);
+    }
+    else if (getInfoFromStorageType() === "courier") {
+        var newUrl = "./../courier-main/courier-main.html";
+        window.location.replace(newUrl);
+    }
+}
+console.log(findTypeUserLogin("orekarako@gmail.com"));
