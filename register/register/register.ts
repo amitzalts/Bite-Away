@@ -75,7 +75,9 @@ function handleSubmitFormRegister(ev: any) {
 
             case "restaurant":
                 restaurants.push(new Restaurant(name.value, password.value, email.value, address.value, restaurant_type.value))
+                console.log("before " ,restaurants);
                 saveInLocalStorage(restaurants , "restaurants");
+                console.log("after" ,restaurants);
                 break;
 
             case "courier":
@@ -85,7 +87,7 @@ function handleSubmitFormRegister(ev: any) {
         }
             ev.target.reset();
 
-            return window.location.href = '../../login/login.html'
+           return window.location.href = '../../login/login.html'
     } catch (error) {
         console.error(error);
     }

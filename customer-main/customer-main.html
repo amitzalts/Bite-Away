@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/style.css">
 
+    <script src="../dist/dataBase.js" defer></script>
     <script src="../src/dist/helper.js" defer></script>
     <script src="../src/dist/model.js" defer></script>
+    <script src="./dist/view.js" defer></script>
     <script src="./dist/control.js" defer></script>
     <title>my profile</title>
 </head>
 
-<body onload="renderRestaurants() , renderCustomerHeader()">
+<body onload="renderRestaurants() , renderCustomerHeader() ">
     <div class="container">
         <div id="customerHeader" class="header" >logged in user</div> 
         <input type="text" id="userInput" class="searchBox" onkeyup="search()" placeholder="Search restaurants...">

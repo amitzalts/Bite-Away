@@ -73,12 +73,15 @@ function findTypeUserLogin(email) {
         var searchInRestaurant = restaurants.find(function (restaurant) { return restaurant.email === email; });
         var searchInCourier = couriers.find(function (courier) { return courier.email === email; });
         if (searchInCustomer) {
+            localStorage.setItem("userCur", JSON.stringify(searchInCustomer));
             return searchInCustomer;
         }
         else if (searchInRestaurant) {
+            localStorage.setItem("userCur", JSON.stringify(searchInRestaurant));
             return searchInRestaurant;
         }
         else if (searchInCourier) {
+            localStorage.setItem("userCur", JSON.stringify(searchInCourier));
             return searchInCourier;
         }
         else {
@@ -147,8 +150,7 @@ function directToCurTypePage() {
         window.location.replace(newUrl);
     }
     else if (getInfoFromStorageType() === "courier") {
-        var newUrl = "./../courier-main/courier-main.html";
+        var newUrl = "./../courier-main/courier.html";
         window.location.replace(newUrl);
     }
 }
-console.log(findTypeUserLogin("orekarako@gmail.com"));

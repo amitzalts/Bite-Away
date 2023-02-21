@@ -1,6 +1,5 @@
 var menu = []; //change to the relevant menu of the logged in resataurant
 var courseRoot = document.querySelector("#courseRoot"); //view
-restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela', 'italian'));
 function loggedInRestaurant() {
     var restaurant = restaurants.find(function (restaurant) { return restaurant.uid; });
     if (!restaurant) {
@@ -21,7 +20,6 @@ function handleAddCourse(ev) {
         if (!courseRoot)
             throw new Error("courseRoot is null");
         courseRoot.innerHTML = renderMenu(menu);
-        saveInLocalStorage(restaurants, "restaurants");
     }
     catch (error) {
         console.error(error);

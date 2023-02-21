@@ -69,12 +69,14 @@ function findTypeUserLogin(email: string): Customer | Restaurant | Courier | und
         const searchInRestaurant = restaurants.find(restaurant => restaurant.email === email) as Restaurant | undefined
         const searchInCourier = couriers.find(courier => courier.email === email) as Courier | undefined
         if (searchInCustomer) {
-
+            localStorage.setItem("userCur" , JSON.stringify(searchInCustomer))
             return  searchInCustomer 
         } else if (searchInRestaurant) {
+            localStorage.setItem("userCur" , JSON.stringify(searchInRestaurant))
             return searchInRestaurant
-
+           
         } else if (searchInCourier) {
+            localStorage.setItem("userCur" , JSON.stringify(searchInCourier))
             return searchInCourier
         } else {
             throw new Error("the User no founded")
@@ -144,8 +146,7 @@ if(getInfoFromStorageType() === "customer") {
     let newUrl = "./../resaurant-main/restaurant-main.html";
     window.location.replace(newUrl);
 }else if(getInfoFromStorageType() === "courier"){
-    let newUrl = "./../courier-main/courier-main.html";
+    let newUrl = "./../courier-main/courier.html";
     window.location.replace(newUrl);
 }
 }
-console.log(findTypeUserLogin("orekarako@gmail.com"));

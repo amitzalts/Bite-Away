@@ -120,3 +120,20 @@ function getInfoFromStorageType() {
         return "";
     }
 }
+/////////////////////////////////// DATA BASE 
+function enterLocalStorage() {
+    restaurants.push(new Restaurant("orel", "123", "orel@walla.com ", "haifa", "asian"));
+    restaurants.push(new Restaurant("dor", "i", "j", "k", "l"));
+    restaurants.push(new Restaurant("zalts", "m", "n", "o", "p"));
+    restaurants.push(new Restaurant("book", "u", "v", "w", "x"));
+    restaurants.push(new Restaurant("karako", "q", "r", "s", "t"));
+    var pasta = new Course("pasta", amit, 10);
+    var pizza = new Course("pizza", amit, 20);
+    var ravioli = new Course("ravioli", amit, 30);
+    var teramisu = new Course("teramisu", amit, 40);
+    restaurants[1].menu.push(new Course("eggroll", orel, 50), new Course("pad thai", orel, 60), new Course("sushi", orel, 70), new Course("cake", orel, 80));
+    var customer1 = new Customer("customer1", "134", "email", "destination");
+    var customer2 = new Customer("customer2", "135", "email2", "destination2");
+    customers.push(customer1, customer2);
+    saveInLocalStorage(restaurants, "restaurants");
+}

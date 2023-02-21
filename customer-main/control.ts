@@ -1,101 +1,25 @@
-const amit = new Restaurant("amit", "a", "b", "c", "d");
-const orel = new Restaurant("orel", "e", "f", "g", "h");
-const dor = new Restaurant("dor", "i", "j", "k", "l");
-const zalts = new Restaurant("zalts", "m", "n", "o", "p");
-const karako = new Restaurant("karako", "q", "r", "s", "t");
-const book = new Restaurant("book", "u", "v", "w", "x");
-
-const rest = [amit , orel , dor ,zalts , karako ,book];
-//@ts-ignore
-restaurants.push(...rest);
-saveInLocalStorage(restaurants, "restaurants");
-
-console.log(restaurants);
 
 
 
-const pasta = new Course("pasta", amit, 10);
-const pizza = new Course("pizza", amit, 20);
-const ravioli = new Course("ravioli", amit, 30);
-const teramisu = new Course("teramisu", amit, 40);
+// function loggedInCustomer(): Customer {
 
-//we get a menu (Course[]), from another page.
-if (!restaurants[0].menu) throw new Error("menu undefined");
-restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
+//     const customer = customers.find((customer) => customer.uid);
+//     if (!customer) {
+//         throw new Error("could not find logged in restaurant");
+//     } else {
+//         return customer;
+//     }
+// }
 
-
-restaurants[1].menu.push(
-    new Course("eggroll", orel, 50),
-    new Course("pad thai", orel, 60),
-    new Course("sushi", orel, 70),
-    new Course("cake", orel, 80),
-)
-
-const customer1 = new Customer("customer1", "134", "email", "destination");
-const customer2 = new Customer("customer2", "135", "email2", "destination2");
-customers.push(customer1, customer2);
-
-
-
-
-function loggedInCustomer(): Customer {
-
-    const customer = customers.find((customer) => customer.uid);
-    if (!customer) {
-        throw new Error("could not find logged in restaurant");
-    } else {
-        return customer;
-    }
-}
-
-function renderCustomerHeader() {
-    try {
-        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        const customer: Customer = loggedInCustomer();
-        if (customer && customerHeader) {
-            customerHeader.innerText = `${customer.name}`
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-function renderRestaurants() {
-    try {
-        const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
-        if (restaurantRoot) {
-            for (let i = 0; i < restaurants.length; i++) {
-                restaurantRoot.innerHTML += `
-                <div id=uid-${restaurants[i].uid} class="results__restaurant">
-                <div id=uid-${restaurants[i].uid}Root ></div>
-                    <div class="results__restaurant__wrapper">
-                        <span>Name: ${restaurants[i].name} </span>
-                        <span>Address: ${restaurants[i].address} </span>
-                        <span>Type: ${restaurants[i].type} </span>
-                    </div>
-                    <button onclick="openMenu('${restaurants[i].uid}')">open menu</button>    
-                </div>`;
-            }
-      
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
 
 function openMenu(uid: string) {
     try {
-        const menu: HTMLElement | null = document.querySelector(`#uid-${uid}Root`);
-        if (!menu) throw new Error("could not find root");
-
-        const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-        menu.innerHTML = `
-       <div class="menu">${restaurants[index].name} 
-            <button class="menu__close" onclick="closeMenu('${uid}')">close</button>
-            <div id=menuRoot${uid}></div>
-       </div>
-       `
+        console.log("Open menu");
+        const menu: HTMLElement = document.querySelector(`#uid-${uid}Root`)!;
+        console.log(menu);
+        if (!menu) throw new Error("could not find menu");
+        menu.innerHTML = renderMenu(uid)
+        console.log(menu);
         const menuRoot = document.querySelector(`#menuRoot${uid}`)
         if (menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
 
@@ -105,37 +29,6 @@ function openMenu(uid: string) {
     }
 }
 
-function getUidFromRestaurant(uid:string):void{
-    console.log(uid);
-}
-
-function renderMenuForCustomer(uid:string): string {
-    try {
-        const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-console.log(index);
-        const html = restaurants[index].menu
-            .map((course) => {
-                console.log(course.uid);
-                return `
-            <form onsubmit="handleAddToCart(event)">    
-                <div class="course">
-                    <h3>${course.name}</h3>
-                    <div>Price: ${course.price}</div>
-                    <input type="number" name="qty" placeholder="0" required>
-                    <input type="hidden" id="${course.uid}" name="${course.name}" value="${course.name}">
-                    <input type="submit" value="Add to Cart">
-                </div>
-            </form>    
-            `;
-            })
-            .join(" ");
-        return html;
-
-    } catch (error) {
-        console.error(error);
-        return "";
-    }
-}
 
 function newOrderByRes(restaurantUid:string , restaurant:Restaurant[]){
     try {
@@ -168,8 +61,8 @@ function handleAddToCart(ev: any) { //wip
         const name = _name?.value
         const qty = ev.target.elements.qty.valueAsNumber;
 
-        const customer = loggedInCustomer();
-        const currentOrder = customer.orders.length;
+        // const customer = loggedInCustomer();
+        // const currentOrder = customer.orders.length;
    
         //     customer.orders[0].name === 
         
@@ -192,7 +85,6 @@ function handleAddToCart(ev: any) { //wip
         // }
         newCourseByRes("Orel" , amit , 50)
 
-        console.log(customer);
 
         // courseRoot.innerHTML = renderMenu(menu);
 
@@ -242,5 +134,20 @@ function search(): void {
     } catch (error) {
         console.error(error);
         return error;
+    }
+}
+
+function renderCustomerHeader() {
+    try {
+        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
+        const data = localStorage.getItem("userCur");
+        if(!data) throw new Error("the userEmail data no found in local storage")
+        const getEmailFromUser = JSON.parse(data) as Customer 
+        const customer: Customer =   getEmailFromUser
+        if (customer && customerHeader) {
+            customerHeader.innerText = `${customer.name}`
+        }
+    } catch (error) {
+        console.error(error);
     }
 }

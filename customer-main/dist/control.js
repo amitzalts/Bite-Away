@@ -1,93 +1,26 @@
-var amit = new Restaurant("amit", "a", "b", "c", "d");
-var orel = new Restaurant("orel", "e", "f", "g", "h");
-var dor = new Restaurant("dor", "i", "j", "k", "l");
-var zalts = new Restaurant("zalts", "m", "n", "o", "p");
-var karako = new Restaurant("karako", "q", "r", "s", "t");
-var book = new Restaurant("book", "u", "v", "w", "x");
-var rest = [amit, orel, dor, zalts, karako, book];
-//@ts-ignore
-restaurants.push.apply(restaurants, rest);
-saveInLocalStorage(restaurants, "restaurants");
-console.log(restaurants);
-var pasta = new Course("pasta", amit, 10);
-var pizza = new Course("pizza", amit, 20);
-var ravioli = new Course("ravioli", amit, 30);
-var teramisu = new Course("teramisu", amit, 40);
-//we get a menu (Course[]), from another page.
-if (!restaurants[0].menu)
-    throw new Error("menu undefined");
-restaurants[0].menu.push(pasta, pizza, ravioli, teramisu);
-restaurants[1].menu.push(new Course("eggroll", orel, 50), new Course("pad thai", orel, 60), new Course("sushi", orel, 70), new Course("cake", orel, 80));
-var customer1 = new Customer("customer1", "134", "email", "destination");
-var customer2 = new Customer("customer2", "135", "email2", "destination2");
-customers.push(customer1, customer2);
-function loggedInCustomer() {
-    var customer = customers.find(function (customer) { return customer.uid; });
-    if (!customer) {
-        throw new Error("could not find logged in restaurant");
-    }
-    else {
-        return customer;
-    }
-}
-function renderCustomerHeader() {
-    try {
-        var customerHeader = document.querySelector("#customerHeader");
-        var customer = loggedInCustomer();
-        if (customer && customerHeader) {
-            customerHeader.innerText = "" + customer.name;
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function renderRestaurants() {
-    try {
-        var restaurantRoot = document.querySelector("#restaurantRoot");
-        if (restaurantRoot) {
-            for (var i = 0; i < restaurants.length; i++) {
-                restaurantRoot.innerHTML += "\n                <div id=uid-" + restaurants[i].uid + " class=\"results__restaurant\">\n                <div id=uid-" + restaurants[i].uid + "Root ></div>\n                    <div class=\"results__restaurant__wrapper\">\n                        <span>Name: " + restaurants[i].name + " </span>\n                        <span>Address: " + restaurants[i].address + " </span>\n                        <span>Type: " + restaurants[i].type + " </span>\n                    </div>\n                    <button onclick=\"openMenu('" + restaurants[i].uid + "')\">open menu</button>    \n                </div>";
-            }
-        }
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+// function loggedInCustomer(): Customer {
+//     const customer = customers.find((customer) => customer.uid);
+//     if (!customer) {
+//         throw new Error("could not find logged in restaurant");
+//     } else {
+//         return customer;
+//     }
+// }
 function openMenu(uid) {
     try {
+        console.log("Open menu");
         var menu = document.querySelector("#uid-" + uid + "Root");
+        console.log(menu);
         if (!menu)
-            throw new Error("could not find root");
-        var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        menu.innerHTML = "\n       <div class=\"menu\">" + restaurants[index].name + " \n            <button class=\"menu__close\" onclick=\"closeMenu('" + uid + "')\">close</button>\n            <div id=menuRoot" + uid + "></div>\n       </div>\n       ";
+            throw new Error("could not find menu");
+        menu.innerHTML = renderMenu(uid);
+        console.log(menu);
         var menuRoot = document.querySelector("#menuRoot" + uid);
         if (menuRoot)
             menuRoot.innerHTML = renderMenuForCustomer(uid);
     }
     catch (error) {
         console.error(error);
-    }
-}
-function getUidFromRestaurant(uid) {
-    console.log(uid);
-}
-function renderMenuForCustomer(uid) {
-    try {
-        var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        console.log(index);
-        var html = restaurants[index].menu
-            .map(function (course) {
-            console.log(course.uid);
-            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"hidden\" id=\"" + course.uid + "\" name=\"" + course.name + "\" value=\"" + course.name + "\">\n                    <input type=\"submit\" value=\"Add to Cart\">\n                </div>\n            </form>    \n            ";
-        })
-            .join(" ");
-        return html;
-    }
-    catch (error) {
-        console.error(error);
-        return "";
     }
 }
 function newOrderByRes(restaurantUid, restaurant) {
@@ -113,8 +46,8 @@ function handleAddToCart(ev) {
         var _name = document.querySelector("#testtest"); //fix
         var name = _name === null || _name === void 0 ? void 0 : _name.value;
         var qty = ev.target.elements.qty.valueAsNumber;
-        var customer = loggedInCustomer();
-        var currentOrder = customer.orders.length;
+        // const customer = loggedInCustomer();
+        // const currentOrder = customer.orders.length;
         //     customer.orders[0].name === 
         // // console.log(customer);
         // // console.log("currentOrder", currentOrder);
@@ -130,7 +63,6 @@ function handleAddToCart(ev) {
         //              console.log(customer);
         // }
         newCourseByRes("Orel", amit, 50);
-        console.log(customer);
         // courseRoot.innerHTML = renderMenu(menu);
     }
     catch (error) {
@@ -177,5 +109,21 @@ function search() {
     catch (error) {
         console.error(error);
         return error;
+    }
+}
+function renderCustomerHeader() {
+    try {
+        var customerHeader = document.querySelector("#customerHeader");
+        var data = localStorage.getItem("userCur");
+        if (!data)
+            throw new Error("the userEmail data no found in local storage");
+        var getEmailFromUser = JSON.parse(data);
+        var customer = getEmailFromUser;
+        if (customer && customerHeader) {
+            customerHeader.innerText = "" + customer.name;
+        }
+    }
+    catch (error) {
+        console.error(error);
     }
 }

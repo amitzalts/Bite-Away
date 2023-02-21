@@ -3,8 +3,6 @@ const menu: Course[] = []; //change to the relevant menu of the logged in resata
 
 const courseRoot = document.querySelector("#courseRoot"); //view
 
-restaurants.push(new Restaurant('Amit', '1234', 'amitzalts@gmail.com', 'ela', 'italian'));
-
 
 function loggedInRestaurant(): Restaurant {
     
@@ -32,7 +30,6 @@ function handleAddCourse(ev: any) {
         if (!courseRoot) throw new Error("courseRoot is null");
 
         courseRoot.innerHTML = renderMenu(menu);
-        saveInLocalStorage(restaurants, "restaurants");
 
     } catch (error) {
         console.error(error);
@@ -96,8 +93,8 @@ function handleDeleteItem(uid: string) {
 
         if (!courseRoot) throw new Error("courseRoot is undefined");
         courseRoot.innerHTML = renderMenu(menu);
-
         saveInLocalStorage(restaurants, "restaurants");
+
 
     } catch (error) {
         console.error(error);

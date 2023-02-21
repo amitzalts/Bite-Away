@@ -67,7 +67,9 @@ function handleSubmitFormRegister(ev) {
                 break;
             case "restaurant":
                 restaurants.push(new Restaurant(name.value, password.value, email.value, address.value, restaurant_type.value));
+                console.log("before ", restaurants);
                 saveInLocalStorage(restaurants, "restaurants");
+                console.log("after", restaurants);
                 break;
             case "courier":
                 couriers.push(new Courier(name.value, password.value, email.value, area.value, vehicle.value, parseInt(age.value)));
