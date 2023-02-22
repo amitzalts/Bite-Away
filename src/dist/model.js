@@ -87,11 +87,12 @@ var orders = getInfoFromStorage("orders");
 function saveInLocalStorage(array, name) {
     try {
         if (!array)
-            throw new Error("the Array no Found ");
+            throw new Error("the " + array + " no Found ");
         localStorage.setItem(name, JSON.stringify(array));
     }
     catch (error) {
         console.error(error);
+        return [];
     }
 }
 function getInfoFromStorage(arrayName) {

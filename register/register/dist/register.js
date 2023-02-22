@@ -50,6 +50,8 @@ function changeFormByTypeUser(typeUser) {
                 age.classList.add('active');
                 break;
         }
+        var submitBtn = document.querySelector('.register-container__btn-submit');
+        submitBtn.classList.add('active');
     }
     catch (error) {
         console.error(error);
@@ -58,28 +60,57 @@ function changeFormByTypeUser(typeUser) {
 function handleSubmitFormRegister(ev) {
     try {
         ev.preventDefault();
-        var _a = ev.target.elements, name = _a.name, password = _a.password, email = _a.email, address = _a.address, area = _a.area, vehicle = _a.vehicle, age = _a.age, restaurant_type = _a.restaurant_type;
-        console.log(name);
-        switch (handleGetTypeRegister()) {
-            case "customer":
-                customers.push(new Customer(name.value, password.value, email.value, address.value));
-                saveInLocalStorage(customers, "customers");
-                break;
-            case "restaurant":
-                restaurants.push(new Restaurant(name.value, password.value, email.value, address.value, restaurant_type.value));
-                console.log("before ", restaurants);
-                saveInLocalStorage(restaurants, "restaurants");
-                console.log("after", restaurants);
-                break;
-            case "courier":
-                couriers.push(new Courier(name.value, password.value, email.value, area.value, vehicle.value, parseInt(age.value)));
-                saveInLocalStorage(couriers, "couriers");
-                break;
+        var _a = ev.target.elements, name = _a.name, password = _a.password, email = _a.email, address = _a.address, area = _a.area, vehicle = _a.vehicle, age = _a.age;
+        if (!checksIfUserExists(email.value)) {
+            switch (handleGetTypeRegister()) {
+                case "customer":
+                    customers.push(new Customer(name.value, password.value, email.value, address.value));
+                    saveInLocalStorage(customers, "customers");
+                    break;
+                case "restaurant":
+                    restaurants.push(new Restaurant(name.value, password.value, email.value, address.value, ev.target.elements.restaurantType.value));
+                    saveInLocalStorage(restaurants, "restaurants");
+                    break;
+                case "courier":
+                    couriers.push(new Courier(name.value, password.value, email.value, area.value, vehicle.value, parseInt(age.value)));
+                    saveInLocalStorage(couriers, "couriers");
+                    break;
+            }
+            ev.target.reset();
+            var newUrl = "./../../../login/login.html";
+            window.location.replace(newUrl);
         }
-        ev.target.reset();
-        return window.location.href = '../../login/login.html';
+        else {
+            alert("the user exist in the system please try anther Email");
+        }
     }
     catch (error) {
         console.error(error);
     }
+}
+function checksIfUserExists(emailUser) {
+    try {
+        var searchInCustomer = customers.filter(function (customer) { return customer.email === emailUser; });
+        var searchInRestaurant = restaurants.filter(function (restaurant) { return restaurant.email === emailUser; });
+        var searchInCourier = couriers.filter(function (courier) { return courier.email === emailUser; });
+        if (!searchInCustomer)
+            console.log("no  inside searchInCustomer");
+        if (!searchInRestaurant)
+            console.log("no  inside searchInRestaurant");
+        if (!searchInCourier)
+            console.log("no  inside searchInCourier");
+        if ((searchInCustomer === null || searchInCustomer === void 0 ? void 0 : searchInCustomer.length) !== 0 || (searchInRestaurant === null || searchInRestaurant === void 0 ? void 0 : searchInRestaurant.length) !== 0 || (searchInCourier === null || searchInCourier === void 0 ? void 0 : searchInCourier.length) !== 0)
+            return true;
+        else {
+            return false;
+        }
+    }
+    catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+function handleLoginPage() {
+    var newUrl = "./../../../login/login.html";
+    window.location.replace(newUrl);
 }

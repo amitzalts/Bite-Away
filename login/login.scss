@@ -124,12 +124,21 @@ button {
         margin: 20px 0;
 
         input{
+            border: none;
+            outline: none;
             display: block;
             width: 70%;
+            color: white;
+            font-size: 1.4rem;
             margin: auto;
+            border-radius: 15px;
             padding: 10px 16px;
+            background: rgba(61, 61, 61, 0.616);
 
-
+            &::placeholder{
+                color: white;
+                font-size: 1.4rem;
+            }
         }
 
    

@@ -115,10 +115,11 @@ const orders = getInfoFromStorage("orders") as Order[] ;
 
 function saveInLocalStorage(array:Customer[] | Restaurant[] | Courier[] | Order[], name:string){
     try {
-            if(!array) throw new Error("the Array no Found ")
+            if(!array) throw new Error(`the ${array} no Found `)
             localStorage.setItem(name , JSON.stringify(array)) 
     } catch (error) {
         console.error(error);
+        return []
     }
 }
 
