@@ -1,11 +1,22 @@
-// function loggedInCustomer(): Customer {
-//     const customer = customers.find((customer) => customer.uid);
-//     if (!customer) {
-//         throw new Error("could not find logged in restaurant");
-//     } else {
-//         return customer;
-//     }
-// }
+function loggedInCustomer() {
+    try {
+        var data = localStorage.getItem("userCur");
+        if (!data)
+            throw new Error("the userEmail data  was not found in local storage");
+        var getEmailFromUser = JSON.parse(data);
+        var customer = getEmailFromUser;
+        if (!customer) {
+            throw new Error("could not find logged in customer");
+        }
+        else {
+            return customer;
+        }
+    }
+    catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
 function openMenu(uid) {
     try {
         console.log("Open menu");
@@ -18,6 +29,7 @@ function openMenu(uid) {
         var menuRoot = document.querySelector("#menuRoot" + uid);
         if (menuRoot)
             menuRoot.innerHTML = renderMenuForCustomer(uid);
+        //invoke here newOrderByRes(uid);
     }
     catch (error) {
         console.error(error);
@@ -25,7 +37,11 @@ function openMenu(uid) {
 }
 function newOrderByRes(restaurantUid, restaurant) {
     try {
-        customers[0].orders.push(new Order(restaurantUid, amit, undefined, undefined, "initialized")); //need to finish      
+        var customer = loggedInCustomer();
+        if (!customer)
+            throw new Error("active customer not found");
+        // const restaurant = 
+        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
         saveInLocalStorage(orders, "orders");
     }
     catch (error) {
@@ -34,7 +50,10 @@ function newOrderByRes(restaurantUid, restaurant) {
 }
 function newCourseByRes(name, restaurant, price) {
     try {
-        customers[0].orders[0].courses.push(new Course(name, restaurant, price));
+        var customer = loggedInCustomer();
+        if (!customer)
+            throw new Error("customer not found");
+        customer.orders[0].courses.push(new Course(name, restaurant, price)); //change 0 to the relevant order
     }
     catch (error) {
         console.error(error);
@@ -109,21 +128,5 @@ function search() {
     catch (error) {
         console.error(error);
         return error;
-    }
-}
-function renderCustomerHeader() {
-    try {
-        var customerHeader = document.querySelector("#customerHeader");
-        var data = localStorage.getItem("userCur");
-        if (!data)
-            throw new Error("the userEmail data no found in local storage");
-        var getEmailFromUser = JSON.parse(data);
-        var customer = getEmailFromUser;
-        if (customer && customerHeader) {
-            customerHeader.innerText = "" + customer.name;
-        }
-    }
-    catch (error) {
-        console.error(error);
     }
 }

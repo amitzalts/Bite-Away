@@ -1,11 +1,11 @@
-function renderRestaurants():string {
+function renderRestaurants(): string {
     try {
         const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
-        if(!restaurantRoot) throw new Error("the restaurantRoot no found")
-            let html = ''
-                restaurants.forEach(restaurant => {
-                            html+=
-                            `
+        if (!restaurantRoot) throw new Error("the restaurantRoot no found")
+        let html = ''
+        restaurants.forEach(restaurant => {
+            html +=
+                `
                             <div id=uid-${restaurant.uid} class="results__restaurant">
                             <div id=uid-${restaurant.uid}Root ></div>
                                 <div class="results__restaurant__wrapper">
@@ -16,11 +16,11 @@ function renderRestaurants():string {
                                 <button onclick="openMenu('${restaurant.uid}')">open menu</button>    
                             </div>
                             `
-                        
-                })
-            restaurantRoot.innerHTML = html
-       return  html
-        
+
+        })
+        restaurantRoot.innerHTML = html
+        return html
+
     }
     catch (error) {
         console.error(error);
@@ -28,28 +28,28 @@ function renderRestaurants():string {
     }
 }
 
-function renderMenu(uid:string):string{
-try {
-    const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-    let html = ''
-      html = `
+function renderMenu(uid: string): string {
+    try {
+        const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
+        let html = ''
+        html = `
    <div class="menu">${restaurants[index].name} 
         <button class="menu__close" onclick="closeMenu('${uid}')">close</button>
         <div id=menuRoot${uid}></div>
    </div>
    `
-   
-   return html
-} catch (error) {
-    console.error(error);
-    return ''
-}
+
+        return html
+    } catch (error) {
+        console.error(error);
+        return ''
+    }
 }
 
-function renderMenuForCustomer(uid:string): string {
+function renderMenuForCustomer(uid: string): string {
     try {
         const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-console.log(index);
+        console.log(index);
         const html = restaurants[index].menu
             .map((course) => {
                 console.log(course.uid);
@@ -71,5 +71,17 @@ console.log(index);
     } catch (error) {
         console.error(error);
         return "";
+    }
+}
+
+function renderCustomerHeader() {
+    try {
+        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
+        const customer = loggedInCustomer()
+        if (customer && customerHeader) {
+            customerHeader.innerText = `${customer.name}`
+        }
+    } catch (error) {
+        console.error(error);
     }
 }
