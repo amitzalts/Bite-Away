@@ -29,7 +29,7 @@ function handleAddCourse(ev: any) {
 
         if (!courseRoot) throw new Error("courseRoot is null");
 
-        courseRoot.innerHTML = renderMenu(menu);
+        courseRoot.innerHTML = renderMenuRest(menu);
 
     } catch (error) {
         console.error(error);
@@ -50,7 +50,7 @@ function renderRestaurantHeader() {
 }
 
 
-function renderMenu(menu: Course[]): string {
+function renderMenuRest(menu: Course[]): string {
     try {
         const restaurant: Restaurant = loggedInRestaurant();
         if (!restaurant) throw new Error("logged in restaurant not found");
@@ -84,7 +84,6 @@ function renderMenu(menu: Course[]): string {
 }
 
 
-
 function handleDeleteItem(uid: string) {
     try {
         const index = menu.findIndex((item) => item.uid === uid);
@@ -92,7 +91,7 @@ function handleDeleteItem(uid: string) {
         menu.splice(index, 1);
 
         if (!courseRoot) throw new Error("courseRoot is undefined");
-        courseRoot.innerHTML = renderMenu(menu);
+        courseRoot.innerHTML = renderMenuRest(menu);
         saveInLocalStorage(restaurants, "restaurants");
 
 

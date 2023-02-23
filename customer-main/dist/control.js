@@ -1,35 +1,24 @@
-function loggedInCustomer() {
+function openMenu(uid) {
     try {
-        var data = localStorage.getItem("userCur");
-        if (!data)
-            throw new Error("the userEmail data  was not found in local storage");
-        var getEmailFromUser = JSON.parse(data);
-        var customer = getEmailFromUser;
-        if (!customer) {
-            throw new Error("could not find logged in customer");
-        }
-        else {
-            return customer;
-        }
+        var menu = document.querySelector("#menuRoot");
+        console.log(menu);
+        if (!menu)
+            throw new Error("could not find menu ");
+        menu.innerHTML = renderMenu(uid);
+        menu.style.display = " block";
+        //invoke here newOrderByRes(uid);
     }
     catch (error) {
         console.error(error);
-        return undefined;
     }
 }
-function openMenu(uid) {
+function closeMenu() {
     try {
-        console.log("Open menu");
-        var menu = document.querySelector("#uid-" + uid + "Root");
-        console.log(menu);
+        var menu = document.querySelector("#menuRoot");
         if (!menu)
-            throw new Error("could not find menu");
-        menu.innerHTML = renderMenu(uid);
-        console.log(menu);
-        var menuRoot = document.querySelector("#menuRoot" + uid);
-        if (menuRoot)
-            menuRoot.innerHTML = renderMenuForCustomer(uid);
-        //invoke here newOrderByRes(uid);
+            throw new Error("could not find root");
+        menu.style.display = " none";
+        menu.innerHTML = "";
     }
     catch (error) {
         console.error(error);
@@ -83,17 +72,6 @@ function handleAddToCart(ev) {
         // }
         newCourseByRes("Orel", amit, 50);
         // courseRoot.innerHTML = renderMenu(menu);
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
-function closeMenu(uid) {
-    try {
-        var menu = document.querySelector("#uid-" + uid + "Root");
-        if (!menu)
-            throw new Error("could not find root");
-        menu.innerHTML = "";
     }
     catch (error) {
         console.error(error);

@@ -1,113 +1,154 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   position: relative;
   background-color: wheat;
 }
 
-.container {
+.container-customer {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
   position: relative;
   margin: 0;
 }
-
-.header {
-  width: 30rem;
-  height: 3rem;
-  position: relative;
-  top: 1rem;
-  left: 40rem;
-  font-size: 5rem;
-  color: #3811ba;
-  font-weight: 800;
+.container-customer__title {
+  width: 150px;
+  margin: 25px auto;
+  font-size: 5em;
+  color: #070606;
 }
-
-.searchBox {
-  width: 30rem;
-  height: 3rem;
-  position: relative;
-  top: 5rem;
-  left: 38rem;
-  border: 0.1rem solid black;
-  border-radius: 1rem;
+.container-customer__searchBox {
+  padding: 10px 20px;
+  width: 50%;
+  margin: auto;
+  border: none;
+  border-radius: 15px;
   font-size: 1.5rem;
-  background-color: #2a2929;
+  background-color: rgba(0, 0, 0, 0.808);
   color: white;
 }
-
-.results {
-  width: 50rem;
-  height: 200rem;
-  position: relative;
-  top: 5rem;
-  left: 30rem;
-  border-radius: 1rem;
-  font-size: 1.5rem;
-  padding: 1rem;
-  box-sizing: border-box;
+.container-customer__restaurant-root {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+  text-align: center;
+  flex-wrap: wrap;
 }
-.results__restaurant {
-  width: 40rem;
-  height: auto;
-  position: relative;
-  top: 0rem;
-  left: 3rem;
-  border: 0.1rem solid black;
-  border-radius: 1rem;
+.container-customer__restaurant-card {
+  box-shadow: 0.4px 1px 10px 2px rgba(0, 0, 0, 0.616), -0.4px 1px 15px 2px inset rgba(255, 255, 255, 0.384);
+  overflow: hidden;
+  height: 350px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 15px;
   font-size: 1.5rem;
   margin-top: 0.7rem;
 }
-.results__restaurant__wrapper {
-  width: 39rem;
-  height: 11rem;
-  position: relative;
-  top: 1rem;
-  left: 1rem;
+.container-customer__title-restaurant {
+  margin: 5px;
+  text-transform: capitalize;
   font-size: 1.5rem;
-  margin-top: 0.7rem;
-  display: flex;
-  flex-direction: column;
-  color: #140ad8;
-  font-weight: 600;
-  gap: 1rem;
 }
-
-.cart {
-  width: 20rem;
-  height: 50rem;
-  position: relative;
-  bottom: 200rem;
-  left: 7rem;
-  border-radius: 1rem;
-  border: 0.1rem solid black;
-  font-size: 1.5rem;
-  padding: 1rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+.container-customer__img-restaurant {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
-
-.menu {
-  width: 40rem;
-  height: auto;
-  position: relative;
-  bottom: 0rem;
-  left: 0rem;
-  border-radius: 1rem;
-  border: 0.1rem solid black;
-  font-size: 1.5rem;
-  padding: 1rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  z-index: 2;
-  background-color: aliceblue;
+.container-customer__btn-restaurant {
+  font-weight: 700;
+  background-color: sandybrown;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 10px;
+  outline: none;
+  border-radius: 15px;
+  border: none;
+  padding: 7px 14px;
 }
-.menu__close {
-  height: 1rem;
-  width: 1rem;
-  position: relative;
-  color: black;
-  border: 0.1rem solid black;
-  z-index: 3;
+.container-customer__btn-restaurant:hover {
+  scale: 1.09;
+}
+.container-customer__menu {
+  display: none;
+  background-color: #9b8d8d;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 90vh;
+}
+.container-customer__menu-close {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 7px;
+  font-size: 2rem;
+  background: inherit;
+  border: none;
+}
+.container-customer__menu-close:hover {
+  color: white;
+}
+.container-customer__container-courses {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: darkgray;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.container-customer__courses-card {
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 150px;
+  background-color: rgba(24, 24, 24, 0.418);
+  height: 300px;
+}
+.container-customer__courses-card:hover {
+  scale: 1.05;
+}
+.container-customer__courses-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.container-customer__courses-card-name {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.container-customer__courses-des {
+  margin: 5px;
+}
+.container-customer__courses-btn {
+  border-radius: 15px;
+  padding: 10px 20px;
+  margin: 5px;
+  width: 100px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0.4px 1px 0px 2px rgba(0, 0, 0, 0.616), -0.4px 1px 15px 1px inset rgba(255, 255, 255, 0.384);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.158);
+}
+.container-customer__courses-btn:hover {
+  box-shadow: 0.4px 1px 10px 2px rgba(0, 0, 0, 0.616), -0.4px 1px 15px 2px inset rgba(255, 255, 255, 0.384);
+}
+.container-customer__courses-btn i {
+  font-size: 1.4rem;
+  color: #130e0e;
 }

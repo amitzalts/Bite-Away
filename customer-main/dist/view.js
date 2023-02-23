@@ -3,13 +3,11 @@ function renderRestaurants() {
         var restaurantRoot = document.querySelector("#restaurantRoot");
         if (!restaurantRoot)
             throw new Error("the restaurantRoot no found");
-        var html_1 = '';
-        restaurants.forEach(function (restaurant) {
-            html_1 +=
-                "\n                            <div id=uid-" + restaurant.uid + " class=\"results__restaurant\">\n                            <div id=uid-" + restaurant.uid + "Root ></div>\n                                <div class=\"results__restaurant__wrapper\">\n                                    <span>Name: " + restaurant.name + " </span>\n                                    <span>Address: " + restaurant.address + " </span>\n                                    <span>Type: " + restaurant.type + " </span>\n                                </div>\n                                <button onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button>    \n                            </div>\n                            ";
-        });
-        restaurantRoot.innerHTML = html_1;
-        return html_1;
+        var html = restaurants.map(function (restaurant) {
+            return "\n\n              <div class=\"container-customer__restaurant-card\">  <img src=\"https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div> ";
+        }).join(" ");
+        restaurantRoot.innerHTML = html;
+        return html;
     }
     catch (error) {
         console.error(error);
@@ -19,8 +17,11 @@ function renderRestaurants() {
 function renderMenu(uid) {
     try {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        var html = '';
-        html = "\n   <div class=\"menu\">" + restaurants[index].name + " \n        <button class=\"menu__close\" onclick=\"closeMenu('" + uid + "')\">close</button>\n        <div id=menuRoot" + uid + "></div>\n   </div>\n   ";
+        console.log(index);
+        var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
+        if (!curRes)
+            throw new Error("no found restaurant");
+        var html = "\n       \n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n            <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n                <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div> ";
         return html;
     }
     catch (error) {
@@ -28,21 +29,19 @@ function renderMenu(uid) {
         return '';
     }
 }
-function renderMenuForCustomer(uid) {
+function renderCourse(uid) {
     try {
         var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
         console.log(index);
-        var html = restaurants[index].menu
-            .map(function (course) {
-            console.log(course.uid);
-            return "\n            <form onsubmit=\"handleAddToCart(event)\">    \n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + "</div>\n                    <input type=\"number\" name=\"qty\" placeholder=\"0\" required>\n                    <input type=\"hidden\" id=\"" + course.uid + "\" name=\"" + course.name + "\" value=\"" + course.name + "\">\n                    <input type=\"submit\" value=\"Add to Cart\">\n                </div>\n            </form>    \n            ";
-        })
-            .join(" ");
+        var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
+        if (!curRes)
+            throw new Error("no found restaurant");
+        var html = " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\" >\n                        Humbugger\n                </p>\n                <p class=\"container-customer__courses-des\" >\n                    lorem asdasd kqwjdn ams,nd lqwkd\n                </p>\n                <h4 class=\"container-customer__courses-price\">\n                    Price:50$\n                </h4>\n                <button class=\"container-customer__courses-btn\">\n                <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n                </div> ";
         return html;
     }
     catch (error) {
         console.error(error);
-        return "";
+        return '';
     }
 }
 function renderCustomerHeader() {

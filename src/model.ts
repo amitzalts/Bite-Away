@@ -41,6 +41,7 @@ this.uid = `100${uid()}`
 class Restaurant {
     uid:string;
     menu: Course[] = [];
+    orders:Order[] = []
     constructor(
         public name:string,
         public password:string , 
@@ -89,13 +90,14 @@ this.uid = `101${uid()}`
 
 class Order {
     uid:string;
-    courses:any
+    courses:Course[]
     constructor(
         public name:string, 
         public restaurant:Restaurant,
+        public customerId:string,
         public courier?:Courier, 
         public destination?:string,
-        public status?:string,  
+        public status?:string, 
          
     ){
 this.uid = `201${uid()}`
@@ -148,7 +150,22 @@ function getInfoFromStorageType():string{
     }
 }
 
-
+function loggedInCustomer(): Customer | undefined {
+    try {
+        const data = localStorage.getItem("userCur");
+        if (!data) throw new Error("the userEmail data  was not found in local storage");
+        const getEmailFromUser = JSON.parse(data) as Customer;
+        const customer: Customer = getEmailFromUser;
+        if (!customer) {
+            throw new Error("could not find logged in customer");
+        } else {
+            return customer;
+        }
+    } catch (error) {
+        console.error(error);
+        return undefined
+    }
+}
 
 
 
@@ -187,3 +204,6 @@ customers.push(customer1, customer2);
 saveInLocalStorage( restaurants ,"restaurants")
 
 }
+
+
+

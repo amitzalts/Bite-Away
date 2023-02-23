@@ -19,7 +19,7 @@ function handleAddCourse(ev) {
         ev.target.reset();
         if (!courseRoot)
             throw new Error("courseRoot is null");
-        courseRoot.innerHTML = renderMenu(menu);
+        courseRoot.innerHTML = renderMenuRest(menu);
     }
     catch (error) {
         console.error(error);
@@ -37,7 +37,7 @@ function renderRestaurantHeader() {
         console.error(error);
     }
 }
-function renderMenu(menu) {
+function renderMenuRest(menu) {
     try {
         var restaurant = loggedInRestaurant();
         if (!restaurant)
@@ -64,7 +64,7 @@ function handleDeleteItem(uid) {
         menu.splice(index, 1);
         if (!courseRoot)
             throw new Error("courseRoot is undefined");
-        courseRoot.innerHTML = renderMenu(menu);
+        courseRoot.innerHTML = renderMenuRest(menu);
         saveInLocalStorage(restaurants, "restaurants");
     }
     catch (error) {

@@ -1,41 +1,30 @@
 
 
-function loggedInCustomer(): Customer | undefined {
+
+
+function openMenu(uid:string) {
     try {
-        const data = localStorage.getItem("userCur");
-        if (!data) throw new Error("the userEmail data  was not found in local storage");
-        const getEmailFromUser = JSON.parse(data) as Customer;
-        const customer: Customer = getEmailFromUser;
-        if (!customer) {
-            throw new Error("could not find logged in customer");
-        } else {
-            return customer;
-        }
-    } catch (error) {
-        console.error(error);
-        return undefined
-    }
-}
-
-
-
-function openMenu(uid: string) {
-    try {
-        console.log("Open menu");
-        const menu: HTMLElement = document.querySelector(`#uid-${uid}Root`)!;
+        const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         console.log(menu);
-        if (!menu) throw new Error("could not find menu");
+        if (!menu) throw new Error("could not find menu ");
         menu.innerHTML = renderMenu(uid)
-        console.log(menu);
-        const menuRoot = document.querySelector(`#menuRoot${uid}`)
-        if (menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
+        menu.style.display = " block"
         //invoke here newOrderByRes(uid);
     } catch (error) {
         console.error(error);
 
     }
 }
-
+function closeMenu() {
+    try {
+        const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
+        if (!menu) throw new Error("could not find root");
+        menu.style.display = " none"
+        menu.innerHTML = "";
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
     try {
@@ -97,7 +86,8 @@ function handleAddToCart(ev: any) { //wip
 
         // }
         newCourseByRes("Orel", amit, 50)
-
+        
+        
 
         // courseRoot.innerHTML = renderMenu(menu);
 
@@ -106,15 +96,6 @@ function handleAddToCart(ev: any) { //wip
     }
 }
 
-function closeMenu(uid: string) {
-    try {
-        const menu: HTMLElement | null = document.querySelector(`#uid-${uid}Root`);
-        if (!menu) throw new Error("could not find root");
-        menu.innerHTML = "";
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 function search(): void {
     try {

@@ -38,6 +38,7 @@ var Restaurant = /** @class */ (function () {
         this.type = type;
         this.BankAccount = BankAccount;
         this.menu = [];
+        this.orders = [];
         this.uid = "200" + uid();
     }
     return Restaurant;
@@ -67,9 +68,10 @@ var Course = /** @class */ (function () {
     return Course;
 }());
 var Order = /** @class */ (function () {
-    function Order(name, restaurant, courier, destination, status) {
+    function Order(name, restaurant, customerId, courier, destination, status) {
         this.name = name;
         this.restaurant = restaurant;
+        this.customerId = customerId;
         this.courier = courier;
         this.destination = destination;
         this.status = status;
@@ -119,6 +121,25 @@ function getInfoFromStorageType() {
     catch (error) {
         console.error(error);
         return "";
+    }
+}
+function loggedInCustomer() {
+    try {
+        var data = localStorage.getItem("userCur");
+        if (!data)
+            throw new Error("the userEmail data  was not found in local storage");
+        var getEmailFromUser = JSON.parse(data);
+        var customer = getEmailFromUser;
+        if (!customer) {
+            throw new Error("could not find logged in customer");
+        }
+        else {
+            return customer;
+        }
+    }
+    catch (error) {
+        console.error(error);
+        return undefined;
     }
 }
 /////////////////////////////////// DATA BASE 
