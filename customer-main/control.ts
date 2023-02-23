@@ -1,15 +1,22 @@
 
 
+function loggedInCustomer(): Customer | undefined {
+    try {
+        const data = localStorage.getItem("userCur");
+        if (!data) throw new Error("the userEmail data  was not found in local storage");
+        const getEmailFromUser = JSON.parse(data) as Customer;
+        const customer: Customer = getEmailFromUser;
+        if (!customer) {
+            throw new Error("could not find logged in customer");
+        } else {
+            return customer;
+        }
+    } catch (error) {
+        console.error(error);
+        return undefined
+    }
+}
 
-// function loggedInCustomer(): Customer {
-
-//     const customer = customers.find((customer) => customer.uid);
-//     if (!customer) {
-//         throw new Error("could not find logged in restaurant");
-//     } else {
-//         return customer;
-//     }
-// }
 
 
 function openMenu(uid: string) {
@@ -22,7 +29,7 @@ function openMenu(uid: string) {
         console.log(menu);
         const menuRoot = document.querySelector(`#menuRoot${uid}`)
         if (menuRoot) menuRoot.innerHTML = renderMenuForCustomer(uid);
-
+        //invoke here newOrderByRes(uid);
     } catch (error) {
         console.error(error);
 
@@ -30,23 +37,29 @@ function openMenu(uid: string) {
 }
 
 
-function newOrderByRes(restaurantUid:string , restaurant:Restaurant[]){
+function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
     try {
 
-        customers[0].orders.push(new Order(restaurantUid, amit, undefined, undefined, "initialized"))//need to finish      
+        const customer = loggedInCustomer();
+        if (!customer) throw new Error("active customer not found");
+
+        // const restaurant = 
+
+        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"))  
         saveInLocalStorage(orders, "orders");
-    
+
     } catch (error) {
         console.error(error);
-     
     }
 }
 
-function newCourseByRes(name:string , restaurant:Restaurant , price:number){
+function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
     try {
+        const customer = loggedInCustomer();
+        if(!customer) throw new Error("customer not found");
 
-       customers[0].orders[0].courses.push(new Course(name, restaurant, price))
-       
+        customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
+
 
     } catch (error) {
         console.error(error);
@@ -63,10 +76,10 @@ function handleAddToCart(ev: any) { //wip
 
         // const customer = loggedInCustomer();
         // const currentOrder = customer.orders.length;
-   
+
         //     customer.orders[0].name === 
-        
-            
+
+
         // // console.log(customer);
         // // console.log("currentOrder", currentOrder);
         // // console.log(name); //works
@@ -76,14 +89,14 @@ function handleAddToCart(ev: any) { //wip
         //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
         //  if(customer.orders[0].name = )
         //     }   
-          
+
         //  //need to finish
         //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
         //     // console.log("currentOrder", currentOrder);
         //              console.log(customer);
-        
+
         // }
-        newCourseByRes("Orel" , amit , 50)
+        newCourseByRes("Orel", amit, 50)
 
 
         // courseRoot.innerHTML = renderMenu(menu);
@@ -137,17 +150,4 @@ function search(): void {
     }
 }
 
-function renderCustomerHeader() {
-    try {
-        const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        const data = localStorage.getItem("userCur");
-        if(!data) throw new Error("the userEmail data no found in local storage")
-        const getEmailFromUser = JSON.parse(data) as Customer 
-        const customer: Customer =   getEmailFromUser
-        if (customer && customerHeader) {
-            customerHeader.innerText = `${customer.name}`
-        }
-    } catch (error) {
-        console.error(error);
-    }
-}
+

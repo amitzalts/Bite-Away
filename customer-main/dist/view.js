@@ -45,3 +45,15 @@ function renderMenuForCustomer(uid) {
         return "";
     }
 }
+function renderCustomerHeader() {
+    try {
+        var customerHeader = document.querySelector("#customerHeader");
+        var customer = loggedInCustomer();
+        if (customer && customerHeader) {
+            customerHeader.innerText = "" + customer.name;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
