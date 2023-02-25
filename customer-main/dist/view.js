@@ -36,7 +36,11 @@ function renderCourse(uid) {
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
             throw new Error("no found restaurant");
-        var html = " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\" >\n                        Humbugger\n                </p>\n                <p class=\"container-customer__courses-des\" >\n                    lorem asdasd kqwjdn ams,nd lqwkd\n                </p>\n                <h4 class=\"container-customer__courses-price\">\n                    Price:50$\n                </h4>\n                <button class=\"container-customer__courses-btn\">\n                <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n                </div> ";
+        var html = curRes.menu
+            .map(function (course) {
+            return " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\">" + course.name + "</p>\n                <p class=\"container-customer__courses-des\">" + course.description + "</p>\n                <h4 class=\"container-customer__courses-price\">Price:" + course.price + "</h4>\n                <button class=\"container-customer__courses-btn\">\n                    <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n            </div> ";
+        })
+            .join(" ");
         return html;
     }
     catch (error) {

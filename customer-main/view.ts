@@ -29,8 +29,8 @@ function renderMenu(uid: string): string {
         const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
         console.log(index);
 
-        const curRes = restaurants.find(restaurant=>restaurant.uid === uid) as Restaurant
-        if(!curRes) throw new Error("no found restaurant")
+        const curRes = restaurants.find(restaurant => restaurant.uid === uid) as Restaurant
+        if (!curRes) throw new Error("no found restaurant")
         const html = `
        
         <button class="container-customer__menu-close" onclick="closeMenu()">
@@ -50,25 +50,22 @@ function renderCourse(uid: string): string {
         const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
         console.log(index);
 
-        const curRes = restaurants.find(restaurant=>restaurant.uid === uid) as Restaurant
-        if(!curRes) throw new Error("no found restaurant")
-        const html = ` 
+        const curRes = restaurants.find(restaurant => restaurant.uid === uid);
+        if (!curRes) throw new Error("no found restaurant");
+        const html = curRes.menu
+            .map((course) => {
+                return ` 
             <div class="container-customer__courses-card">
                 <img src="https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg" class="container-customer__courses-img">
-                <p class="container-customer__courses-card-name" >
-                        Humbugger
-                </p>
-                <p class="container-customer__courses-des" >
-                    lorem asdasd kqwjdn ams,nd lqwkd
-                </p>
-                <h4 class="container-customer__courses-price">
-                    Price:50$
-                </h4>
+                <p class="container-customer__courses-card-name">${course.name}</p>
+                <p class="container-customer__courses-des">${course.description}</p>
+                <h4 class="container-customer__courses-price">Price:${course.price}</h4>
                 <button class="container-customer__courses-btn">
-                <i class="fa-solid fa-cart-plus"></i>
+                    <i class="fa-solid fa-cart-plus"></i>
                 </button>
-                </div> `;
-
+            </div> `;
+            })
+            .join(" ");
         return html;
     } catch (error) {
         console.error(error);

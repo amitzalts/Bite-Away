@@ -58,9 +58,10 @@ var Courier = /** @class */ (function () {
 }());
 // --------------------------- non User Classes ------
 var Course = /** @class */ (function () {
-    function Course(name, price) {
+    function Course(name, price, description) {
         this.name = name;
         this.price = price;
+        this.description = description;
         this.uid = "101" + uid();
         // this.date = new Date();  // date right now
     }

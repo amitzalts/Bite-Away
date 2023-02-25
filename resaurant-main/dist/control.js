@@ -8,7 +8,8 @@ function handleAddCourse(ev) {
         ev.preventDefault();
         var name = ev.target.elements.name.value;
         var price = ev.target.elements.price.valueAsNumber;
-        restaurant.menu.push(new Course(name, price));
+        var description = ev.target.elements.description.value;
+        restaurant.menu.push(new Course(name, price, description));
         saveMenu(restaurant.uid, restaurant.menu);
         ev.target.reset();
         renderMenuRest();
@@ -33,7 +34,7 @@ function renderMenuRest() {
         var menu = restaurant.menu;
         var html = menu
             .map(function (course) {
-            return "\n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                    <div>uid: " + course.uid + "</div>\n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
+            return "\n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                    <div>Description: " + course.description + " </div>\n                    <div>uid: " + course.uid + "</div>\n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
         })
             .join(" ");
         if (!courseRoot)

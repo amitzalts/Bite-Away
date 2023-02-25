@@ -13,8 +13,9 @@ function handleAddCourse(ev: any) {
 
         const name = ev.target.elements.name.value as string;
         const price = ev.target.elements.price.valueAsNumber as number;
+        const description = ev.target.elements.description.value as string;
         
-        restaurant.menu.push(new Course(name, price));
+        restaurant.menu.push(new Course(name, price, description));
         
         saveMenu(restaurant.uid, restaurant.menu);
 
@@ -41,7 +42,7 @@ function renderRestaurantHeader() {
 }
 
 
-function renderMenuRest(){
+function renderMenuRest(){ // later add ability to update the course's name, price, description 
     try {
         const menu  = restaurant.menu;
         const html = menu
@@ -50,6 +51,7 @@ function renderMenuRest(){
                 <div class="course">
                     <h3>${course.name}</h3>
                     <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>
+                    <div>Description: ${course.description} </div>
                     <div>uid: ${course.uid}</div>
                     <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
                 </div>

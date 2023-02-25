@@ -77,6 +77,7 @@ class Course {
     constructor(
         public name: string,
         public price: number,
+        public description: string,
     ) {
         this.uid = `101${uid()}`
         // this.date = new Date();  // date right now
