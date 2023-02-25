@@ -74,12 +74,11 @@ function findTypeUserLogin(email: string): Customer | Restaurant | Courier | und
         } else if (searchInRestaurant) {
             localStorage.setItem("userCur" , JSON.stringify(searchInRestaurant))
             return searchInRestaurant
-           
         } else if (searchInCourier) {
             localStorage.setItem("userCur" , JSON.stringify(searchInCourier))
             return searchInCourier
         } else {
-            throw new Error("the User no founded")
+            throw new Error("the User not found")
         }
 
     } catch (error) {

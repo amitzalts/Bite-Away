@@ -38,7 +38,7 @@ var Restaurant = /** @class */ (function () {
         this.type = type;
         this.BankAccount = BankAccount;
         this.menu = [];
-        this.orders = [];
+        this.customers = [];
         this.uid = "200" + uid();
     }
     return Restaurant;
@@ -58,9 +58,8 @@ var Courier = /** @class */ (function () {
 }());
 // --------------------------- non User Classes ------
 var Course = /** @class */ (function () {
-    function Course(name, restaurant, price) {
+    function Course(name, price) {
         this.name = name;
-        this.restaurant = restaurant;
         this.price = price;
         this.uid = "101" + uid();
         // this.date = new Date();  // date right now
@@ -84,12 +83,11 @@ var Order = /** @class */ (function () {
 var customers = getInfoFromStorage("customers");
 var restaurants = getInfoFromStorage("restaurants");
 var couriers = getInfoFromStorage("couriers");
-var orders = getInfoFromStorage("orders");
 // --------------------------- LocalStorage ------
 function saveInLocalStorage(array, name) {
     try {
         if (!array)
-            throw new Error("the " + array + " no Found ");
+            throw new Error("the " + array + " no Found");
         localStorage.setItem(name, JSON.stringify(array));
     }
     catch (error) {
@@ -123,23 +121,50 @@ function getInfoFromStorageType() {
         return "";
     }
 }
-function loggedInCustomer() {
+function loggedInUser() {
     try {
         var data = localStorage.getItem("userCur");
         if (!data)
             throw new Error("the userEmail data  was not found in local storage");
         var getEmailFromUser = JSON.parse(data);
-        var customer = getEmailFromUser;
-        if (!customer) {
+        var user = getEmailFromUser;
+        if (!user) {
             throw new Error("could not find logged in customer");
         }
         else {
-            return customer;
+            return user;
         }
     }
     catch (error) {
         console.error(error);
         return undefined;
+    }
+}
+function loggedInRestaurant() {
+    try {
+        var user_1 = loggedInUser();
+        if (!user_1)
+            throw new Error("no user found");
+        var restaurant = restaurants.find(function (rest) { return rest.uid === user_1.uid; });
+        if (!restaurant)
+            throw new Error("no restaurant found");
+        return restaurant;
+    }
+    catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
+function saveMenu(restaurantUid, menu) {
+    try {
+        var restaurant = restaurants.find(function (rest) { return rest.uid === restaurantUid; });
+        if (!restaurant)
+            throw new Error("restaurant not found");
+        restaurant.menu = menu;
+        saveInLocalStorage(restaurants, "restaurants");
+    }
+    catch (error) {
+        console.error(error);
     }
 }
 /////////////////////////////////// DATA BASE 

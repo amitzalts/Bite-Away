@@ -3,7 +3,7 @@ function openMenu(uid) {
         var menu = document.querySelector("#menuRoot");
         console.log(menu);
         if (!menu)
-            throw new Error("could not find menu ");
+            throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid);
         menu.style.display = " block";
         //invoke here newOrderByRes(uid);
@@ -26,10 +26,11 @@ function closeMenu() {
 }
 function newOrderByRes(restaurantUid, restaurant) {
     try {
-        var customer = loggedInCustomer();
-        if (!customer)
+        var _customer = loggedInUser();
+        if (!_customer)
             throw new Error("active customer not found");
         // const restaurant = 
+        var customer = _customer;
         customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
         saveInLocalStorage(orders, "orders");
     }
@@ -39,9 +40,10 @@ function newOrderByRes(restaurantUid, restaurant) {
 }
 function newCourseByRes(name, restaurant, price) {
     try {
-        var customer = loggedInCustomer();
-        if (!customer)
+        var _customer = loggedInUser();
+        if (!_customer)
             throw new Error("customer not found");
+        var customer = _customer;
         customer.orders[0].courses.push(new Course(name, restaurant, price)); //change 0 to the relevant order
     }
     catch (error) {

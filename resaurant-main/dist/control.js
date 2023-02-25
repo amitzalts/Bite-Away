@@ -1,25 +1,17 @@
-var menu = []; //change to the relevant menu of the logged in resataurant
 var courseRoot = document.querySelector("#courseRoot"); //view
-function loggedInRestaurant() {
-    var restaurant = restaurants.find(function (restaurant) { return restaurant.uid; });
-    if (!restaurant) {
-        throw new Error("could not find logged in restaurant");
-    }
-    else {
-        return restaurant;
-    }
-}
+var _restaurant = loggedInRestaurant(); //index
+if (!_restaurant)
+    throw new Error("no restaurant found");
+var restaurant = _restaurant; //index
 function handleAddCourse(ev) {
     try {
         ev.preventDefault();
         var name = ev.target.elements.name.value;
         var price = ev.target.elements.price.valueAsNumber;
-        var restaurant = loggedInRestaurant();
-        menu.push(new Course(name, restaurant, price));
+        restaurant.menu.push(new Course(name, price));
+        saveMenu(restaurant.uid, restaurant.menu);
         ev.target.reset();
-        if (!courseRoot)
-            throw new Error("courseRoot is null");
-        courseRoot.innerHTML = renderMenuRest(menu);
+        renderMenuRest();
     }
     catch (error) {
         console.error(error);
@@ -28,7 +20,6 @@ function handleAddCourse(ev) {
 function renderRestaurantHeader() {
     try {
         var restaurantHeader = document.querySelector("#restaurantHeader");
-        var restaurant = loggedInRestaurant();
         if (restaurant && restaurantHeader) {
             restaurantHeader.innerText = "" + restaurant.name;
         }
@@ -37,19 +28,17 @@ function renderRestaurantHeader() {
         console.error(error);
     }
 }
-function renderMenuRest(menu) {
+function renderMenuRest() {
     try {
-        var restaurant = loggedInRestaurant();
-        if (!restaurant)
-            throw new Error("logged in restaurant not found");
-        if (!menu || !Array.isArray(menu))
-            throw new Error("menu is not an array");
+        var menu = restaurant.menu;
         var html = menu
             .map(function (course) {
-            return "\n\n            <div class=\"course\">\n                <h3>" + course.name + "</h3>\n                <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                <div>uid: " + course.uid + "</div>\n                <div>restaurant: " + course.restaurant.name + "</div>\n                <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n            </div>\n            ";
+            return "\n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                    <div>uid: " + course.uid + "</div>\n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
         })
             .join(" ");
-        return html;
+        if (!courseRoot)
+            throw new Error("courseRoot is null");
+        courseRoot.innerHTML = html;
     }
     catch (error) {
         console.error(error);
@@ -58,14 +47,14 @@ function renderMenuRest(menu) {
 }
 function handleDeleteItem(uid) {
     try {
-        var index = menu.findIndex(function (item) { return item.uid === uid; });
+        var index = restaurant.menu.findIndex(function (item) { return item.uid === uid; });
         if (index === -1)
             throw new Error("course not found");
-        menu.splice(index, 1);
+        restaurant.menu.splice(index, 1);
         if (!courseRoot)
             throw new Error("courseRoot is undefined");
-        courseRoot.innerHTML = renderMenuRest(menu);
-        saveInLocalStorage(restaurants, "restaurants");
+        renderMenuRest();
+        saveMenu(restaurant.uid, restaurant.menu);
     }
     catch (error) {
         console.error(error);

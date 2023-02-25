@@ -85,7 +85,7 @@ function findTypeUserLogin(email) {
             return searchInCourier;
         }
         else {
-            throw new Error("the User no founded");
+            throw new Error("the User not found");
         }
     }
     catch (error) {

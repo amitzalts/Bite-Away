@@ -81,7 +81,7 @@ function renderCourse(uid: string): string {
 function renderCustomerHeader() {
     try {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        const customer = loggedInCustomer()
+        const customer = loggedInUser();
         if (customer && customerHeader) {
             customerHeader.innerText = `${customer.name}`
         }

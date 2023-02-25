@@ -47,7 +47,7 @@ function renderCourse(uid) {
 function renderCustomerHeader() {
     try {
         var customerHeader = document.querySelector("#customerHeader");
-        var customer = loggedInCustomer();
+        var customer = loggedInUser();
         if (customer && customerHeader) {
             customerHeader.innerText = "" + customer.name;
         }

@@ -1,12 +1,9 @@
 
-
-
-
 function openMenu(uid:string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         console.log(menu);
-        if (!menu) throw new Error("could not find menu ");
+        if (!menu) throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid)
         menu.style.display = " block"
         //invoke here newOrderByRes(uid);
@@ -29,12 +26,13 @@ function closeMenu() {
 function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
     try {
 
-        const customer = loggedInCustomer();
-        if (!customer) throw new Error("active customer not found");
+        const _customer = loggedInUser();
+        if (!_customer) throw new Error("active customer not found");
 
         // const restaurant = 
-
-        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"))  
+        const customer = _customer as Customer;
+        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
+         
         saveInLocalStorage(orders, "orders");
 
     } catch (error) {
@@ -44,11 +42,11 @@ function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change
 
 function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
     try {
-        const customer = loggedInCustomer();
-        if(!customer) throw new Error("customer not found");
+        const _customer = loggedInUser();
+        if(!_customer) throw new Error("customer not found");
 
+        const customer = _customer as Customer;
         customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
-
 
     } catch (error) {
         console.error(error);
