@@ -86,7 +86,7 @@ function search() {
         userInput === null || userInput === void 0 ? void 0 : userInput.addEventListener("input", function (search) {
             var userInputValue = search.target.value;
             userInputValue = userInputValue.toLocaleLowerCase();
-            var results = document.querySelectorAll(".results__restaurant");
+            var results = document.querySelectorAll(".container-customer__restaurant-card");
             for (var i = 0; i < results.length; i++) {
                 if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
                     results[i].style.display = "";
@@ -96,7 +96,7 @@ function search() {
                     results[i].style.display = "none";
                 }
             }
-            var allrestaurants = document.querySelectorAll(".results");
+            var allrestaurants = document.querySelectorAll(".container-customer__result");
             for (var i = 0; i < results.length; i++) {
                 if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
                     noResults_1.style.display = "";

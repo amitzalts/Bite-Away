@@ -1,4 +1,3 @@
-
 function openMenu(uid:string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
@@ -12,6 +11,7 @@ function openMenu(uid:string) {
 
     }
 }
+
 function closeMenu() {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
@@ -104,7 +104,7 @@ function search(): void {
             let userInputValue = (search.target as HTMLInputElement).value
             userInputValue = userInputValue.toLocaleLowerCase();
 
-            let results = document.querySelectorAll<HTMLElement>(".results__restaurant");
+            let results = document.querySelectorAll<HTMLElement>(".container-customer__restaurant-card");
             for (let i = 0; i < results.length; i++) {
                 if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
                     results[i].style.display = "";
@@ -114,7 +114,7 @@ function search(): void {
                 }
             }
 
-            let allrestaurants = document.querySelectorAll<HTMLElement>(".results");
+            let allrestaurants = document.querySelectorAll<HTMLElement>(".container-customer__result");
             for (let i = 0; i < results.length; i++) {
                 if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
                     noResults.style.display = "";
