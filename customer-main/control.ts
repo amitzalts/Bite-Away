@@ -16,6 +16,7 @@ function openMenu(uid:string) {
 
 function closeMenu() {
     try {
+        alert("if you close the menu your order will be lost");
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         if (!menu) throw new Error("could not find root");
         menu.style.display = " none"

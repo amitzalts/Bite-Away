@@ -13,6 +13,7 @@ function openMenu(uid) {
 }
 function closeMenu() {
     try {
+        alert("if you close the menu your order will be lost");
         var menu = document.querySelector("#menuRoot");
         if (!menu)
             throw new Error("could not find root");
