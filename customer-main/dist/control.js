@@ -6,7 +6,6 @@ function openMenu(uid) {
             throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid);
         menu.style.display = " block";
-        //invoke here newOrderByRes(uid);
     }
     catch (error) {
         console.error(error);
@@ -24,61 +23,81 @@ function closeMenu() {
         console.error(error);
     }
 }
-function newOrderByRes(restaurantUid, restaurant) {
+function newOrder(curRes) {
     try {
-        var _customer = loggedInUser();
-        if (!_customer)
-            throw new Error("active customer not found");
-        // const restaurant = 
-        var customer = _customer;
-        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
-        saveInLocalStorage(orders, "orders");
+        customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes, customer.uid));
+        console.log(customer.orders);
     }
     catch (error) {
         console.error(error);
     }
 }
-function newCourseByRes(name, restaurant, price) {
+function handleAddToOrder(curResUid, courseUid) {
     try {
-        var _customer = loggedInUser();
-        if (!_customer)
-            throw new Error("customer not found");
-        var customer = _customer;
-        customer.orders[0].courses.push(new Course(name, restaurant, price)); //change 0 to the relevant order
+        var order = customer.orders[customer.orders.length - 1];
+        var curRes = restaurants.find(function (rest) { return rest.uid === curResUid; });
+        if (!curRes)
+            throw new Error("restaurant not found");
+        var course = curRes.menu.find(function (order) { return order.uid === courseUid; });
+        if (!course)
+            throw new Error("course not found");
+        order.courses.push(course);
+        console.log(order);
     }
     catch (error) {
         console.error(error);
     }
 }
-function handleAddToCart(ev) {
-    try {
-        ev.preventDefault();
-        var _name = document.querySelector("#testtest"); //fix
-        var name = _name === null || _name === void 0 ? void 0 : _name.value;
-        var qty = ev.target.elements.qty.valueAsNumber;
-        // const customer = loggedInCustomer();
-        // const currentOrder = customer.orders.length;
-        //     customer.orders[0].name === 
-        // // console.log(customer);
-        // // console.log("currentOrder", currentOrder);
-        // // console.log(name); //works
-        // if (name) {
-        //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
-        //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
-        //  if(customer.orders[0].name = )
-        //     }   
-        //  //need to finish
-        //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
-        //     // console.log("currentOrder", currentOrder);
-        //              console.log(customer);
-        // }
-        newCourseByRes("Orel", amit, 50);
-        // courseRoot.innerHTML = renderMenu(menu);
-    }
-    catch (error) {
-        console.error(error);
-    }
-}
+// function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
+//     try {
+//         const _customer = loggedInUser();
+//         if (!_customer) throw new Error("active customer not found");
+//         // const restaurant = 
+//         const customer = _customer as Customer;
+//         customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
+//         saveInLocalStorage(orders, "orders");
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
+//     try {
+//         const _customer = loggedInUser();
+//         if(!_customer) throw new Error("customer not found");
+//         const customer = _customer as Customer;
+//         customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+// function handleAddToOrder(ev: any) { //wip
+//     try {
+//         ev.preventDefault();
+//         const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
+//         const name = _name?.value
+//         const qty = ev.target.elements.qty.valueAsNumber;
+//         // const customer = loggedInCustomer();
+//         // const currentOrder = customer.orders.length;
+//         //     customer.orders[0].name === 
+//         // // console.log(customer);
+//         // // console.log("currentOrder", currentOrder);
+//         // // console.log(name); //works
+//         // if (name) {
+//         //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
+//         //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
+//         //  if(customer.orders[0].name = )
+//         //     }   
+//         //  //need to finish
+//         //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
+//         //     // console.log("currentOrder", currentOrder);
+//         //              console.log(customer);
+//         // }
+//         newCourseByRes("Orel", amit, 50)
+//         // courseRoot.innerHTML = renderMenu(menu);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 function search() {
     try {
         var userInput = document.querySelector("#userInput");

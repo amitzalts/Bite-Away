@@ -1,3 +1,7 @@
+const _customer = loggedInCustomer();
+if(!_customer) throw new Error("no customer found");
+const customer = _customer;
+
 function renderRestaurants(): string {
     try {
         const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
@@ -47,11 +51,9 @@ function renderMenu(uid: string): string {
 
 function renderCourse(uid: string): string {
     try {
-        const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-        console.log(index);
-
         const curRes = restaurants.find(restaurant => restaurant.uid === uid);
         if (!curRes) throw new Error("no found restaurant");
+        newOrder(curRes);
         const html = curRes.menu
             .map((course) => {
                 return ` 
@@ -60,12 +62,13 @@ function renderCourse(uid: string): string {
                 <p class="container-customer__courses-card-name">${course.name}</p>
                 <p class="container-customer__courses-des">${course.description}</p>
                 <h4 class="container-customer__courses-price">Price:${course.price}</h4>
-                <button class="container-customer__courses-btn">
+                <button class="container-customer__courses-btn" onclick="handleAddToOrder('${curRes.uid}', '${course.uid}')">
                     <i class="fa-solid fa-cart-plus"></i>
                 </button>
             </div> `;
             })
             .join(" ");
+            
         return html;
     } catch (error) {
         console.error(error);
@@ -78,8 +81,8 @@ function renderCourse(uid: string): string {
 function renderCustomerHeader() {
     try {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        const customer = loggedInUser();
-        if (customer && customerHeader) {
+        
+        if (customerHeader) {
             customerHeader.innerText = `${customer.name}`
         }
     } catch (error) {

@@ -1,3 +1,7 @@
+var _customer = loggedInCustomer();
+if (!_customer)
+    throw new Error("no customer found");
+var customer = _customer;
 function renderRestaurants() {
     try {
         var restaurantRoot = document.querySelector("#restaurantRoot");
@@ -31,14 +35,13 @@ function renderMenu(uid) {
 }
 function renderCourse(uid) {
     try {
-        var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        console.log(index);
-        var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
-        if (!curRes)
+        var curRes_1 = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
+        if (!curRes_1)
             throw new Error("no found restaurant");
-        var html = curRes.menu
+        newOrder(curRes_1);
+        var html = curRes_1.menu
             .map(function (course) {
-            return " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\">" + course.name + "</p>\n                <p class=\"container-customer__courses-des\">" + course.description + "</p>\n                <h4 class=\"container-customer__courses-price\">Price:" + course.price + "</h4>\n                <button class=\"container-customer__courses-btn\">\n                    <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n            </div> ";
+            return " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\">" + course.name + "</p>\n                <p class=\"container-customer__courses-des\">" + course.description + "</p>\n                <h4 class=\"container-customer__courses-price\">Price:" + course.price + "</h4>\n                <button class=\"container-customer__courses-btn\" onclick=\"handleAddToOrder('" + curRes_1.uid + "', '" + course.uid + "')\">\n                    <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n            </div> ";
         })
             .join(" ");
         return html;
@@ -51,8 +54,7 @@ function renderCourse(uid) {
 function renderCustomerHeader() {
     try {
         var customerHeader = document.querySelector("#customerHeader");
-        var customer = loggedInUser();
-        if (customer && customerHeader) {
+        if (customerHeader) {
             customerHeader.innerText = "" + customer.name;
         }
     }

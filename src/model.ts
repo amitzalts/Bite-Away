@@ -182,6 +182,22 @@ function loggedInRestaurant(): Restaurant | undefined {
     }
 }
 
+function loggedInCustomer(): Customer | undefined {
+    try {
+        const user = loggedInUser();
+        if(!user) throw new Error ("no user found");
+        const customer = customers.find(cust => cust.uid === user.uid);
+
+        if(!customer) throw new Error ("no restaurant found");
+        return customer;
+
+    } catch (error) {
+        console.error(error);
+        return undefined
+    }
+}
+
+
 function saveMenu(restaurantUid: string, menu: Course[]) { //saves the menu of the given restaurant to local storage
     try {
         const restaurant = restaurants.find(rest => rest.uid === restaurantUid);

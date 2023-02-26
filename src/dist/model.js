@@ -156,6 +156,21 @@ function loggedInRestaurant() {
         return undefined;
     }
 }
+function loggedInCustomer() {
+    try {
+        var user_2 = loggedInUser();
+        if (!user_2)
+            throw new Error("no user found");
+        var customer = customers.find(function (cust) { return cust.uid === user_2.uid; });
+        if (!customer)
+            throw new Error("no restaurant found");
+        return customer;
+    }
+    catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
 function saveMenu(restaurantUid, menu) {
     try {
         var restaurant = restaurants.find(function (rest) { return rest.uid === restaurantUid; });

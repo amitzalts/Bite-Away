@@ -1,3 +1,6 @@
+
+
+
 function openMenu(uid:string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
@@ -5,12 +8,11 @@ function openMenu(uid:string) {
         if (!menu) throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid)
         menu.style.display = " block"
-        //invoke here newOrderByRes(uid);
     } catch (error) {
         console.error(error);
-
     }
 }
+
 
 function closeMenu() {
     try {
@@ -23,76 +25,105 @@ function closeMenu() {
     }
 }
 
-function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
+function newOrder(curRes: Restaurant){
     try {
+    customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes, customer.uid));
+    console.log(customer.orders);
+    } catch (error) {
+        console.error(error);
+    }  
+    
+}
 
-        const _customer = loggedInUser();
-        if (!_customer) throw new Error("active customer not found");
 
-        // const restaurant = 
-        const customer = _customer as Customer;
-        customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
+function handleAddToOrder(curResUid:string,courseUid:string){
+    try {
+       const order = customer.orders[customer.orders.length-1];
+
+       const curRes = restaurants.find(rest => rest.uid === curResUid);
+       if(!curRes) throw new Error ("restaurant not found");
+
+       const course = curRes.menu.find(order => order.uid === courseUid);
+       if(!course) throw new Error ("course not found");
+
+       order.courses.push(course);
+       console.log(order);
+      
+    } catch (error) {
+        console.error(error); 
+    }
+}
+
+
+// function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
+//     try {
+//         const _customer = loggedInUser();
+//         if (!_customer) throw new Error("active customer not found");
+
+//         // const restaurant = 
+//         const customer = _customer as Customer;
+//         customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
          
-        saveInLocalStorage(orders, "orders");
+//         saveInLocalStorage(orders, "orders");
 
-    } catch (error) {
-        console.error(error);
-    }
-}
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
-function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
-    try {
-        const _customer = loggedInUser();
-        if(!_customer) throw new Error("customer not found");
+// function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
+//     try {
+//         const _customer = loggedInUser();
+//         if(!_customer) throw new Error("customer not found");
 
-        const customer = _customer as Customer;
-        customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
+//         const customer = _customer as Customer;
+//         customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
 
-    } catch (error) {
-        console.error(error);
-    }
-}
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
-function handleAddToCart(ev: any) { //wip
-    try {
-        ev.preventDefault();
+// function handleAddToOrder(ev: any) { //wip
+//     try {
+//         ev.preventDefault();
 
-        const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
-        const name = _name?.value
-        const qty = ev.target.elements.qty.valueAsNumber;
+//         const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
+//         const name = _name?.value
+//         const qty = ev.target.elements.qty.valueAsNumber;
 
-        // const customer = loggedInCustomer();
-        // const currentOrder = customer.orders.length;
+//         // const customer = loggedInCustomer();
+//         // const currentOrder = customer.orders.length;
 
-        //     customer.orders[0].name === 
+//         //     customer.orders[0].name === 
 
 
-        // // console.log(customer);
-        // // console.log("currentOrder", currentOrder);
-        // // console.log(name); //works
+//         // // console.log(customer);
+//         // // console.log("currentOrder", currentOrder);
+//         // // console.log(name); //works
 
-        // if (name) {
-        //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
-        //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
-        //  if(customer.orders[0].name = )
-        //     }   
+//         // if (name) {
+//         //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
+//         //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
+//         //  if(customer.orders[0].name = )
+//         //     }   
 
-        //  //need to finish
-        //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
-        //     // console.log("currentOrder", currentOrder);
-        //              console.log(customer);
+//         //  //need to finish
+//         //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
+//         //     // console.log("currentOrder", currentOrder);
+//         //              console.log(customer);
 
-        // }
-        newCourseByRes("Orel", amit, 50)
+//         // }
+//         newCourseByRes("Orel", amit, 50)
         
         
 
-        // courseRoot.innerHTML = renderMenu(menu);
+//         // courseRoot.innerHTML = renderMenu(menu);
 
-    } catch (error) {
-        console.error(error);
-    }
-}
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 
 function search(): void {
