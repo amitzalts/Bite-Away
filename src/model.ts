@@ -42,6 +42,7 @@ class Restaurant {
     uid: string;
     menu: Course[] = [];
     customers: Customer[] = [];
+    orders: Order[];
     constructor(
         public name: string,
         public password: string,
@@ -87,10 +88,10 @@ class Course {
 
 class Order {
     uid: string;
-    courses: Course[]
+    courses: Course[];
     constructor(
         public name: string,
-        public restaurant: Restaurant,
+        public restaurantId: String,
         public customerId: string,
         public courier?: Courier,
         public destination?: string,

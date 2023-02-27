@@ -1,14 +1,14 @@
-var _customer = loggedInCustomer();
+var _customer = loggedInCustomer(); //index
 if (!_customer)
-    throw new Error("no customer found");
-var customer = _customer;
+    throw new Error("no customer found"); //index
+var customer = _customer; //index
 function renderRestaurants() {
     try {
         var restaurantRoot = document.querySelector("#restaurantRoot");
         if (!restaurantRoot)
             throw new Error("the restaurantRoot no found");
         var html = restaurants.map(function (restaurant) {
-            return "\n\n              <div class=\"container-customer__restaurant-card\">  <img src=\"https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div> ";
+            return "\n              <div class=\"container-customer__restaurant-card\">  <img src=\"https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div> ";
         }).join(" ");
         restaurantRoot.innerHTML = html;
         return html;
@@ -25,7 +25,7 @@ function renderMenu(uid) {
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
             throw new Error("no found restaurant");
-        var html = "\n       \n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n            <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n                <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div> ";
+        var html = "\n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n        <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n        <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div>\n        ";
         return html;
     }
     catch (error) {

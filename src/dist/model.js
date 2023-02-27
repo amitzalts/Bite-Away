@@ -68,9 +68,9 @@ var Course = /** @class */ (function () {
     return Course;
 }());
 var Order = /** @class */ (function () {
-    function Order(name, restaurant, customerId, courier, destination, status) {
+    function Order(name, restaurantId, customerId, courier, destination, status) {
         this.name = name;
-        this.restaurant = restaurant;
+        this.restaurantId = restaurantId;
         this.customerId = customerId;
         this.courier = courier;
         this.destination = destination;
