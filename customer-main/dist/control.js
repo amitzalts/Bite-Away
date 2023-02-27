@@ -26,8 +26,9 @@ function closeMenu() {
 }
 function newOrder(curRes) {
     try {
-        customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes.uid, customer.uid));
+        customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes.uid, customer.uid, undefined, undefined, "initalized"));
         console.log(customer.orders);
+        renderCart();
     }
     catch (error) {
         console.error(error);

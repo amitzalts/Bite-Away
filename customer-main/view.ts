@@ -72,7 +72,7 @@ function renderCourse(uid: string): string {
         return html;
     } catch (error) {
         console.error(error);
-        return ''
+        return '';
     }
 }
 
@@ -87,4 +87,22 @@ function renderCustomerHeader() {
     } catch (error) {
         console.error(error);
     }
+}
+
+function renderCart(){
+    const CartRoot: HTMLElement | null = document.querySelector("#CartRoot");
+    if(!CartRoot) throw new Error("cart root not found");
+
+    const html = customer.orders[customer.orders.length-1].courses
+        .map((course) => {
+            return ` 
+        <div class="container-customer__cart__course">
+            <p class="container-customer__cart__course__name">${course.name}</p>
+            <p class="container-customer__cart__course__price">Price:${course.price}</p>
+            <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')"></button>
+        </div>`;
+        })
+        .join(" ");
+        
+    return html;
 }
