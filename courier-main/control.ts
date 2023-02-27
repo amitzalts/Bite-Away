@@ -7,7 +7,7 @@ function renderPool(array) {
                 delieveryPool.innerHTML += `
                 <div class="order">
                     <h1> ${orders1[i].name} </h1>
-                    <h1> ${orders1[i].restaurant.name} </h1>
+                    <h1> ${orders1[i].restaurantId} </h1>
                     <h3> ${orders1[i].destination} </h3>
                     <h3> ${orders1[i].status} </h3>
                     <button  onclick="pickup(event)" class="pickupBtn">Pick Up</button>

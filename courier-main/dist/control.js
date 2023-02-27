@@ -3,7 +3,7 @@ function renderPool(array) {
         var delieveryPool = document.querySelector(".open-orders");
         if (delieveryPool) {
             for (var i = 0; i < orders1.length; i++) {
-                delieveryPool.innerHTML += "\n                <div class=\"order\">\n                    <h1> " + orders1[i].name + " </h1>\n                    <h1> " + orders1[i].restaurant.name + " </h1>\n                    <h3> " + orders1[i].destination + " </h3>\n                    <h3> " + orders1[i].status + " </h3>\n                    <button  onclick=\"pickup(event)\" class=\"pickupBtn\">Pick Up</button>\n                </div>\n                ";
+                delieveryPool.innerHTML += "\n                <div class=\"order\">\n                    <h1> " + orders1[i].name + " </h1>\n                    <h1> " + orders1[i].restaurantId + " </h1>\n                    <h3> " + orders1[i].destination + " </h3>\n                    <h3> " + orders1[i].status + " </h3>\n                    <button  onclick=\"pickup(event)\" class=\"pickupBtn\">Pick Up</button>\n                </div>\n                ";
             }
         }
     }

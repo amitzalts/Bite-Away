@@ -56,7 +56,8 @@ class Restaurant {
 }
 
 class Courier {
-    uid: string
+    uid: string;
+    orders: Order[];
     constructor(
         public name: string,
         public password: string,
@@ -191,6 +192,20 @@ function loggedInCustomer(): Customer | undefined {
 
         if(!customer) throw new Error ("no restaurant found");
         return customer;
+
+    } catch (error) {
+        console.error(error);
+        return undefined
+    }
+}
+function loggedInCourier(): Courier | undefined {
+    try {
+        const user = loggedInUser();
+        if(!user) throw new Error ("no user found");
+        const courier = couriers.find(cour => cour.uid === user.uid);
+
+        if(!courier) throw new Error ("no restaurant found");
+        return courier;
 
     } catch (error) {
         console.error(error);

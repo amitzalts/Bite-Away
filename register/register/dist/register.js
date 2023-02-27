@@ -45,7 +45,7 @@ function changeFormByTypeUser(typeUser) {
                 name.classList.add('active');
                 password.classList.add('active');
                 email.classList.add('active');
-                area.classList.add('active');
+                address.classList.add('active');
                 vehicle.classList.add('active');
                 age.classList.add('active');
                 break;
@@ -112,5 +112,6 @@ function checksIfUserExists(emailUser) {
 }
 function handleLoginPage() {
     var newUrl = "./../../../login/login.html";
+    console.log("12");
     window.location.replace(newUrl);
 }

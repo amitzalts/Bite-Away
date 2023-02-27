@@ -53,7 +53,7 @@ function changeFormByTypeUser(typeUser: string) {
                 name.classList.add('active');
                 password.classList.add('active');
                 email.classList.add('active')
-                area.classList.add('active');
+                address.classList.add('active');
                 vehicle.classList.add('active');
                 age.classList.add('active')
                 break
@@ -127,5 +127,7 @@ function checksIfUserExists(emailUser: string): boolean{
 
 function handleLoginPage(){
     let newUrl = "./../../../login/login.html";
+    console.log("12");
+    
     window.location.replace(newUrl);
 }

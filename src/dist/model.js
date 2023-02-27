@@ -171,6 +171,21 @@ function loggedInCustomer() {
         return undefined;
     }
 }
+function loggedInCourier() {
+    try {
+        var user_3 = loggedInUser();
+        if (!user_3)
+            throw new Error("no user found");
+        var courier = couriers.find(function (cour) { return cour.uid === user_3.uid; });
+        if (!courier)
+            throw new Error("no restaurant found");
+        return courier;
+    }
+    catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
 function saveMenu(restaurantUid, menu) {
     try {
         var restaurant = restaurants.find(function (rest) { return rest.uid === restaurantUid; });
