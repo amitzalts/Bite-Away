@@ -6,8 +6,8 @@ function openMenu(uid:string) {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         console.log(menu);
         if (!menu) throw new Error("could not find menu");
-        menu.innerHTML = renderMenu(uid)
-        menu.style.display = " block"
+        menu.innerHTML = renderMenu(uid);
+        menu.style.display = " block";
     } catch (error) {
         console.error(error);
     }
@@ -19,7 +19,7 @@ function closeMenu() {
         alert("if you close the menu your order will be lost");
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         if (!menu) throw new Error("could not find root");
-        menu.style.display = " none"
+        menu.style.display = " none";
         menu.innerHTML = "";
     } catch (error) {
         console.error(error);
@@ -28,13 +28,12 @@ function closeMenu() {
 
 function newOrder(curRes: Restaurant){
     try {
-    customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initalized"));
-    console.log(customer.orders);
-    renderCart();
+        customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initalized"));
+        console.log(customer.orders);
+
     } catch (error) {
         console.error(error);
-    }  
-    
+    } 
 }
 
 
@@ -50,7 +49,11 @@ function handleAddToOrder(curResUid:string,courseUid:string){
 
        order.courses.push(course);
        console.log(order);
-      
+
+       const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
+        if(!cartRoot) throw new Error("cart root not found");
+        cartRoot.innerHTML = renderCart();
+       
     } catch (error) {
         console.error(error); 
     }

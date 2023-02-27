@@ -63,13 +63,11 @@ function renderCustomerHeader() {
     }
 }
 function renderCart() {
-    var CartRoot = document.querySelector("#CartRoot");
-    if (!CartRoot)
-        throw new Error("cart root not found");
     var html = customer.orders[customer.orders.length - 1].courses
         .map(function (course) {
-        return " \n        <div class=\"container-customer__cart__course\">\n            <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n            <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n            <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + curRes.uid + "', '" + course.uid + "')\"></button>\n        </div>";
+        return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\">remove</button>\n            </div>\n            ";
     })
         .join(" ");
     return html;
 }
+// onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')

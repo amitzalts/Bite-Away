@@ -28,7 +28,6 @@ function newOrder(curRes) {
     try {
         customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes.uid, customer.uid, undefined, undefined, "initalized"));
         console.log(customer.orders);
-        renderCart();
     }
     catch (error) {
         console.error(error);
@@ -45,6 +44,10 @@ function handleAddToOrder(curResUid, courseUid) {
             throw new Error("course not found");
         order.courses.push(course);
         console.log(order);
+        var cartRoot = document.querySelector("#cartRoot");
+        if (!cartRoot)
+            throw new Error("cart root not found");
+        cartRoot.innerHTML = renderCart();
     }
     catch (error) {
         console.error(error);

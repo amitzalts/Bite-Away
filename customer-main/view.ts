@@ -82,27 +82,27 @@ function renderCustomerHeader() {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
         
         if (customerHeader) {
-            customerHeader.innerText = `${customer.name}`
+            customerHeader.innerText = `${customer.name}`;
         }
     } catch (error) {
         console.error(error);
     }
 }
 
-function renderCart(){
-    const CartRoot: HTMLElement | null = document.querySelector("#CartRoot");
-    if(!CartRoot) throw new Error("cart root not found");
-
+function renderCart(): string{
+    
     const html = customer.orders[customer.orders.length-1].courses
         .map((course) => {
             return ` 
-        <div class="container-customer__cart__course">
-            <p class="container-customer__cart__course__name">${course.name}</p>
-            <p class="container-customer__cart__course__price">Price:${course.price}</p>
-            <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')"></button>
-        </div>`;
+            <div class="container-customer__cart__course">
+                <p class="container-customer__cart__course__name">${course.name}</p>
+                <p class="container-customer__cart__course__price">Price:${course.price}</p>
+                <button class="container-customer__cart__course__removeBtn">remove</button>
+            </div>
+            `
         })
         .join(" ");
-        
-    return html;
+
+    return html;     
 }
+// onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')
