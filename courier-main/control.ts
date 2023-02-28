@@ -1,6 +1,8 @@
 const pickUpBtns = document.querySelectorAll('.pick-up-btn');
-const ordersArray:Order[] = getInfoFromStorage("orders");
+const ordersArray = getInfoFromStorage("orderPool") as Order[];
 console.dir(ordersArray);
+
+console.log("orderpool", orderPool);
 
 
 function renderPool(array) {

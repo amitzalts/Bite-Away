@@ -33,7 +33,7 @@ function updateStatus(uid) {
         var order = restaurant.orders.find(function (order) { return order.uid === uid; });
         if (!order)
             throw new Error("order not found");
-        order.status = "picked";
+        order.status = "ready";
         orderPool.push(order);
         saveInLocalStorage(restaurants, "restaurants");
         saveInLocalStorage(orderPool, "orderPool");

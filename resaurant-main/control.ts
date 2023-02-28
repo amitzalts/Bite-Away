@@ -41,7 +41,7 @@ function updateStatus(uid:string){
         const order = restaurant.orders.find(order => order.uid === uid);
         if (!order) throw new Error("order not found");
 
-        order.status = "picked";
+        order.status = "ready";
 
         orderPool.push(order);
 

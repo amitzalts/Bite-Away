@@ -1,6 +1,7 @@
 var pickUpBtns = document.querySelectorAll('.pick-up-btn');
-var ordersArray = getInfoFromStorage("orders");
+var ordersArray = getInfoFromStorage("orderPool");
 console.dir(ordersArray);
+console.log("orderpool", orderPool);
 function renderPool(array) {
     try {
         var delieveryPool_1 = document.querySelector(".open-orders");
