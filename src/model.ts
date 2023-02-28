@@ -109,6 +109,7 @@ class Order {
 const customers = getInfoFromStorage("customers") as Customer[];
 const restaurants = getInfoFromStorage("restaurants") as Restaurant[];
 const couriers = getInfoFromStorage("couriers") as Courier[];
+const orders = getInfoFromStorage("orders") as Order[];
 
 
 // --------------------------- LocalStorage ------

@@ -84,6 +84,7 @@ var Order = /** @class */ (function () {
 var customers = getInfoFromStorage("customers");
 var restaurants = getInfoFromStorage("restaurants");
 var couriers = getInfoFromStorage("couriers");
+var orders = getInfoFromStorage("orders");
 // --------------------------- LocalStorage ------
 function saveInLocalStorage(array, name) {
     try {
