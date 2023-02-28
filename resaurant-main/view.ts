@@ -2,10 +2,10 @@ const courseRoot = document.querySelector("#courseRoot"); //view
 
 function renderRestaurantHeader() {
     try {
-        const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader"); 
+        const restaurantHeader: HTMLElement | null = document.querySelector("#restaurantHeader");
 
         if (restaurant && restaurantHeader) {
-            restaurantHeader.innerText = `${restaurant.name}`    
+            restaurantHeader.innerText = `${restaurant.name}`
         }
     } catch (error) {
         console.error(error);
@@ -13,9 +13,9 @@ function renderRestaurantHeader() {
 }
 
 
-function renderMenuRest(){ // later add ability to update the course's name, price, description 
+function renderMenuRest() { // later add ability to update the course's name, price, description 
     try {
-        const menu  = restaurant.menu;
+        const menu = restaurant.menu;
         const html = menu
             .map((course) => {
                 return `
@@ -35,6 +35,29 @@ function renderMenuRest(){ // later add ability to update the course's name, pri
     } catch (error) {
         console.error(error);
         return "";
+    }
+}
+
+function renderActiveOrders() {
+    try {
+        const activeOrderRoot = document.querySelector("#activeOrderRoot");
+
+        const activeOrders = restaurant.orders.filter((activeOrder) => activeOrder.status !== "initialized");
+
+        const html = activeOrders
+            .map((order) => {
+                return `
+                <div class="activeOrders__order">order uid: ${order.uid}
+                    <button onclick="updateStatus('${order.uid}')">${order.status}</button>
+                </div>
+                `
+            })
+            .join(" ");
+        if (!activeOrderRoot) throw new Error("activeOrderRoot is null");
+        activeOrderRoot.innerHTML = html;
+
+    } catch (error) {
+        console.error(error);
     }
 }
 

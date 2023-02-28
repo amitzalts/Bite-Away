@@ -42,7 +42,7 @@ class Restaurant {
     uid: string;
     menu: Course[] = [];
     customers: Customer[] = [];
-    orders: Order[];
+    orders: Order[]= [];
     constructor(
         public name: string,
         public password: string,
@@ -57,7 +57,7 @@ class Restaurant {
 
 class Courier {
     uid: string;
-    orders: Order[];
+    orders: Order[] = [];
     constructor(
         public name: string,
         public password: string,
@@ -109,6 +109,7 @@ class Order {
 const customers = getInfoFromStorage("customers") as Customer[];
 const restaurants = getInfoFromStorage("restaurants") as Restaurant[];
 const couriers = getInfoFromStorage("couriers") as Courier[];
+const orderPool: Order[] = [];
 
 
 // --------------------------- LocalStorage ------

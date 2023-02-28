@@ -16,11 +16,12 @@ function openMenu(uid:string) {
 
 function closeMenu() {
     try {
-        alert("if you close the menu your order will be lost");
-        const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
-        if (!menu) throw new Error("could not find root");
-        menu.style.display = " none";
-        menu.innerHTML = "";
+        if(confirm("if you close the menu your order will be lost") === true){
+            const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
+            if (!menu) throw new Error("could not find root");
+            menu.style.display = " none";
+            menu.innerHTML = "";
+        }
     } catch (error) {
         console.error(error);
     }
@@ -28,7 +29,7 @@ function closeMenu() {
 
 function newOrder(curRes: Restaurant){
     try {
-        customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initalized"));
+        customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initialized"));
         console.log(customer.orders);
 
     } catch (error) {
@@ -58,6 +59,71 @@ function handleAddToOrder(curResUid:string,courseUid:string){
         console.error(error); 
     }
 }
+
+function submitOrder(){
+    try {
+    const order = customer.orders[customer.orders.length-1];
+    
+    if(!Array.isArray(order.courses) || !order.courses.length){
+        alert("your order is empty");  
+    } else{
+        const submitOrderBtn:HTMLDivElement | null = document.querySelector("#submitOrderBtn");
+            
+        if(order.status ==="initialized") order.status = "submitted";
+        if(order.destination === undefined) order.destination = customer.address;
+        
+        saveInLocalStorage(customers, "customers");
+
+        const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
+        if(!curRes) throw new Error ("restaurant not found");
+
+        console.log("curRes", curRes)
+        curRes.orders.push(order);
+        saveInLocalStorage(restaurants, "restaurants");
+        
+        if(submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen"; 
+    }
+    
+    } catch (error) {
+        console.error(error); 
+    }
+    
+}
+
+function search(): void {
+    try {
+        const userInput: Element | null = document.querySelector("#userInput");
+        const noResults: HTMLDivElement | null = document.querySelector("#noResultsRoot");
+
+        userInput?.addEventListener("input", (search) => {
+            let userInputValue = (search.target as HTMLInputElement).value
+            userInputValue = userInputValue.toLocaleLowerCase();
+
+            let results = document.querySelectorAll<HTMLElement>(".container-customer__restaurant-card");
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
+                    results[i].style.display = "";
+                    noResults.style.display = "none";
+                } else {
+                    results[i].style.display = "none";
+                }
+            }
+
+            let allrestaurants = document.querySelectorAll<HTMLElement>(".container-customer__result");
+            for (let i = 0; i < results.length; i++) {
+                if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
+                    noResults.style.display = "";
+                    noResults.innerHTML = `Sorry, there isn't a restaurant that icludes <u><b>${userInputValue}</b></u> on Bite Away...`;
+                }
+            }
+        }
+        );
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
+
 
 
 // function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
@@ -129,40 +195,3 @@ function handleAddToOrder(curResUid:string,courseUid:string){
 //         console.error(error);
 //     }
 // }
-
-
-function search(): void {
-    try {
-        const userInput: Element | null = document.querySelector("#userInput");
-        const noResults: HTMLDivElement | null = document.querySelector("#noResultsRoot");
-
-        userInput?.addEventListener("input", (search) => {
-            let userInputValue = (search.target as HTMLInputElement).value
-            userInputValue = userInputValue.toLocaleLowerCase();
-
-            let results = document.querySelectorAll<HTMLElement>(".container-customer__restaurant-card");
-            for (let i = 0; i < results.length; i++) {
-                if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
-                    results[i].style.display = "";
-                    noResults.style.display = "none";
-                } else {
-                    results[i].style.display = "none";
-                }
-            }
-
-            let allrestaurants = document.querySelectorAll<HTMLElement>(".container-customer__result");
-            for (let i = 0; i < results.length; i++) {
-                if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults) {
-                    noResults.style.display = "";
-                    noResults.innerHTML = `Sorry, there isn't a restaurant that icludes <u><b>${userInputValue}</b></u> on Bite Away...`;
-                }
-            }
-        }
-        );
-    } catch (error) {
-        console.error(error);
-        return error;
-    }
-}
-
-

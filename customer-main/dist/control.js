@@ -13,12 +13,13 @@ function openMenu(uid) {
 }
 function closeMenu() {
     try {
-        alert("if you close the menu your order will be lost");
-        var menu = document.querySelector("#menuRoot");
-        if (!menu)
-            throw new Error("could not find root");
-        menu.style.display = " none";
-        menu.innerHTML = "";
+        if (confirm("if you close the menu your order will be lost") === true) {
+            var menu = document.querySelector("#menuRoot");
+            if (!menu)
+                throw new Error("could not find root");
+            menu.style.display = " none";
+            menu.innerHTML = "";
+        }
     }
     catch (error) {
         console.error(error);
@@ -26,7 +27,7 @@ function closeMenu() {
 }
 function newOrder(curRes) {
     try {
-        customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes.uid, customer.uid, undefined, undefined, "initalized"));
+        customer.orders.push(new Order(customer.uid + "-" + curRes.uid + "-" + Date.now().toString(), curRes.uid, customer.uid, undefined, undefined, "initialized"));
         console.log(customer.orders);
     }
     catch (error) {
@@ -51,6 +52,64 @@ function handleAddToOrder(curResUid, courseUid) {
     }
     catch (error) {
         console.error(error);
+    }
+}
+function submitOrder() {
+    try {
+        var order_1 = customer.orders[customer.orders.length - 1];
+        if (!Array.isArray(order_1.courses) || !order_1.courses.length) {
+            alert("your order is empty");
+        }
+        else {
+            var submitOrderBtn = document.querySelector("#submitOrderBtn");
+            if (order_1.status === "initialized")
+                order_1.status = "submitted";
+            if (order_1.destination === undefined)
+                order_1.destination = customer.address;
+            saveInLocalStorage(customers, "customers");
+            var curRes = restaurants.find(function (rest) { return rest.uid === order_1.restaurantId; });
+            if (!curRes)
+                throw new Error("restaurant not found");
+            console.log("curRes", curRes);
+            curRes.orders.push(order_1);
+            saveInLocalStorage(restaurants, "restaurants");
+            if (submitOrderBtn)
+                submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function search() {
+    try {
+        var userInput = document.querySelector("#userInput");
+        var noResults_1 = document.querySelector("#noResultsRoot");
+        userInput === null || userInput === void 0 ? void 0 : userInput.addEventListener("input", function (search) {
+            var userInputValue = search.target.value;
+            userInputValue = userInputValue.toLocaleLowerCase();
+            var results = document.querySelectorAll(".container-customer__restaurant-card");
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
+                    results[i].style.display = "";
+                    noResults_1.style.display = "none";
+                }
+                else {
+                    results[i].style.display = "none";
+                }
+            }
+            var allrestaurants = document.querySelectorAll(".container-customer__result");
+            for (var i = 0; i < results.length; i++) {
+                if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
+                    noResults_1.style.display = "";
+                    noResults_1.innerHTML = "Sorry, there isn't a restaurant that icludes <u><b>" + userInputValue + "</b></u> on Bite Away...";
+                }
+            }
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return error;
     }
 }
 // function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
@@ -103,34 +162,3 @@ function handleAddToOrder(curResUid, courseUid) {
 //         console.error(error);
 //     }
 // }
-function search() {
-    try {
-        var userInput = document.querySelector("#userInput");
-        var noResults_1 = document.querySelector("#noResultsRoot");
-        userInput === null || userInput === void 0 ? void 0 : userInput.addEventListener("input", function (search) {
-            var userInputValue = search.target.value;
-            userInputValue = userInputValue.toLocaleLowerCase();
-            var results = document.querySelectorAll(".container-customer__restaurant-card");
-            for (var i = 0; i < results.length; i++) {
-                if (results[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
-                    results[i].style.display = "";
-                    noResults_1.style.display = "none";
-                }
-                else {
-                    results[i].style.display = "none";
-                }
-            }
-            var allrestaurants = document.querySelectorAll(".container-customer__result");
-            for (var i = 0; i < results.length; i++) {
-                if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
-                    noResults_1.style.display = "";
-                    noResults_1.innerHTML = "Sorry, there isn't a restaurant that icludes <u><b>" + userInputValue + "</b></u> on Bite Away...";
-                }
-            }
-        });
-    }
-    catch (error) {
-        console.error(error);
-        return error;
-    }
-}

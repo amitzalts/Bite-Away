@@ -153,12 +153,12 @@ body {
   color: #130e0e;
 }
 .container-customer__cart {
-  width: auto;
+  width: 10rem;
   height: auto;
   border: 0.1rem solid black;
-  position: relative;
-  top: 0rem;
-  left: 0rem;
+  position: sticky;
+  bottom: 44rem;
+  left: 61rem;
   display: flex;
   flex-direction: column;
 }

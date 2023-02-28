@@ -39,6 +39,7 @@ var Restaurant = /** @class */ (function () {
         this.BankAccount = BankAccount;
         this.menu = [];
         this.customers = [];
+        this.orders = [];
         this.uid = "200" + uid();
     }
     return Restaurant;
@@ -52,6 +53,7 @@ var Courier = /** @class */ (function () {
         this.vehicle = vehicle;
         this.age = age;
         this.BankAccount = BankAccount;
+        this.orders = [];
         this.uid = "300" + uid();
     }
     return Courier;
@@ -84,6 +86,7 @@ var Order = /** @class */ (function () {
 var customers = getInfoFromStorage("customers");
 var restaurants = getInfoFromStorage("restaurants");
 var couriers = getInfoFromStorage("couriers");
+var orderPool = [];
 // --------------------------- LocalStorage ------
 function saveInLocalStorage(array, name) {
     try {

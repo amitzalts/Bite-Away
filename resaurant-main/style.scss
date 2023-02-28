@@ -14,4 +14,10 @@
     width: 30rem;
     height: auto;
     border: 0.1rem solid black;
+    position: absolute;
+    top: 7rem;
+    left: 31rem;
+    &__order{
+        color: red;
+    }
 }

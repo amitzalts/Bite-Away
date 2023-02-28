@@ -35,3 +35,25 @@ function handleDeleteItem(uid: string) {
         console.error(error);
     }
 }
+
+function updateStatus(uid:string){
+    try {
+        const order = restaurant.orders.find(order => order.uid === uid);
+        if (!order) throw new Error("order not found");
+
+        order.status = "picked";
+
+        orderPool.push(order);
+
+        saveInLocalStorage(restaurants, "restaurants");
+        saveInLocalStorage(orderPool, "orderPool");
+
+        renderActiveOrders();
+
+        console.log("rest", restaurants);
+        console.log("orderPool", orderPool);
+
+    } catch (error) {
+        console.error(error);
+    }
+}

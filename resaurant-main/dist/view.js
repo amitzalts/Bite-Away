@@ -27,3 +27,20 @@ function renderMenuRest() {
         return "";
     }
 }
+function renderActiveOrders() {
+    try {
+        var activeOrderRoot = document.querySelector("#activeOrderRoot");
+        var activeOrders = restaurant.orders.filter(function (activeOrder) { return activeOrder.status !== "initialized"; });
+        var html = activeOrders
+            .map(function (order) {
+            return "\n                <div class=\"activeOrders__order\">order uid: " + order.uid + "\n                    <button onclick=\"updateStatus('" + order.uid + "')\">" + order.status + "</button>\n                </div>\n                ";
+        })
+            .join(" ");
+        if (!activeOrderRoot)
+            throw new Error("activeOrderRoot is null");
+        activeOrderRoot.innerHTML = html;
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
