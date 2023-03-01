@@ -1,3 +1,4 @@
 
 *.html
 dist/dataBase.js
+*.js

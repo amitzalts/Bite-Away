@@ -4,7 +4,6 @@
 function openMenu(uid:string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
-        console.log(menu);
         if (!menu) throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid);
         menu.style.display = " block";
@@ -40,16 +39,20 @@ function newOrder(curRes: Restaurant){
 
 function handleAddToOrder(curResUid:string,courseUid:string){
     try {
-       const order = customer.orders[customer.orders.length-1];
-
+        const curUser  = loggedInUser()
+        if(!curUser) throw new Error("the user need to login")
+        const order = curUser.orders;
+console.log(order);
+    //    const order = customer.orders[customer.orders.length-1];
+        if(!order) throw new Error("not found order")
        const curRes = restaurants.find(rest => rest.uid === curResUid);
        if(!curRes) throw new Error ("restaurant not found");
 
-       const course = curRes.menu.find(order => order.uid === courseUid);
+       const course = curRes.menu.find(order => order.uid === courseUid) ;
        if(!course) throw new Error ("course not found");
 
-       order.courses.push(course);
-       console.log(order);
+       order.push(course);
+       console.log(curUser);
 
        const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
         if(!cartRoot) throw new Error("cart root not found");
