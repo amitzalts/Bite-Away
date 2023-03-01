@@ -45,7 +45,7 @@ const delieveryPool = document.querySelectorAll("#delieveryPool");
 
 function enterOrdersLocalStorage() {
 
-    const order1 = new Order("Tal", "new", "courier1", undefined, "Yafe Nof 34", "ready");
+    const order1 = new Order("Tal", "new", "123", undefined, "Yafe Nof 34", "ready");
     const order2 = new Order("Yuval", "new", "courier2", undefined, "Aharo n 21", "ready");
     const order3 = new Order("Oren", "new", "courier3", undefined, "Ben Gurion 32", "ready");
     const order4 = new Order("Moses", "new", "courier4", undefined, "Balfour 10", "ready");
@@ -53,7 +53,7 @@ function enterOrdersLocalStorage() {
     const orders1: Order[] = [];
 
     orders1.push(order1, order2, order3, order4, order5);
-    saveInLocalStorage(orders1 , "orders")
+    saveInLocalStorage(orders1 , "orderPool")
 }
 
 

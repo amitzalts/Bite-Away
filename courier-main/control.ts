@@ -2,7 +2,6 @@ const pickUpBtns = document.querySelectorAll('.pick-up-btn');
 const ordersArray = getInfoFromStorage("orderPool") as Order[];
 console.dir(ordersArray);
 
-console.log("orderpool", orderPool);
 
 
 function renderPool(array) {
@@ -15,13 +14,15 @@ function renderPool(array) {
                 <div class="order">
                     <h1> ${array.name} </h1>
                     <h1> ${array.restaurantId} </h1>
+                    <h1 style="display:none;" class="custId"> ${array.uid} </h1>
                     <h3> ${array.destination} </h3>
                     <h3 class="status"> ${array.status} </h3>
                     <button  onclick="pickup(event)" class="pickupBtn">Pick Up</button>
                 </div>
                 `;
+                
             })
-            console.log(ordersArray);
+            .join(" ");
         }
     }
     catch (error) {
@@ -30,10 +31,21 @@ function renderPool(array) {
 }
 
 
-// Add event listener to each pick-up button
 function pickup(event) {
+   try {
+    const order: HTMLElement = event.target.parentNode as HTMLElement;
+    const orderId = document.querySelector(".custId")?.innerHTML as string;
+    console.log(orderId);
+    const curOrder = ordersArray.find(order => order.uid === orderId) ;
+    if(!curOrder)  throw new Error ("order not found")
+    
+    console.log(curOrder?.name);
+    
 
-
+   } catch (error) {
+        console.log(error);
+            
+   }
 };
 
 renderPool(ordersArray)
