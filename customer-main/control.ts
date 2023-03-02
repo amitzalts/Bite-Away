@@ -1,7 +1,7 @@
 
 
 
-function openMenu(uid:string) {
+function openMenu(uid: string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         if (!menu) throw new Error("could not find menu");
@@ -15,7 +15,7 @@ function openMenu(uid:string) {
 
 function closeMenu() {
     try {
-        if(confirm("if you close the menu your order will be lost") === true){
+        if (confirm("if you close the menu your order will be lost") === true) {
             const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
             if (!menu) throw new Error("could not find root");
             menu.style.display = " none";
@@ -26,72 +26,72 @@ function closeMenu() {
     }
 }
 
-function newOrder(curRes: Restaurant){
+function newOrder(curRes: Restaurant) {
     try {
         customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initialized"));
 
     } catch (error) {
         console.error(error);
-    } 
+    }
 }
 
 
-function handleAddToOrder(curResUid:string,courseUid:string){
+function handleAddToOrder(curResUid: string, courseUid: string) {
     try {
-        const curUser  = loggedInUser();
-        if(!curUser) throw new Error("the user need to login");
+        const order = customer.orders[customer.orders.length - 1];
+        console.log("order after add", order);
+        if (!order) throw new Error("order not found")
+        const curRes = restaurants.find(rest => rest.uid === curResUid);
+        if (!curRes) throw new Error("restaurant not found");
 
-        // const order = curUser.orders;
-        const order = customer.orders[customer.orders.length-1];
-        console.log(order);
-        if(!order) throw new Error("not found order")
-       const curRes = restaurants.find(rest => rest.uid === curResUid);
-       if(!curRes) throw new Error ("restaurant not found");
+        const course = curRes.menu.find(order => order.uid === courseUid);
+        if (!course) throw new Error("course not found");
 
-       const course = curRes.menu.find(order => order.uid === courseUid) ;
-       if(!course) throw new Error ("course not found");
+        order.courses.push(course);
 
-       order.courses.push(course);
-       console.log(curUser);
-
-       const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
-        if(!cartRoot) throw new Error("cart root not found");
+        const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
+        if (!cartRoot) throw new Error("cart root not found");
         cartRoot.innerHTML = renderCart();
-       
+
     } catch (error) {
-        console.error(error); 
+        console.error(error);
     }
 }
 
-function submitOrder(){
+function submitOrder() {
     try {
-    const order = customer.orders[customer.orders.length];
+        const order = customer.orders[customer.orders.length - 1];
 
-    if((!Array.isArray(order.courses)) || (!order.courses.length)){
-        alert("your order is empty");
-          
-    } else if(!order.status){
-        const submitOrderBtn:HTMLDivElement | null = document.querySelector("#submitOrderBtn");
-            
-        if(order.status ==="initialized") order.status = "submitted";
-        if(order.destination === undefined) order.destination = customer.address;
-        
-        saveInLocalStorage(customers, "customers");
+        if (!order) {
+            alert("add new courses by selecting a restaurant menu");
 
-        const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
-        if(!curRes) throw new Error ("restaurant not found");
+        } else if ((!Array.isArray(order.courses)) || (!order.courses.length)) {
+            console.log(order);
+            alert("your order is empty");
 
-        console.log("curRes", curRes)
-        curRes.orders.push(order);
-        saveInLocalStorage(restaurants, "restaurants");
-        
-        if(submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen"; 
-    }
-    
+        } else if (order.status) {
+            const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
+            if (order.status === "initialized") order.status = "submitted";
+            if (order.destination === undefined) order.destination = customer.address;
+
+            saveInLocalStorage(customers, "customers");
+
+            const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
+            if (!curRes) throw new Error("restaurant not found");
+
+            console.log("curRes", curRes)
+            curRes.orders.push(order);
+            saveInLocalStorage(restaurants, "restaurants");
+
+            if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+        } else{
+            alert("you alreay have a submitted order");
+        }
+
     } catch (error) {
-        console.error(error); 
+        console.error(error);
     }
-    
+
 }
 
 function search(): void {

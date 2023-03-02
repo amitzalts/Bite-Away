@@ -34,14 +34,10 @@ function newOrder(curRes) {
 }
 function handleAddToOrder(curResUid, courseUid) {
     try {
-        var curUser = loggedInUser();
-        if (!curUser)
-            throw new Error("the user need to login");
-        // const order = curUser.orders;
         var order = customer.orders[customer.orders.length - 1];
-        console.log(order);
+        console.log("order after add", order);
         if (!order)
-            throw new Error("not found order");
+            throw new Error("order not found");
         var curRes = restaurants.find(function (rest) { return rest.uid === curResUid; });
         if (!curRes)
             throw new Error("restaurant not found");
@@ -49,7 +45,6 @@ function handleAddToOrder(curResUid, courseUid) {
         if (!course)
             throw new Error("course not found");
         order.courses.push(course);
-        console.log(curUser);
         var cartRoot = document.querySelector("#cartRoot");
         if (!cartRoot)
             throw new Error("cart root not found");
@@ -61,11 +56,15 @@ function handleAddToOrder(curResUid, courseUid) {
 }
 function submitOrder() {
     try {
-        var order_1 = customer.orders[customer.orders.length];
-        if ((!Array.isArray(order_1.courses)) || (!order_1.courses.length)) {
+        var order_1 = customer.orders[customer.orders.length - 1];
+        if (!order_1) {
+            alert("add new courses by selecting a restaurant menu");
+        }
+        else if ((!Array.isArray(order_1.courses)) || (!order_1.courses.length)) {
+            console.log(order_1);
             alert("your order is empty");
         }
-        else if (!order_1.status) {
+        else if (order_1.status) {
             var submitOrderBtn = document.querySelector("#submitOrderBtn");
             if (order_1.status === "initialized")
                 order_1.status = "submitted";
@@ -80,6 +79,9 @@ function submitOrder() {
             saveInLocalStorage(restaurants, "restaurants");
             if (submitOrderBtn)
                 submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+        }
+        else {
+            alert("you alreay have a submitted order");
         }
     }
     catch (error) {
