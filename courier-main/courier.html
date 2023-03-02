@@ -11,7 +11,7 @@
     <script src="./dist/view.js" defer></script>
     <script src="./dist/control.js" defer></script>
 </head>
-<body onload="renderCourierHeader() ,enterOrdersLocalStorage()">
+<body onload="renderCourierHeader() , renderPool(),renderDroppedOrders()">
 	<header>
 		<h1 id="courierHeader">Courier</h1>
 		<h1>Courier Deliveries Manager</h1>
@@ -24,16 +24,16 @@
 		</ul>
 	</nav>
 	<main>
-		<div class="open-orders">
-			<h2>Open Orders</h2>
+		<h2>Open Orders</h2>
+		<div id="openOrdersRoot">
 		
 		</div>
-		<div class="active-orders">
-			<h2>Active Orders</h2>
+		<h2>Active Orders</h2>
+		<div id="activeOrdersRoot">
 			
 		</div>
-		<div class="completed-orders">
-			<h2>Completed Orders</h2>
+		<h2>Dropped Orders</h2>
+		<div id="droppedOrdersRoot">
 		
 		</div>
 	</main>

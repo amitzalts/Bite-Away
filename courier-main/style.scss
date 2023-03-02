@@ -58,11 +58,6 @@ main {
 	padding: 20px;
 }
 
-.open-orders {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-}
 
 .order {
 	border: 1px solid #ccc;
@@ -84,21 +79,3 @@ main {
 	cursor: pointer;
 }
 
-.active-orders {
-	display: flex;
-	margin-top: 50px;
-}
-
-.active-orders .order {
-	background-color: #eee;
-}
-
-.completed-orders {
-	display: flex;
-    
-	margin-top: 50px;
-}
-
-.completed-orders .order {
-	background-color: #eeeeee;
-}
