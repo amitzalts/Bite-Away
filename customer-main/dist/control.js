@@ -38,9 +38,9 @@ function handleAddToOrder(curResUid, courseUid) {
         var curUser = loggedInUser();
         if (!curUser)
             throw new Error("the user need to login");
-        var order = curUser.orders;
+        // const order = curUser.orders;
+        var order = customer.orders[customer.orders.length - 1];
         console.log(order);
-        //    const order = customer.orders[customer.orders.length-1];
         if (!order)
             throw new Error("not found order");
         var curRes = restaurants.find(function (rest) { return rest.uid === curResUid; });
@@ -49,7 +49,7 @@ function handleAddToOrder(curResUid, courseUid) {
         var course = curRes.menu.find(function (order) { return order.uid === courseUid; });
         if (!course)
             throw new Error("course not found");
-        order.push(course);
+        order.courses.push(course);
         console.log(curUser);
         var cartRoot = document.querySelector("#cartRoot");
         if (!cartRoot)

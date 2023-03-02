@@ -39,11 +39,12 @@ function newOrder(curRes: Restaurant){
 
 function handleAddToOrder(curResUid:string,courseUid:string){
     try {
-        const curUser  = loggedInUser()
-        if(!curUser) throw new Error("the user need to login")
-        const order = curUser.orders;
-console.log(order);
-    //    const order = customer.orders[customer.orders.length-1];
+        const curUser  = loggedInUser();
+        if(!curUser) throw new Error("the user need to login");
+
+        // const order = curUser.orders;
+        const order = customer.orders[customer.orders.length-1];
+        console.log(order);
         if(!order) throw new Error("not found order")
        const curRes = restaurants.find(rest => rest.uid === curResUid);
        if(!curRes) throw new Error ("restaurant not found");
@@ -51,7 +52,7 @@ console.log(order);
        const course = curRes.menu.find(order => order.uid === courseUid) ;
        if(!course) throw new Error ("course not found");
 
-       order.push(course);
+       order.courses.push(course);
        console.log(curUser);
 
        const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
