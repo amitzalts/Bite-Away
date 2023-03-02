@@ -17,7 +17,88 @@ function renderCourierHeader() {
     }
 }
 
+function renderDroppedOrders() {
+    try {
+        const delieveryPool = document.querySelector("#droppedOrdersRoot");
+        const droppedOrders = droppedOrdersList();
+        console.log(droppedOrders);
+        if (delieveryPool) {
+           let html = droppedOrders
+           .map ((droppedOrders) =>{
+                return `
+                <div class="order">
+                    <h1>name: ${droppedOrders.name} </h1>
+                    <h1>restId: ${droppedOrders.restaurantId} </h1>
+                    <h3> destination: ${droppedOrders.destination} </h3>
+                    <h3 class="status">status: ${droppedOrders.status} </h3>
+                </div>
+                `;
+                
+            })
+            .join(" ");
+            delieveryPool.innerHTML = html;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 
+function renderActiveOrders() {
+    try {
+        const delieveryPool = document.querySelector("#activeOrdersRoot");
+        const activeOrder = courier.orders;
+        if (delieveryPool) {
+           let html = activeOrder
+           .map ((activeOrder) =>{
+                return `
+                <div class="order">
+                    <h1> ${activeOrder.name} </h1>
+                    <h1> ${activeOrder.restaurantId} </h1>
+                    <h1 style="display:none;" class="custId"> ${activeOrder.uid} </h1>
+                    <h3> ${activeOrder.destination} </h3>
+                    <h3 class="status"> ${activeOrder.status} </h3>
+                    <button  onclick="dropOrder('${activeOrder.customerId}')" class="dropBtn">Drop</button>
+                </div>
+                `;
+                
+            })
+            .join(" ");
+            delieveryPool.innerHTML = html;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+function renderPool() {
+    try {
+        console.log(orderPool[0].uid);
+        const delieveryPool = document.querySelector("#openOrdersRoot");
+        if (delieveryPool) {
+           let html = orderPool
+           .map ((order) =>{
+                return `
+                <div class="order">
+                    <h1> name: ${order.name} </h1>
+                    <h1> restaurant-ID: ${order.restaurantId} </h1>
+                    <h1 class="custId"> order-ID: ${order.uid} </h1>
+                    <h3> destination: ${order.destination} </h3>
+                    <h3 class="status"> status: ${order.status} </h3>
+                    <button  onclick="pickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
+                </div>
+                `;
+                
+            })
+            .join(" ");
+            delieveryPool.innerHTML = html;
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 
 
 //---------------------------------------------------------- VIEW
