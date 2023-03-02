@@ -29,7 +29,6 @@ function closeMenu() {
 function newOrder(curRes: Restaurant){
     try {
         customer.orders.push(new Order(`${customer.uid}-${curRes.uid}-${Date.now().toString()}`, curRes.uid, customer.uid, undefined, undefined, "initialized"));
-        console.log(customer.orders);
 
     } catch (error) {
         console.error(error);
@@ -66,11 +65,12 @@ function handleAddToOrder(curResUid:string,courseUid:string){
 
 function submitOrder(){
     try {
-    const order = customer.orders[customer.orders.length-1];
-    
-    if(!Array.isArray(order.courses) || !order.courses.length){
-        alert("your order is empty");  
-    } else{
+    const order = customer.orders[customer.orders.length];
+
+    if((!Array.isArray(order.courses)) || (!order.courses.length)){
+        alert("your order is empty");
+          
+    } else if(!order.status){
         const submitOrderBtn:HTMLDivElement | null = document.querySelector("#submitOrderBtn");
             
         if(order.status ==="initialized") order.status = "submitted";
@@ -128,74 +128,3 @@ function search(): void {
     }
 }
 
-
-
-// function newOrderByRes(restaurantUid: string, restaurant: Restaurant) { //change to uid only
-//     try {
-//         const _customer = loggedInUser();
-//         if (!_customer) throw new Error("active customer not found");
-
-//         // const restaurant = 
-//         const customer = _customer as Customer;
-//         customer.orders.push(new Order(restaurantUid, restaurant, undefined, undefined, "initialized"));
-         
-//         saveInLocalStorage(orders, "orders");
-
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-// function newCourseByRes(name: string, restaurant: Restaurant, price: number) {
-//     try {
-//         const _customer = loggedInUser();
-//         if(!_customer) throw new Error("customer not found");
-
-//         const customer = _customer as Customer;
-//         customer.orders[0].courses.push(new Course(name, restaurant, price))//change 0 to the relevant order
-
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-// function handleAddToOrder(ev: any) { //wip
-//     try {
-//         ev.preventDefault();
-
-//         const _name: HTMLInputElement | null = document.querySelector("#testtest");//fix
-//         const name = _name?.value
-//         const qty = ev.target.elements.qty.valueAsNumber;
-
-//         // const customer = loggedInCustomer();
-//         // const currentOrder = customer.orders.length;
-
-//         //     customer.orders[0].name === 
-
-
-//         // // console.log(customer);
-//         // // console.log("currentOrder", currentOrder);
-//         // // console.log(name); //works
-
-//         // if (name) {
-//         //     console.log((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized"));
-//         //     if ((currentOrder === 0) && (customer?.orders[currentOrder]?.status !== "initialized")) { //the orders array is empty or the current order's status is undefined
-//         //  if(customer.orders[0].name = )
-//         //     }   
-
-//         //  //need to finish
-//         //     // console.log("customer.orders[currentOrder]", customer.orders[currentOrder]);
-//         //     // console.log("currentOrder", currentOrder);
-//         //              console.log(customer);
-
-//         // }
-//         newCourseByRes("Orel", amit, 50)
-        
-        
-
-//         // courseRoot.innerHTML = renderMenu(menu);
-
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
