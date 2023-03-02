@@ -4,21 +4,25 @@ const pickUpBtns = document.querySelectorAll('.pick-up-btn');
 
 function pickupOrder(uid: string) {
     try {
-        if ((courier.orders.length === 0) || (courier.orders[courier.orders.length].status === "Picked")) {
+        const lastOrder = courier.orders.length;
+        if ((lastOrder === 0) || (courier.orders[lastOrder].status === "Picked")) {
             const order = orderPool.find(order => order.uid === uid);
             const orderIndex = orderPool.findIndex(order => order.uid === uid);
             if (orderIndex === -1) throw new Error("order not found");
             if (!order) throw new Error("order not found")
-            order.status = "Picked";
-            courier.orders.push(order)
-            orderPool.splice(orderIndex, 1)
+            courier.orders.push(order);
+            orderPool.splice(orderIndex, 1);
+            courier.orders[lastOrder].status = "Picked";
+            console.log("courier.orders[lastOrder].status", courier.orders[lastOrder].status);
             saveInLocalStorage(orderPool, "orderPool");
-            
+            // saveInLocalStorage(couriers, "couriers");
+
             renderPool();
             renderActiveOrders();
+
         }
         else {
-            alert("You already have an active order.")
+            alert("You already have an active order")
         }
 
     } catch (error) {
