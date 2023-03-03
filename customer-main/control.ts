@@ -135,3 +135,21 @@ function search(): void {
     }
 }
 
+function handleRemoveFromOrder(uid: string) {
+    try {
+        const curOrder = customer.orders[customer.orders.length-1];
+        const index = curOrder.courses.findIndex((item) => item.uid === uid);
+        if (index === -1) throw new Error("course not found");
+
+        curOrder.courses.splice(index, 1);
+
+        const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
+        if (!cartRoot) throw new Error("cart root not found");
+        cartRoot.innerHTML = renderCart();
+
+        console.log(customer.orders[customer.orders.length - 1]);
+
+    } catch (error) {
+        console.error(error);
+    }
+}

@@ -31,7 +31,7 @@ function renderRestaurants(): string {
 function renderMenu(uid: string): string {
     try {
         const curRes = restaurants.find(restaurant => restaurant.uid === uid) as Restaurant
-        if (!curRes) throw new Error("no found restaurant")
+        if (!curRes) throw new Error("restaurant not found ")
         const html = `
         <button class="container-customer__menu-close" onclick="closeMenu()">
         <i class="fa-solid fa-xmark"></i>
@@ -50,7 +50,7 @@ function renderMenu(uid: string): string {
 function renderCourse(uid: string): string {
     try {
         const curRes = restaurants.find(restaurant => restaurant.uid === uid);
-        if (!curRes) throw new Error("no found restaurant");
+        if (!curRes) throw new Error("restaurant not found");
         newOrder(curRes);
         const html = curRes.menu
             .map((course) => {
@@ -78,10 +78,8 @@ function renderCourse(uid: string): string {
 function renderCustomerHeader() {
     try {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        
-        if (customerHeader) {
-            customerHeader.innerText = `${customer.name}`;
-        }
+        if (customerHeader) customerHeader.innerText = `${customer.name}`;
+
     } catch (error) {
         console.error(error);
     }
@@ -95,7 +93,7 @@ function renderCart(): string{
             <div class="container-customer__cart__course">
                 <p class="container-customer__cart__course__name">${course.name}</p>
                 <p class="container-customer__cart__course__price">Price:${course.price}</p>
-                <button class="container-customer__cart__course__removeBtn">remove</button>
+                <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${course.uid}')">remove</button>
             </div>
             `
         })
@@ -103,4 +101,6 @@ function renderCart(): string{
 
     return html;     
 }
-// onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')
+
+
+

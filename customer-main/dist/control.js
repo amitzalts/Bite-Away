@@ -127,3 +127,20 @@ function search() {
         return error;
     }
 }
+function handleRemoveFromOrder(uid) {
+    try {
+        var curOrder = customer.orders[customer.orders.length - 1];
+        var index = curOrder.courses.findIndex(function (item) { return item.uid === uid; });
+        if (index === -1)
+            throw new Error("course not found");
+        curOrder.courses.splice(index, 1);
+        var cartRoot = document.querySelector("#cartRoot");
+        if (!cartRoot)
+            throw new Error("cart root not found");
+        cartRoot.innerHTML = renderCart();
+        console.log(customer.orders[customer.orders.length - 1]);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}

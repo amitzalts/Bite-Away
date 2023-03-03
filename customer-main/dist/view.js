@@ -22,7 +22,7 @@ function renderMenu(uid) {
     try {
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
-            throw new Error("no found restaurant");
+            throw new Error("restaurant not found ");
         var html = "\n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n        <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n        <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div>\n        ";
         return html;
     }
@@ -35,7 +35,7 @@ function renderCourse(uid) {
     try {
         var curRes_1 = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes_1)
-            throw new Error("no found restaurant");
+            throw new Error("restaurant not found");
         newOrder(curRes_1);
         var html = curRes_1.menu
             .map(function (course) {
@@ -52,9 +52,8 @@ function renderCourse(uid) {
 function renderCustomerHeader() {
     try {
         var customerHeader = document.querySelector("#customerHeader");
-        if (customerHeader) {
+        if (customerHeader)
             customerHeader.innerText = "" + customer.name;
-        }
     }
     catch (error) {
         console.error(error);
@@ -63,9 +62,8 @@ function renderCustomerHeader() {
 function renderCart() {
     var html = customer.orders[customer.orders.length - 1].courses
         .map(function (course) {
-        return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\">remove</button>\n            </div>\n            ";
+        return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + course.uid + "')\">remove</button>\n            </div>\n            ";
     })
         .join(" ");
     return html;
 }
-// onclick="handleRemoveFromOrder('${curRes.uid}', '${course.uid}')
