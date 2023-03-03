@@ -30,9 +30,6 @@ function renderRestaurants(): string {
 
 function renderMenu(uid: string): string {
     try {
-        const index = restaurants.findIndex((restaurant) => restaurant.uid === uid);
-        console.log(index);
-
         const curRes = restaurants.find(restaurant => restaurant.uid === uid) as Restaurant
         if (!curRes) throw new Error("no found restaurant")
         const html = `
@@ -42,8 +39,6 @@ function renderMenu(uid: string): string {
         <h1 class="container-customer__menu-title">${curRes.name} Menu</h1>
         <div class="container-customer__container-courses">${renderCourse(uid)}</div>
         `
-        console.log("customer", customer);
-        console.log("customer.orders", customer.orders);
         return html;
         
     } catch (error) {

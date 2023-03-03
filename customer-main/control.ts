@@ -6,7 +6,10 @@ function openMenu(uid: string) {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
         if (!menu) throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid);
-        menu.style.display = " block";
+        menu.style.display = "block";
+
+        const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
+        if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "white";
     } catch (error) {
         console.error(error);
     }
@@ -70,21 +73,25 @@ function submitOrder() {
             alert("your order is empty");
 
         } else if (order.status) {
-            const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
-            if (order.status === "initialized") order.status = "submitted";
-            if (order.destination === undefined) order.destination = customer.address;
+            if (order.status === "submitted") {
+                alert("your order has alreay been sent");
+            } else {
+                if (order.status === "initialized") order.status = "submitted";
+                if (order.destination === undefined) order.destination = customer.address;
 
-            saveInLocalStorage(customers, "customers");
+                saveInLocalStorage(customers, "customers");
 
-            const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
-            if (!curRes) throw new Error("restaurant not found");
+                const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
+                if (!curRes) throw new Error("restaurant not found");
 
-            console.log("curRes", curRes)
-            curRes.orders.push(order);
-            saveInLocalStorage(restaurants, "restaurants");
+                console.log("curRes", curRes)
+                curRes.orders.push(order);
+                saveInLocalStorage(restaurants, "restaurants");
 
-            if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
-        } else{
+                const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
+                if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+            }
+        } else {
             alert("you alreay have a submitted order");
         }
 

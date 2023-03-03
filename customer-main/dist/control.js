@@ -4,7 +4,10 @@ function openMenu(uid) {
         if (!menu)
             throw new Error("could not find menu");
         menu.innerHTML = renderMenu(uid);
-        menu.style.display = " block";
+        menu.style.display = "block";
+        var submitOrderBtn = document.querySelector("#submitOrderBtn");
+        if (submitOrderBtn)
+            submitOrderBtn.style.backgroundColor = "white";
     }
     catch (error) {
         console.error(error);
@@ -65,20 +68,25 @@ function submitOrder() {
             alert("your order is empty");
         }
         else if (order_1.status) {
-            var submitOrderBtn = document.querySelector("#submitOrderBtn");
-            if (order_1.status === "initialized")
-                order_1.status = "submitted";
-            if (order_1.destination === undefined)
-                order_1.destination = customer.address;
-            saveInLocalStorage(customers, "customers");
-            var curRes = restaurants.find(function (rest) { return rest.uid === order_1.restaurantId; });
-            if (!curRes)
-                throw new Error("restaurant not found");
-            console.log("curRes", curRes);
-            curRes.orders.push(order_1);
-            saveInLocalStorage(restaurants, "restaurants");
-            if (submitOrderBtn)
-                submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+            if (order_1.status === "submitted") {
+                alert("your order has alreay been sent");
+            }
+            else {
+                if (order_1.status === "initialized")
+                    order_1.status = "submitted";
+                if (order_1.destination === undefined)
+                    order_1.destination = customer.address;
+                saveInLocalStorage(customers, "customers");
+                var curRes = restaurants.find(function (rest) { return rest.uid === order_1.restaurantId; });
+                if (!curRes)
+                    throw new Error("restaurant not found");
+                console.log("curRes", curRes);
+                curRes.orders.push(order_1);
+                saveInLocalStorage(restaurants, "restaurants");
+                var submitOrderBtn = document.querySelector("#submitOrderBtn");
+                if (submitOrderBtn)
+                    submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+            }
         }
         else {
             alert("you alreay have a submitted order");

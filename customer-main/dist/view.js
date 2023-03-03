@@ -20,14 +20,10 @@ function renderRestaurants() {
 }
 function renderMenu(uid) {
     try {
-        var index = restaurants.findIndex(function (restaurant) { return restaurant.uid === uid; });
-        console.log(index);
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
             throw new Error("no found restaurant");
         var html = "\n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n        <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n        <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div>\n        ";
-        console.log("customer", customer);
-        console.log("customer.orders", customer.orders);
         return html;
     }
     catch (error) {
