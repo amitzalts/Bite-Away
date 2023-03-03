@@ -106,7 +106,6 @@ class Order {
     }
 }
 
-
 // --------------------------- Array ------
 
 const customers = getInfoFromStorage("customers") as Customer[];

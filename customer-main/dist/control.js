@@ -1,3 +1,5 @@
+var sum = customer.orders[customer.orders.length - 1].courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
+console.log(sum);
 function openMenu(uid) {
     try {
         var menu = document.querySelector("#menuRoot");
