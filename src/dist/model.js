@@ -1,6 +1,17 @@
 // Costumer (name, uid, password, e-mail, address, credit card number) ..!
 // Restaurant (name, uid, password, e-mail, address, bank account number, type)
 // Courier (name, uid, password, e-mail, area, bank account number, id number, vehicle, age(?))
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 // Course (name, uid, restaurant, price, description)
 // Order (uid, courses, restaurant, courier, destination, status, date, time of creation, time of approval, time of process start, time ready, time sent, time of delivery)
 // customer = 1  , Restaurant = 2 , admin = 0   courier = 3 ;  start number uid
@@ -81,13 +92,25 @@ var Order = /** @class */ (function () {
         this.courses = [];
     }
     Order.prototype.sum = function () {
+        var _a;
         try {
-            if ((!Array.isArray(this.courses)) || (!this.courses.length)) {
-                return 0;
-            }
-            ;
-            var sum = this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
+            var sum = (_a = this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0)) !== null && _a !== void 0 ? _a : 0; //if lefthand is null/undefined return 0
             return sum;
+        }
+        catch (error) {
+            console.error(error);
+            return undefined;
+        }
+    };
+    Order.prototype.instanceCounter = function () {
+        try {
+            var countedCourses = this.courses.reduce(function (allCourses, course) {
+                var _a;
+                var _b;
+                var currCount = (_b = allCourses[course.name]) !== null && _b !== void 0 ? _b : 0;
+                return __assign(__assign({}, allCourses), (_a = {}, _a[course.name] = currCount + 1, _a));
+            }, {});
+            return countedCourses;
         }
         catch (error) {
             console.error(error);

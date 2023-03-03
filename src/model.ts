@@ -106,18 +106,30 @@ class Order {
     }
     public sum(): number | undefined {
         try {
-            if ((!Array.isArray(this.courses)) || (!this.courses.length)){
-              return 0;  
-            } ;
-            const sum = this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0,);
+            const sum = this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0,) ?? 0; //if lefthand is null/undefined return 0
             return sum;
         } catch (error) {
             console.error(error);
             return undefined;
         }
     }
-}
 
+    public instanceCounter(): {} | undefined {
+        try {
+            const countedCourses = this.courses.reduce((allCourses, course) => {
+                const currCount = allCourses[course.name] ?? 0;
+                return {
+                    ...allCourses,
+                    [course.name]: currCount + 1,
+                };
+            }, {});
+                return countedCourses;
+        } catch (error) {
+            console.error(error);
+            return undefined;
+        }
+    }
+}
 
 // --------------------------- Array ------
 
