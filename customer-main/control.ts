@@ -1,5 +1,4 @@
 const sum = customer.orders[customer.orders.length-1].courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
-
 console.log(sum);
 
 function openMenu(uid: string) {
