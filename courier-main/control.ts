@@ -5,17 +5,19 @@ const pickUpBtns = document.querySelectorAll('.pick-up-btn');
 function pickupOrder(uid: string) {
     try {
         const lastOrder = courier.orders.length;
-        if ((lastOrder === 0) || (courier.orders[lastOrder].status === "Picked")) {
+        console.log("lastOrder", lastOrder);
+        
+        if ((lastOrder === 0) || (courier.orders[lastOrder].status !== "Picked")) {
             const order = orderPool.find(order => order.uid === uid);
             const orderIndex = orderPool.findIndex(order => order.uid === uid);
             if (orderIndex === -1) throw new Error("order not found");
-            if (!order) throw new Error("order not found")
+            if (!order) throw new Error("order not found");
             courier.orders.push(order);
             orderPool.splice(orderIndex, 1);
             courier.orders[lastOrder].status = "Picked";
             console.log("courier.orders[lastOrder].status", courier.orders[lastOrder].status);
             saveInLocalStorage(orderPool, "orderPool");
-            // saveInLocalStorage(couriers, "couriers");
+            saveInLocalStorage(couriers, "couriers");
 
             renderPool();
             renderActiveOrders();
@@ -33,7 +35,13 @@ function pickupOrder(uid: string) {
 
 function dropOrder() {
     try {
-        const activeOrder = courier.orders[0];
+        const lastOrder = courier.orders.length-1;
+        const activeOrder = courier.orders[lastOrder];
+        console.log("last order" , lastOrder);
+
+        console.log("activeOrder" ,activeOrder);
+        console.log( "activeOrder.customerId" , activeOrder.customerId);
+
         const customer = customers.find(customer => customer.uid === activeOrder.customerId);
         if (!customer) throw new Error("no customer found");
         const customerActiveOrder = customer.orders.find(activeOrder => activeOrder.uid === activeOrder.uid);

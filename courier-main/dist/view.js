@@ -4,6 +4,7 @@ if (!_courier)
     throw new Error("no _courier found");
 var courier = _courier;
 console.log(courier.name);
+//---------------------------------------------------------
 function renderCourierHeader() {
     try {
         var courierHeader = document.querySelector("#courierHeader");
@@ -19,7 +20,6 @@ function renderDroppedOrders() {
     try {
         var delieveryPool_1 = document.querySelector("#droppedOrdersRoot");
         var droppedOrders = droppedOrdersList();
-        console.log(droppedOrders);
         if (delieveryPool_1) {
             var html = droppedOrders
                 .map(function (droppedOrders) {
@@ -36,9 +36,10 @@ function renderDroppedOrders() {
 function renderActiveOrders() {
     try {
         var delieveryPool_2 = document.querySelector("#activeOrdersRoot");
-        var activeOrder = courier.orders;
+        // const activeOrder = courier.orders;
+        var activeOrders = courier.orders.filter(function (orders) { return orders.status === "Picked"; });
         if (delieveryPool_2) {
-            var html = activeOrder
+            var html = activeOrders
                 .map(function (activeOrder) {
                 return "\n                <div class=\"order\">\n                    <h1> " + activeOrder.name + " </h1>\n                    <h1> " + activeOrder.restaurantId + " </h1>\n                    <h1 style=\"display:none;\" class=\"custId\"> " + activeOrder.uid + " </h1>\n                    <h3> " + activeOrder.destination + " </h3>\n                    <h3 class=\"status\"> " + activeOrder.status + " </h3>\n                    <button  onclick=\"dropOrder('" + activeOrder.customerId + "')\" class=\"dropBtn\">Drop</button>\n                </div>\n                ";
             })
@@ -52,7 +53,6 @@ function renderActiveOrders() {
 }
 function renderPool() {
     try {
-        console.log(orderPool[0].uid);
         var delieveryPool_3 = document.querySelector("#openOrdersRoot");
         if (delieveryPool_3) {
             var html = orderPool

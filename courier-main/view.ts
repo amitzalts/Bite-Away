@@ -3,7 +3,7 @@ const _courier = loggedInCourier();
 if(!_courier) throw new Error("no _courier found");
 const courier = _courier;
 console.log(courier.name);
-
+//---------------------------------------------------------
 
 function renderCourierHeader() {
     try {
@@ -21,7 +21,7 @@ function renderDroppedOrders() {
     try {
         const delieveryPool = document.querySelector("#droppedOrdersRoot");
         const droppedOrders = droppedOrdersList();
-        console.log(droppedOrders);
+       
         if (delieveryPool) {
            let html = droppedOrders
            .map ((droppedOrders) =>{
@@ -47,9 +47,12 @@ function renderDroppedOrders() {
 function renderActiveOrders() {
     try {
         const delieveryPool = document.querySelector("#activeOrdersRoot");
-        const activeOrder = courier.orders;
+        // const activeOrder = courier.orders;
+
+        const activeOrders = courier.orders.filter(orders => orders.status === "Picked");
+
         if (delieveryPool) {
-           let html = activeOrder
+           let html = activeOrders
            .map ((activeOrder) =>{
                 return `
                 <div class="order">
@@ -74,7 +77,7 @@ function renderActiveOrders() {
 
 function renderPool() {
     try {
-        console.log(orderPool[0].uid);
+        
         const delieveryPool = document.querySelector("#openOrdersRoot");
         if (delieveryPool) {
            let html = orderPool
@@ -89,7 +92,6 @@ function renderPool() {
                     <button  onclick="pickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
                 </div>
                 `;
-                
             })
             .join(" ");
             delieveryPool.innerHTML = html;

@@ -2,7 +2,8 @@ var pickUpBtns = document.querySelectorAll('.pick-up-btn');
 function pickupOrder(uid) {
     try {
         var lastOrder = courier.orders.length;
-        if ((lastOrder === 0) || (courier.orders[lastOrder].status === "Picked")) {
+        console.log("lastOrder", lastOrder);
+        if ((lastOrder === 0) || (courier.orders[lastOrder].status !== "Picked")) {
             var order = orderPool.find(function (order) { return order.uid === uid; });
             var orderIndex = orderPool.findIndex(function (order) { return order.uid === uid; });
             if (orderIndex === -1)
@@ -14,7 +15,7 @@ function pickupOrder(uid) {
             courier.orders[lastOrder].status = "Picked";
             console.log("courier.orders[lastOrder].status", courier.orders[lastOrder].status);
             saveInLocalStorage(orderPool, "orderPool");
-            // saveInLocalStorage(couriers, "couriers");
+            saveInLocalStorage(couriers, "couriers");
             renderPool();
             renderActiveOrders();
         }
@@ -29,7 +30,11 @@ function pickupOrder(uid) {
 ;
 function dropOrder() {
     try {
-        var activeOrder_1 = courier.orders[0];
+        var lastOrder = courier.orders.length - 1;
+        var activeOrder_1 = courier.orders[lastOrder];
+        console.log("last order", lastOrder);
+        console.log("activeOrder", activeOrder_1);
+        console.log("activeOrder.customerId", activeOrder_1.customerId);
         var customer = customers.find(function (customer) { return customer.uid === activeOrder_1.customerId; });
         if (!customer)
             throw new Error("no customer found");
