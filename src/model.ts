@@ -42,7 +42,7 @@ class Restaurant {
     uid: string;
     menu: Course[] = [];
     customers: Customer[] = [];
-    orders: Order[]= [];
+    orders: Order[] = [];
     constructor(
         public name: string,
         public password: string,
@@ -90,7 +90,7 @@ class Course {
 class Order {
     uid: string;
     courses: Course[];
-    
+
 
     constructor(
         public name: string,
@@ -104,11 +104,18 @@ class Order {
         this.uid = `201${uid()}`
         this.courses = [];
     }
-    public sum(): number{
-       return this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
+    public sum(): number | undefined {
+        try {
+            if ((!Array.isArray(this.courses)) || (!this.courses.length)){
+              return 0;  
+            } ;
+            const sum = this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0,);
+            return sum;
+        } catch (error) {
+            console.error(error);
+            return undefined;
+        }
     }
-
-
 }
 
 
@@ -180,10 +187,10 @@ function loggedInUser(): Customer | Restaurant | Courier | undefined {
 function loggedInRestaurant(): Restaurant | undefined {
     try {
         const user = loggedInUser();
-        if(!user) throw new Error ("no user found");
+        if (!user) throw new Error("no user found");
         const restaurant = restaurants.find(rest => rest.uid === user.uid);
 
-        if(!restaurant) throw new Error ("no restaurant found");
+        if (!restaurant) throw new Error("no restaurant found");
         return restaurant;
 
 
@@ -196,10 +203,10 @@ function loggedInRestaurant(): Restaurant | undefined {
 function loggedInCustomer(): Customer | undefined {
     try {
         const user = loggedInUser();
-        if(!user) throw new Error ("no user found");
+        if (!user) throw new Error("no user found");
         const customer = customers.find(cust => cust.uid === user.uid);
 
-        if(!customer) throw new Error ("no restaurant found");
+        if (!customer) throw new Error("no restaurant found");
         return customer;
 
     } catch (error) {
@@ -210,10 +217,10 @@ function loggedInCustomer(): Customer | undefined {
 function loggedInCourier(): Courier | undefined {
     try {
         const user = loggedInUser();
-        if(!user) throw new Error ("no user found");
+        if (!user) throw new Error("no user found");
         const courier = couriers.find(cour => cour.uid === user.uid);
 
-        if(!courier) throw new Error ("no restaurant found");
+        if (!courier) throw new Error("no restaurant found");
         return courier;
 
     } catch (error) {
@@ -236,37 +243,37 @@ function saveMenu(restaurantUid: string, menu: Course[]) { //saves the menu of t
 
 
 
-    /////////////////////////////////// DATA BASE 
-    function enterLocalStorage() {
+/////////////////////////////////// DATA BASE 
+function enterLocalStorage() {
 
-        restaurants.push(new Restaurant("orel", "123", "orel@walla.com ", "haifa", "asian"))
-        restaurants.push(new Restaurant("dor", "i", "j", "k", "l"))
-        restaurants.push(new Restaurant("zalts", "m", "n", "o", "p"))
-        restaurants.push(new Restaurant("book", "u", "v", "w", "x"))
-        restaurants.push(new Restaurant("karako", "q", "r", "s", "t"))
-
-
-
-        const pasta = new Course("pasta", amit, 10);
-        const pizza = new Course("pizza", amit, 20);
-        const ravioli = new Course("ravioli", amit, 30);
-        const teramisu = new Course("teramisu", amit, 40);
+    restaurants.push(new Restaurant("orel", "123", "orel@walla.com ", "haifa", "asian"))
+    restaurants.push(new Restaurant("dor", "i", "j", "k", "l"))
+    restaurants.push(new Restaurant("zalts", "m", "n", "o", "p"))
+    restaurants.push(new Restaurant("book", "u", "v", "w", "x"))
+    restaurants.push(new Restaurant("karako", "q", "r", "s", "t"))
 
 
-        restaurants[1].menu.push(
-            new Course("eggroll", orel, 50),
-            new Course("pad thai", orel, 60),
-            new Course("sushi", orel, 70),
-            new Course("cake", orel, 80),
-        )
+
+    const pasta = new Course("pasta", amit, 10);
+    const pizza = new Course("pizza", amit, 20);
+    const ravioli = new Course("ravioli", amit, 30);
+    const teramisu = new Course("teramisu", amit, 40);
 
 
-        const customer1 = new Customer("customer1", "134", "email", "destination");
-        const customer2 = new Customer("customer2", "135", "email2", "destination2");
-        customers.push(customer1, customer2);
-        saveInLocalStorage(restaurants, "restaurants")
+    restaurants[1].menu.push(
+        new Course("eggroll", orel, 50),
+        new Course("pad thai", orel, 60),
+        new Course("sushi", orel, 70),
+        new Course("cake", orel, 80),
+    )
 
-    }
+
+    const customer1 = new Customer("customer1", "134", "email", "destination");
+    const customer2 = new Customer("customer2", "135", "email2", "destination2");
+    customers.push(customer1, customer2);
+    saveInLocalStorage(restaurants, "restaurants")
+
+}
 
 
 

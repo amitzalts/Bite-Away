@@ -54,7 +54,6 @@ function handleAddToOrder(curResUid, courseUid) {
         if (!cartRoot)
             throw new Error("cart root not found");
         cartRoot.innerHTML = renderCart();
-        console.log("sum", order.sum());
     }
     catch (error) {
         console.error(error);

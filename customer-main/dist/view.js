@@ -60,10 +60,28 @@ function renderCustomerHeader() {
     }
 }
 function renderCart() {
-    var html = customer.orders[customer.orders.length - 1].courses
-        .map(function (course) {
-        return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + course.uid + "')\">remove</button>\n            </div>\n            ";
-    })
-        .join(" ");
-    return html;
+    try {
+        var html = customer.orders[customer.orders.length - 1].courses
+            .map(function (course) {
+            return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + course.uid + "')\">remove</button>\n            </div>\n            ";
+        })
+            .join(" ");
+        renderCartSum();
+        return html;
+    }
+    catch (error) {
+        console.error(error);
+        return " ";
+    }
+}
+function renderCartSum() {
+    try {
+        var order = customer.orders[customer.orders.length - 1];
+        var sumRoot = document.querySelector("#sumRoot");
+        if (sumRoot)
+            sumRoot.innerText = "sum: " + order.sum() + " shekels";
+    }
+    catch (error) {
+        console.error(error);
+    }
 }

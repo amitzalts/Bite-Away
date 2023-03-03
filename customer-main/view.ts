@@ -1,5 +1,5 @@
 const _customer = loggedInCustomer(); //index
-if(!_customer) throw new Error("no customer found");//index
+if (!_customer) throw new Error("no customer found");//index
 const customer = _customer;//index
 
 function renderRestaurants(): string {
@@ -16,7 +16,7 @@ function renderRestaurants(): string {
                  <p>Type: ${restaurant.type} </p>
              <button class="container-customer__btn-restaurant" onclick="openMenu('${restaurant.uid}')">open menu</button> </div>
              `
-             ).join(" ");
+        ).join(" ");
 
         restaurantRoot.innerHTML = html;
         return html;
@@ -40,7 +40,7 @@ function renderMenu(uid: string): string {
         <div class="container-customer__container-courses">${renderCourse(uid)}</div>
         `
         return html;
-        
+
     } catch (error) {
         console.error(error);
         return ''
@@ -66,7 +66,7 @@ function renderCourse(uid: string): string {
             </div> `;
             })
             .join(" ");
-            
+
         return html;
     } catch (error) {
         console.error(error);
@@ -85,21 +85,39 @@ function renderCustomerHeader() {
     }
 }
 
-function renderCart(): string{
-    
-    const html = customer.orders[customer.orders.length-1].courses
-        .map((course) => {
-            return ` 
+function renderCart(): string {
+    try {
+        const html = customer.orders[customer.orders.length - 1].courses
+            .map((course) => {
+                return ` 
             <div class="container-customer__cart__course">
                 <p class="container-customer__cart__course__name">${course.name}</p>
                 <p class="container-customer__cart__course__price">Price:${course.price}</p>
                 <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${course.uid}')">remove</button>
             </div>
             `
-        })
-        .join(" ");
+            })
+            .join(" ");
 
-    return html;     
+        renderCartSum();
+
+        return html;
+    } catch (error) {
+        console.error(error);
+        return " ";
+    }
+}
+
+
+function renderCartSum() {
+    try {
+        const order = customer.orders[customer.orders.length - 1];
+        const sumRoot: HTMLElement | null = document.querySelector("#sumRoot");
+        if (sumRoot) sumRoot.innerText = `sum: ${order.sum()} shekels`;
+
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 

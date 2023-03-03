@@ -81,7 +81,18 @@ var Order = /** @class */ (function () {
         this.courses = [];
     }
     Order.prototype.sum = function () {
-        return this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
+        try {
+            if ((!Array.isArray(this.courses)) || (!this.courses.length)) {
+                return 0;
+            }
+            ;
+            var sum = this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
+            return sum;
+        }
+        catch (error) {
+            console.error(error);
+            return undefined;
+        }
     };
     return Order;
 }());
