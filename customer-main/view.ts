@@ -6,7 +6,7 @@ function renderRestaurants(): string {
     try {
         const restaurantRoot: HTMLDivElement | null = document.querySelector("#restaurantRoot");
         if (!restaurantRoot) throw new Error("the restaurantRoot no found")
-        let html = restaurants.map(restaurant =>
+        const html = restaurants.map(restaurant =>
             `
               <div class="container-customer__restaurant-card">  <img src="https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg" class="container-customer__img-restaurant">
               <h1 class="container-customer__title-restaurant">
@@ -14,9 +14,9 @@ function renderRestaurants(): string {
               </h1>
                 <p>Address: ${restaurant.address} </p>
                  <p>Type: ${restaurant.type} </p>
-             <button class="container-customer__btn-restaurant" onclick="openMenu('${restaurant.uid}')">open menu</button> </div> `
+             <button class="container-customer__btn-restaurant" onclick="openMenu('${restaurant.uid}')">open menu</button> </div>
+             `
              ).join(" ");
-
 
         restaurantRoot.innerHTML = html;
         return html;
@@ -24,7 +24,7 @@ function renderRestaurants(): string {
     }
     catch (error) {
         console.error(error);
-        return ""
+        return "";
     }
 }
 

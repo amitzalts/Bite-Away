@@ -64,7 +64,6 @@ function submitOrder() {
             alert("add new courses by selecting a restaurant menu");
         }
         else if ((!Array.isArray(order_1.courses)) || (!order_1.courses.length)) {
-            console.log(order_1);
             alert("your order is empty");
         }
         else if (order_1.status) {
@@ -80,12 +79,15 @@ function submitOrder() {
                 var curRes = restaurants.find(function (rest) { return rest.uid === order_1.restaurantId; });
                 if (!curRes)
                     throw new Error("restaurant not found");
-                console.log("curRes", curRes);
                 curRes.orders.push(order_1);
                 saveInLocalStorage(restaurants, "restaurants");
                 var submitOrderBtn = document.querySelector("#submitOrderBtn");
                 if (submitOrderBtn)
                     submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+                var cartRoot = document.querySelector("#cartRoot");
+                if (!cartRoot)
+                    throw new Error("cart root not found");
+                cartRoot.innerHTML = "<div>your order has been sent to the restaurant</div>";
             }
         }
         else {
@@ -138,7 +140,6 @@ function handleRemoveFromOrder(uid) {
         if (!cartRoot)
             throw new Error("cart root not found");
         cartRoot.innerHTML = renderCart();
-        console.log(customer.orders[customer.orders.length - 1]);
     }
     catch (error) {
         console.error(error);

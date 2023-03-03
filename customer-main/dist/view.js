@@ -8,7 +8,7 @@ function renderRestaurants() {
         if (!restaurantRoot)
             throw new Error("the restaurantRoot no found");
         var html = restaurants.map(function (restaurant) {
-            return "\n              <div class=\"container-customer__restaurant-card\">  <img src=\"https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div> ";
+            return "\n              <div class=\"container-customer__restaurant-card\">  <img src=\"https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div>\n             ";
         }).join(" ");
         restaurantRoot.innerHTML = html;
         return html;

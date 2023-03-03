@@ -1,6 +1,3 @@
-
-
-
 function openMenu(uid: string) {
     try {
         const menu: HTMLElement = document.querySelector(`#menuRoot`)!;
@@ -69,7 +66,6 @@ function submitOrder() {
             alert("add new courses by selecting a restaurant menu");
 
         } else if ((!Array.isArray(order.courses)) || (!order.courses.length)) {
-            console.log(order);
             alert("your order is empty");
 
         } else if (order.status) {
@@ -84,12 +80,15 @@ function submitOrder() {
                 const curRes = restaurants.find(rest => rest.uid === order.restaurantId);
                 if (!curRes) throw new Error("restaurant not found");
 
-                console.log("curRes", curRes)
                 curRes.orders.push(order);
                 saveInLocalStorage(restaurants, "restaurants");
 
                 const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
                 if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+
+                const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
+                if (!cartRoot) throw new Error("cart root not found");
+                cartRoot.innerHTML =  `<div>your order has been sent to the restaurant</div>`;
             }
         } else {
             alert("you alreay have a submitted order");
@@ -146,8 +145,6 @@ function handleRemoveFromOrder(uid: string) {
         const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
         if (!cartRoot) throw new Error("cart root not found");
         cartRoot.innerHTML = renderCart();
-
-        console.log(customer.orders[customer.orders.length - 1]);
 
     } catch (error) {
         console.error(error);
