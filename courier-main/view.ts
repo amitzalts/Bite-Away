@@ -56,15 +56,14 @@ function renderActiveOrders() {
            .map ((activeOrder) =>{
                 return `
                 <div class="order">
-                    <h1> ${activeOrder.name} </h1>
-                    <h1> ${activeOrder.restaurantId} </h1>
-                    <h1 style="display:none;" class="custId"> ${activeOrder.uid} </h1>
-                    <h3> ${activeOrder.destination} </h3>
-                    <h3 class="status"> ${activeOrder.status} </h3>
-                    <button  onclick="dropOrder('${activeOrder.customerId}')" class="dropBtn">Drop</button>
+                    <h1>name: ${activeOrder.name} </h1>
+                    <h1>restaurantId: ${activeOrder.restaurantId} </h1>
+                    <h1 style="display:none;" class="custId">orderId: ${activeOrder.uid} </h1>
+                    <h3>destination: ${activeOrder.destination} </h3>
+                    <h3 class="status">status: ${activeOrder.status} </h3>
+                    <button onclick="dropOrder('${activeOrder.customerId}')" class="dropBtn">Drop</button>
                 </div>
-                `;
-                
+                `;  
             })
             .join(" ");
             delieveryPool.innerHTML = html;

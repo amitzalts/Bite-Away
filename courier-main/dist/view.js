@@ -41,7 +41,7 @@ function renderActiveOrders() {
         if (delieveryPool_2) {
             var html = activeOrders
                 .map(function (activeOrder) {
-                return "\n                <div class=\"order\">\n                    <h1> " + activeOrder.name + " </h1>\n                    <h1> " + activeOrder.restaurantId + " </h1>\n                    <h1 style=\"display:none;\" class=\"custId\"> " + activeOrder.uid + " </h1>\n                    <h3> " + activeOrder.destination + " </h3>\n                    <h3 class=\"status\"> " + activeOrder.status + " </h3>\n                    <button  onclick=\"dropOrder('" + activeOrder.customerId + "')\" class=\"dropBtn\">Drop</button>\n                </div>\n                ";
+                return "\n                <div class=\"order\">\n                    <h1>name: " + activeOrder.name + " </h1>\n                    <h1>restaurantId: " + activeOrder.restaurantId + " </h1>\n                    <h1 style=\"display:none;\" class=\"custId\">orderId: " + activeOrder.uid + " </h1>\n                    <h3>destination: " + activeOrder.destination + " </h3>\n                    <h3 class=\"status\">status: " + activeOrder.status + " </h3>\n                    <button onclick=\"dropOrder('" + activeOrder.customerId + "')\" class=\"dropBtn\">Drop</button>\n                </div>\n                ";
             })
                 .join(" ");
             delieveryPool_2.innerHTML = html;
