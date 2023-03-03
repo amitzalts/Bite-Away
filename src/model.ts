@@ -90,7 +90,8 @@ class Course {
 class Order {
     uid: string;
     courses: Course[];
-    sum: number;
+    
+
     constructor(
         public name: string,
         public restaurantId: String,
@@ -102,9 +103,14 @@ class Order {
     ) {
         this.uid = `201${uid()}`
         this.courses = [];
-        this.sum = this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
     }
+    public sum(): number{
+       return this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
+    }
+
+
 }
+
 
 // --------------------------- Array ------
 

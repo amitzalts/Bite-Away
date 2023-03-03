@@ -1,5 +1,5 @@
-const sum = customer.orders[customer.orders.length-1].courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
-console.log(sum);
+// const sum = customer.orders[customer.orders.length-1].courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
+// console.log("sum", sum);
 
 function openMenu(uid: string) {
     try {
@@ -55,6 +55,8 @@ function handleAddToOrder(curResUid: string, courseUid: string) {
         const cartRoot: HTMLElement | null = document.querySelector("#cartRoot");
         if (!cartRoot) throw new Error("cart root not found");
         cartRoot.innerHTML = renderCart();
+
+        console.log("sum", order.sum());
 
     } catch (error) {
         console.error(error);

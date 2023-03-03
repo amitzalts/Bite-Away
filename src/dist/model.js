@@ -79,8 +79,10 @@ var Order = /** @class */ (function () {
         this.status = status;
         this.uid = "201" + uid();
         this.courses = [];
-        this.sum = this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
     }
+    Order.prototype.sum = function () {
+        return this.courses.reduce(function (accumulator, currentValue) { return accumulator + currentValue.price; }, 0);
+    };
     return Order;
 }());
 // --------------------------- Array ------
