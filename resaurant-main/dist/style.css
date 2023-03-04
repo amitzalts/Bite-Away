@@ -1,13 +1,20 @@
 .menu {
-  width: 30rem;
+  width: 20rem;
   height: auto;
   border: 0.1rem solid black;
 }
-
-.course {
-  width: 10rem;
-  height: 10rem;
+.menu__course {
+  width: 13rem;
+  height: 12rem;
   border: 0.1rem solid black;
+}
+.menu__course__detail {
+  width: auto;
+  height: auto;
+  border: 0.1rem solid black;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .activeOrders {

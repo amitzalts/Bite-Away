@@ -19,11 +19,21 @@ function renderMenuRest() { // later add ability to update the course's name, pr
         const html = menu
             .map((course) => {
                 return `
-                <div class="course">
+                <div class="menu__course">
+                <button onclick="handleUpdateItem('${course.uid}')">udpate</button>   
                     <h3>${course.name}</h3>
-                    <div>Price: ${course.price} <button onclick="handleUpdatePrice()">Update</button></div>
-                    <div>Description: ${course.description} </div>
-                    <div>uid: ${course.uid}</div>
+                    <div class="menu__course__detail">
+                        <label>Price:</label>
+                        <div>${course.price}</div>
+                    </div>
+                    <div class="menu__course__detail">
+                        <label>Description:</label>
+                        <div>${course.description}</div>
+                    </div>
+                    <div class="menu__course__detail">
+                        <label>uid:</label>
+                        <div>${course.uid}</div>
+                    </div>    
                     <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
                 </div>
                 `;
@@ -42,7 +52,7 @@ function renderActiveOrders() {
     try {
         const activeOrderRoot = document.querySelector("#activeOrderRoot");
 
-        const activeOrders = restaurant.orders.filter((activeOrder) => activeOrder.status !== "initialized");
+        const activeOrders = restaurant.orders.filter((activeOrder) => activeOrder.status !== "initialized" || "Picked" || "Droppped");
 
         const html = activeOrders
             .map((order) => {
@@ -61,3 +71,4 @@ function renderActiveOrders() {
     }
 }
 
+// <button onclick="handleUpdatePrice()">Update</button>

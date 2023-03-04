@@ -15,7 +15,7 @@ function renderMenuRest() {
         var menu = restaurant.menu;
         var html = menu
             .map(function (course) {
-            return "\n                <div class=\"course\">\n                    <h3>" + course.name + "</h3>\n                    <div>Price: " + course.price + " <button onclick=\"handleUpdatePrice()\">Update</button></div>\n                    <div>Description: " + course.description + " </div>\n                    <div>uid: " + course.uid + "</div>\n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
+            return "\n                <div class=\"menu__course\">\n                <button onclick=\"handleUpdateItem('" + course.uid + "')\">udpate</button>   \n                    <h3>" + course.name + "</h3>\n                    <div class=\"menu__course__detail\">\n                        <label>Price:</label>\n                        <div>" + course.price + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>Description:</label>\n                        <div>" + course.description + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>uid:</label>\n                        <div>" + course.uid + "</div>\n                    </div>    \n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
         })
             .join(" ");
         if (!courseRoot)
@@ -30,7 +30,7 @@ function renderMenuRest() {
 function renderActiveOrders() {
     try {
         var activeOrderRoot = document.querySelector("#activeOrderRoot");
-        var activeOrders = restaurant.orders.filter(function (activeOrder) { return activeOrder.status !== "initialized"; });
+        var activeOrders = restaurant.orders.filter(function (activeOrder) { return activeOrder.status !== "initialized" || "Picked" || "Droppped"; });
         var html = activeOrders
             .map(function (order) {
             return "\n                <div class=\"activeOrders__order\">order uid: " + order.uid + "\n                    <button onclick=\"updateStatus('" + order.uid + "')\">" + order.status + "</button>\n                </div>\n                ";
@@ -44,3 +44,4 @@ function renderActiveOrders() {
         console.error(error);
     }
 }
+// <button onclick="handleUpdatePrice()">Update</button>
