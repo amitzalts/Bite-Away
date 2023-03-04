@@ -79,7 +79,7 @@ function renderCartSum() {
         var order = customer.orders[customer.orders.length - 1];
         var sumRoot = document.querySelector("#sumRoot");
         if (sumRoot)
-            sumRoot.innerText = "sum: " + order.sum() + " shekels";
+            sumRoot.innerText = "sum: " + order.sum + " shekels";
         console.log(JSON.stringify(order.instanceCounter()));
     }
     catch (error) {

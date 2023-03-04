@@ -78,10 +78,6 @@ function renderActiveOrders() {
 }
 
 
-
-
-
-
 function renderRestaurantProfileImage() {
     try {
         const restaurantImage: HTMLElement | null = document.querySelector("#restaurantProfileImageRoot");

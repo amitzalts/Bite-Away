@@ -113,9 +113,9 @@ function renderCartSum() {
     try {
         const order = customer.orders[customer.orders.length - 1];
         const sumRoot: HTMLElement | null = document.querySelector("#sumRoot");
-        if (sumRoot) sumRoot.innerText = `sum: ${order.sum()} shekels`;
+        if (sumRoot) sumRoot.innerText = `sum: ${order.sum} shekels`;
 
-        console.log(JSON.stringify(order.instanceCounter()))
+        console.log(JSON.stringify(order.instanceCounter()));
         
     } catch (error) {
         console.error(error);
