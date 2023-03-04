@@ -37,7 +37,7 @@ function renderActiveOrders() {
         })
             .join(" ");
         if (!activeOrderRoot)
-            throw new Error("activeOrderRoot is null");
+            throw new Error("activeOrderRoot was not found");
         activeOrderRoot.innerHTML = html;
     }
     catch (error) {

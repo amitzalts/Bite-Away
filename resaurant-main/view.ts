@@ -68,10 +68,8 @@ function renderActiveOrders() {
                 `
             })
             .join(" ");
-        if (!activeOrderRoot) throw new Error("activeOrderRoot is null");
+        if (!activeOrderRoot) throw new Error("activeOrderRoot was not found");
         activeOrderRoot.innerHTML = html;
-
-      
 
     } catch (error) {
         console.error(error);
