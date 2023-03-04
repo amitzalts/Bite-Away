@@ -106,6 +106,7 @@ class Order {
         this.uid = `201${uid()}`
         this.courses = [];
     }
+    
     public sum(): number | undefined {
         try {
             const sum = this.courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0,) ?? 0; //if lefthand is null/undefined return 0

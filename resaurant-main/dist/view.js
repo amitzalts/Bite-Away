@@ -33,7 +33,7 @@ function renderActiveOrders() {
         var activeOrders = restaurant.orders.filter(function (activeOrder) { return activeOrder.status !== "initialized" || "Picked" || "Droppped"; });
         var html = activeOrders
             .map(function (order) {
-            return "\n                <div class=\"activeOrders__order\">order uid: " + order.uid + "\n                    <div class=\"activeOrders__order__detail\">customer uid: " + order.customerId + "</div>\n                    <div class=\"activeOrders__order__detail\">order destination: " + order.destination + "</div>\n                    <div id=\"coursesRoot\" class=\"activeOrders__order__detail\">courses: ''</div>\n                    <div id=\"SumRoot\" class=\"activeOrders__order__detail\">sum: ''</div>\n                    <button onclick=\"updateStatus('" + order.uid + "')\">" + order.status + "</button>\n                </div>\n                ";
+            return "\n                <div class=\"activeOrders__order\">order uid: " + order.uid + "\n                    <div class=\"activeOrders__order__detail\">customer uid: " + order.customerId + "</div>\n                    <div class=\"activeOrders__order__detail\">order destination: " + order.destination + "</div>\n                    <div id=\"coursesRoot\" class=\"activeOrders__order__detail\">courses: </div>\n                    <div id=\"SumRoot\" class=\"activeOrders__order__detail\">sum: </div>\n                    <button onclick=\"updateStatus('" + order.uid + "')\">" + order.status + "</button>\n                </div>\n                ";
         })
             .join(" ");
         if (!activeOrderRoot)

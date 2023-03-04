@@ -1,4 +1,5 @@
-const courseRoot = document.querySelector("#courseRoot"); 
+const courseRoot = document.querySelector("#courseRoot");
+
 
 function renderRestaurantHeader() {
     try {
@@ -61,8 +62,8 @@ function renderActiveOrders() {
                 <div class="activeOrders__order">order uid: ${order.uid}
                     <div class="activeOrders__order__detail">customer uid: ${order.customerId}</div>
                     <div class="activeOrders__order__detail">order destination: ${order.destination}</div>
-                    <div id="coursesRoot" class="activeOrders__order__detail">courses: ''</div>
-                    <div id="SumRoot" class="activeOrders__order__detail">sum: ''</div>
+                    <div id="coursesRoot" class="activeOrders__order__detail">courses: </div>
+                    <div id="SumRoot" class="activeOrders__order__detail">sum: </div>
                     <button onclick="updateStatus('${order.uid}')">${order.status}</button>
                 </div>
                 `
@@ -75,6 +76,11 @@ function renderActiveOrders() {
         console.error(error);
     }
 }
+
+
+
+
+
 
 function renderRestaurantProfileImage() {
     try {
