@@ -8,7 +8,7 @@ function renderRestaurants(): string {
         if (!restaurantRoot) throw new Error("the restaurantRoot no found")
         const html = restaurants.map(restaurant =>
             `
-              <div class="container-customer__restaurant-card">  <img src="https://www.misedetchef.co.il/wp-content/uploads/2020/02/2c-new.jpg" class="container-customer__img-restaurant">
+              <div class="container-customer__restaurant-card">  <img src="${restaurant.imageUrl}" class="container-customer__img-restaurant">
               <h1 class="container-customer__title-restaurant">
               ${restaurant.name} 
               </h1>
@@ -56,7 +56,7 @@ function renderCourse(uid: string): string {
             .map((course) => {
                 return ` 
             <div class="container-customer__courses-card">
-                <img src="https://www.aspicyperspective.com/wp-content/uploads/2020/07/best-hamburger-patties-1.jpg" class="container-customer__courses-img">
+                <img src="${course.imageUrl}" class="container-customer__courses-img">
                 <p class="container-customer__courses-card-name">${course.name}</p>
                 <p class="container-customer__courses-des">${course.description}</p>
                 <h4 class="container-customer__courses-price">Price:${course.price}</h4>

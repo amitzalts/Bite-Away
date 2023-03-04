@@ -1,4 +1,4 @@
-var courseRoot = document.querySelector("#courseRoot"); //view
+var courseRoot = document.querySelector("#courseRoot");
 function renderRestaurantHeader() {
     try {
         var restaurantHeader = document.querySelector("#restaurantHeader");
@@ -15,7 +15,7 @@ function renderMenuRest() {
         var menu = restaurant.menu;
         var html = menu
             .map(function (course) {
-            return "\n                <div class=\"menu__course\">\n                <button onclick=\"handleUpdateItem('" + course.uid + "')\">udpate</button>   \n                    <h3>" + course.name + "</h3>\n                    <div class=\"menu__course__detail\">\n                        <label>Price:</label>\n                        <div>" + course.price + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>Description:</label>\n                        <div>" + course.description + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>uid:</label>\n                        <div>" + course.uid + "</div>\n                    </div>    \n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
+            return "\n                <div class=\"menu__course\">\n                <button onclick=\"handleUpdateItem('" + course.uid + "')\">udpate</button>   \n                    <h3>" + course.name + "</h3>\n                    <div class=\"menu__course__detail\">\n                        <label>Price:</label>\n                        <div>" + course.price + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>Description:</label>\n                        <div>" + course.description + "</div>\n                    </div>\n                    <div class=\"menu__course__detail\">\n                        <label>uid:</label>\n                        <div>" + course.uid + "</div>\n                    </div>\n                    <img class=\"menu__course__image\" src=\"" + course.imageUrl + "\">  \n                    <button onclick=\"handleDeleteItem('" + course.uid + "')\">Remove</button>\n                </div>\n                ";
         })
             .join(" ");
         if (!courseRoot)
@@ -44,4 +44,14 @@ function renderActiveOrders() {
         console.error(error);
     }
 }
-// <button onclick="handleUpdatePrice()">Update</button>
+function renderRestaurantProfileImage() {
+    try {
+        var restaurantImage = document.querySelector("#restaurantProfileImageRoot");
+        if (restaurant && restaurantImage) {
+            restaurantImage.innerHTML = "\n            <img class=\"menu__course__image\" src=\"" + restaurant.imageUrl + "\">\n            ";
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}

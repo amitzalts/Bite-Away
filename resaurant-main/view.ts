@@ -1,4 +1,4 @@
-const courseRoot = document.querySelector("#courseRoot"); //view
+const courseRoot = document.querySelector("#courseRoot"); 
 
 function renderRestaurantHeader() {
     try {
@@ -33,7 +33,8 @@ function renderMenuRest() { // later add ability to update the course's name, pr
                     <div class="menu__course__detail">
                         <label>uid:</label>
                         <div>${course.uid}</div>
-                    </div>    
+                    </div>
+                    <img class="menu__course__image" src="${course.imageUrl}">  
                     <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
                 </div>
                 `;
@@ -71,4 +72,16 @@ function renderActiveOrders() {
     }
 }
 
-// <button onclick="handleUpdatePrice()">Update</button>
+function renderRestaurantProfileImage() {
+    try {
+        const restaurantImage: HTMLElement | null = document.querySelector("#restaurantProfileImageRoot");
+
+        if (restaurant && restaurantImage) {
+            restaurantImage.innerHTML = `
+            <img class="menu__course__image" src="${restaurant.imageUrl}">
+            `
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}

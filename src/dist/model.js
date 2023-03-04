@@ -41,13 +41,14 @@ var Customer = /** @class */ (function () {
     return Customer;
 }());
 var Restaurant = /** @class */ (function () {
-    function Restaurant(name, password, email, address, type, BankAccount) {
+    function Restaurant(name, password, email, address, type, BankAccount, imageUrl) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.address = address;
         this.type = type;
         this.BankAccount = BankAccount;
+        this.imageUrl = imageUrl;
         this.menu = [];
         this.customers = [];
         this.orders = [];
@@ -71,10 +72,11 @@ var Courier = /** @class */ (function () {
 }());
 // --------------------------- non User Classes ------
 var Course = /** @class */ (function () {
-    function Course(name, price, description) {
+    function Course(name, price, description, imageUrl) {
         this.name = name;
         this.price = price;
         this.description = description;
+        this.imageUrl = imageUrl;
         this.uid = "101" + uid();
         // this.date = new Date();  // date right now
     }

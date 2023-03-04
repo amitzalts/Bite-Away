@@ -50,6 +50,7 @@ class Restaurant {
         public address: string,
         public type: string,
         public BankAccount?: string,
+        public imageUrl?: string,
     ) {
         this.uid = `200${uid()}`
     }
@@ -80,6 +81,7 @@ class Course {
         public name: string,
         public price: number,
         public description: string,
+        public imageUrl?: string,
     ) {
         this.uid = `101${uid()}`
         // this.date = new Date();  // date right now

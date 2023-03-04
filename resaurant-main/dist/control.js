@@ -4,7 +4,8 @@ function handleAddCourse(ev) {
         var name = ev.target.elements.name.value;
         var price = ev.target.elements.price.valueAsNumber;
         var description = ev.target.elements.description.value;
-        restaurant.menu.push(new Course(name, price, description));
+        var imageUrl = ev.target.elements.imageUrl.value;
+        restaurant.menu.push(new Course(name, price, description, imageUrl));
         saveMenu(restaurant.uid, restaurant.menu);
         ev.target.reset();
         renderMenuRest();
@@ -40,6 +41,19 @@ function updateStatus(uid) {
         renderActiveOrders();
         console.log("rest", restaurants);
         console.log("orderPool", orderPool);
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function restaurantProfileImage(ev) {
+    try {
+        ev.preventDefault();
+        var imageUrl = ev.target.elements.imageUrl.value;
+        restaurant.imageUrl = imageUrl;
+        saveInLocalStorage(restaurants, "restaurants");
+        ev.target.reset();
+        renderRestaurantProfileImage();
     }
     catch (error) {
         console.error(error);

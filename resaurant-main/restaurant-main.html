@@ -14,16 +14,22 @@
     <title>My Restaurant</title>
 </head>
 
-<body onload="renderRestaurantHeader(), renderMenuRest(), renderActiveOrders()">
+<body onload="renderRestaurantHeader(), renderMenuRest(), renderActiveOrders(), renderRestaurantProfileImage()">
     <div class="container">  
         <h1 id="restaurantHeader">restaurant name</h1>
+        <form onsubmit="restaurantProfileImage(event)">
+            <input type="url" name="imageUrl" placeholder="paste a url of the desired image" size="30">
+            <input type="submit" value="update image" />
+        </form>
+        <div id="restaurantProfileImageRoot"></div>
+        
 
         <form onsubmit="handleAddCourse(event)">
             <input type="text" name="name" placeholder="course name" required>
             <input type="number" name="price" placeholder="price" required>
             <input type="text" name="description" placeholder="description" required>
+            <input type="url" name="imageUrl" placeholder="paste a url of the course's photo" size="30">
             <input type="submit" value="Add to Menu" />
-            <div>add picture</div>
         </form>
 
         <div class="menu">Menu
