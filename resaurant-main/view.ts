@@ -56,9 +56,13 @@ function renderActiveOrders() {
         const activeOrders = restaurant.orders.filter((activeOrder) => activeOrder.status !== "initialized" || "Picked" || "Droppped");
 
         const html = activeOrders
-            .map((order) => {
+            .map((order) => {  
                 return `
                 <div class="activeOrders__order">order uid: ${order.uid}
+                    <div class="activeOrders__order__detail">customer uid: ${order.customerId}</div>
+                    <div class="activeOrders__order__detail">order destination: ${order.destination}</div>
+                    <div id="coursesRoot" class="activeOrders__order__detail">courses: ''</div>
+                    <div id="SumRoot" class="activeOrders__order__detail">sum: ''</div>
                     <button onclick="updateStatus('${order.uid}')">${order.status}</button>
                 </div>
                 `
@@ -66,6 +70,8 @@ function renderActiveOrders() {
             .join(" ");
         if (!activeOrderRoot) throw new Error("activeOrderRoot is null");
         activeOrderRoot.innerHTML = html;
+
+      
 
     } catch (error) {
         console.error(error);
