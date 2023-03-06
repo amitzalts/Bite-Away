@@ -14,22 +14,23 @@ function renderRestaurantHeader() {
 }
 
 
-function renderMenuRest() { // later add ability to update the course's name, price, description 
+function renderMenuRest() {
     try {
         const menu = restaurant.menu;
         const html = menu
             .map((course) => {
                 return `
                 <div class="menu__course">
-                <button onclick="handleUpdateItem('${course.uid}')">udpate</button>   
-                    <h3>${course.name}</h3>
+                <button id="update-${course.uid}" onclick="handleUpdateCourse('${course.uid}')">udpate</button>   
+                <button style="display:none" id="save-${course.uid}" onclick="saveUpdatedCourse('${course.uid}')">save</button>   
+                    <h3 id="upadteName-${course.uid}" contenteditable="false">${course.name}</h3>
                     <div class="menu__course__detail">
                         <label>Price:</label>
-                        <div>${course.price}</div>
+                        <div id="upadtePrice-${course.uid}" contenteditable="false">${course.price}</div>
                     </div>
                     <div class="menu__course__detail">
                         <label>Description:</label>
-                        <div>${course.description}</div>
+                        <div id="upadteDescription-${course.uid}" contenteditable="false">${course.description}</div>
                     </div>
                     <div class="menu__course__detail">
                         <label>uid:</label>
@@ -91,3 +92,4 @@ function renderRestaurantProfileImage() {
         console.error(error);
     }
 }
+

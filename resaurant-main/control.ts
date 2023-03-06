@@ -6,15 +6,15 @@ function handleAddCourse(ev: any) {
         const price = ev.target.elements.price.valueAsNumber as number;
         const description = ev.target.elements.description.value as string;
         const imageUrl = ev.target.elements.imageUrl.value as string;
-        
+
         restaurant.menu.push(new Course(name, price, description, imageUrl));
-        
+
         saveMenu(restaurant.uid, restaurant.menu);
 
         ev.target.reset();
 
         renderMenuRest();
-        
+
     } catch (error) {
         console.error(error);
     }
@@ -36,7 +36,7 @@ function handleDeleteItem(uid: string) {
     }
 }
 
-function updateStatus(uid:string){
+function updateStatus(uid: string) {
     try {
         const order = restaurant.orders.find(order => order.uid === uid);
         if (!order) throw new Error("order not found");
@@ -63,18 +63,98 @@ function restaurantProfileImage(ev: any) {
         ev.preventDefault();
 
         const imageUrl = ev.target.elements.imageUrl.value as string;
-        
+
         restaurant.imageUrl = imageUrl;
-        
+
         saveInLocalStorage(restaurants, "restaurants");
 
         ev.target.reset();
 
         renderRestaurantProfileImage();
-        
+
     } catch (error) {
         console.error(error);
     }
 }
 
+
+
+function handleUpdateCourse(uid: string) {
+    try {
+        const course = restaurant.menu.find(course => course.uid === uid);
+        if (!course) throw new Error("course not found");
+
+        const courseDataName: HTMLElement | null = document.querySelector(`#upadteName-${course.uid}`);
+        const courseDataPrice: HTMLElement | null = document.querySelector(`#upadtePrice-${course.uid}`);
+        const courseDataDescription: HTMLElement | null = document.querySelector(`#upadteDescription-${course.uid}`);
+
+        if (!courseDataName) throw new Error("course Data Name not found");
+        if (!courseDataPrice) throw new Error("course Data Price not found");
+        if (!courseDataDescription) throw new Error("course Data Description not found");
+
+        
+        courseDataName.contentEditable = "true";
+        courseDataPrice.contentEditable = "true";
+        courseDataDescription.contentEditable = "true";
+
+        courseDataName.style.color = "blue";
+        courseDataPrice.style.color = "blue";
+        courseDataDescription.style.color = "blue";
+
+        const updateButton: HTMLElement | null = document.querySelector(`#update-${course.uid}`);
+        if (!updateButton) throw new Error("update Button not found");
+        updateButton.style.display = "none";
+
+        const saveButton: HTMLElement | null = document.querySelector(`#save-${course.uid}`);
+        if (!saveButton) throw new Error("save Button not found");
+        saveButton.style.display = "block";
+
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function saveUpdatedCourse(uid: string) {
+    try {
+
+        const course = restaurant.menu.find(course => course.uid === uid);
+        if (!course) throw new Error("course not found");
+
+        const courseDataName: HTMLElement | null = document.querySelector(`#upadteName-${course.uid}`);
+        const courseDataPrice: HTMLElement | null = document.querySelector(`#upadtePrice-${course.uid}`);
+        const courseDataDescription: HTMLElement | null = document.querySelector(`#upadteDescription-${course.uid}`);
+
+        if (!courseDataName) throw new Error("course Data Name not found");
+        if (!courseDataPrice) throw new Error("course Data Price not found");
+        if (!courseDataDescription) throw new Error("course Data Description not found");
+
+        course.name = courseDataName.innerText;
+        course.price = parseInt(courseDataPrice.innerText);
+        course.description = courseDataDescription.innerText;
+
+        saveInLocalStorage(restaurants, "restaurants");
+
+        const updateButton: HTMLElement | null = document.querySelector(`#update-${course.uid}`);
+        if (!updateButton) throw new Error("update Button not found");
+        updateButton.style.display = "block";
+
+        const saveButton: HTMLElement | null = document.querySelector(`#save-${course.uid}`);
+        if (!saveButton) throw new Error("save Button not found");
+        saveButton.style.display = "none";
+
+        courseDataName.contentEditable = "false";
+        courseDataPrice.contentEditable = "false";
+        courseDataDescription.contentEditable = "false";
+
+        courseDataName.style.color = "black";
+        courseDataPrice.style.color = "black";
+        courseDataDescription.style.color = "black";
+
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 

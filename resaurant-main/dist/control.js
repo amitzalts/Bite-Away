@@ -59,3 +59,73 @@ function restaurantProfileImage(ev) {
         console.error(error);
     }
 }
+function handleUpdateCourse(uid) {
+    try {
+        var course = restaurant.menu.find(function (course) { return course.uid === uid; });
+        if (!course)
+            throw new Error("course not found");
+        var courseDataName = document.querySelector("#upadteName-" + course.uid);
+        var courseDataPrice = document.querySelector("#upadtePrice-" + course.uid);
+        var courseDataDescription = document.querySelector("#upadteDescription-" + course.uid);
+        if (!courseDataName)
+            throw new Error("course Data Name not found");
+        if (!courseDataPrice)
+            throw new Error("course Data Price not found");
+        if (!courseDataDescription)
+            throw new Error("course Data Description not found");
+        courseDataName.contentEditable = "true";
+        courseDataPrice.contentEditable = "true";
+        courseDataDescription.contentEditable = "true";
+        courseDataName.style.color = "blue";
+        courseDataPrice.style.color = "blue";
+        courseDataDescription.style.color = "blue";
+        var updateButton = document.querySelector("#update-" + course.uid);
+        if (!updateButton)
+            throw new Error("update Button not found");
+        updateButton.style.display = "none";
+        var saveButton = document.querySelector("#save-" + course.uid);
+        if (!saveButton)
+            throw new Error("save Button not found");
+        saveButton.style.display = "block";
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+function saveUpdatedCourse(uid) {
+    try {
+        var course = restaurant.menu.find(function (course) { return course.uid === uid; });
+        if (!course)
+            throw new Error("course not found");
+        var courseDataName = document.querySelector("#upadteName-" + course.uid);
+        var courseDataPrice = document.querySelector("#upadtePrice-" + course.uid);
+        var courseDataDescription = document.querySelector("#upadteDescription-" + course.uid);
+        if (!courseDataName)
+            throw new Error("course Data Name not found");
+        if (!courseDataPrice)
+            throw new Error("course Data Price not found");
+        if (!courseDataDescription)
+            throw new Error("course Data Description not found");
+        course.name = courseDataName.innerText;
+        course.price = parseInt(courseDataPrice.innerText);
+        course.description = courseDataDescription.innerText;
+        saveInLocalStorage(restaurants, "restaurants");
+        var updateButton = document.querySelector("#update-" + course.uid);
+        if (!updateButton)
+            throw new Error("update Button not found");
+        updateButton.style.display = "block";
+        var saveButton = document.querySelector("#save-" + course.uid);
+        if (!saveButton)
+            throw new Error("save Button not found");
+        saveButton.style.display = "none";
+        courseDataName.contentEditable = "false";
+        courseDataPrice.contentEditable = "false";
+        courseDataDescription.contentEditable = "false";
+        courseDataName.style.color = "black";
+        courseDataPrice.style.color = "black";
+        courseDataDescription.style.color = "black";
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
