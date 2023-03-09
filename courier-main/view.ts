@@ -55,13 +55,13 @@ function renderActiveOrders() {
            let html = activeOrders
            .map ((activeOrder) =>{
                 return `
-                <div class="order">
-                    <h1>name: ${activeOrder.name} </h1>
-                    <h1>restaurantId: ${activeOrder.restaurantId} </h1>
-                    <h1 style="display:none;" class="custId">orderId: ${activeOrder.uid} </h1>
-                    <h3>destination: ${activeOrder.destination} </h3>
-                    <h3 class="status">status: ${activeOrder.status} </h3>
-                    <button onclick="dropOrder('${activeOrder.customerId}')" class="dropBtn">Drop</button>
+                <div class="main__active-card">
+                    <h1 class="main__active-name" >name: ${activeOrder.name} </h1>
+                    <h1 class="main__active-restaurant">restaurantId: ${activeOrder.restaurantId} </h1>
+                    <h1  class="main__active-order-id" style="display:none;">orderId: ${activeOrder.uid} </h1>
+                    <h3> class="main__active-des" destination: ${activeOrder.destination} </h3>
+                    <h3 class="main__active-status">status: ${activeOrder.status} </h3>
+                    <button onclick="dropOrder('${activeOrder.customerId}')">Drop</button>
                 </div>
                 `;  
             })
@@ -82,12 +82,12 @@ function renderPool() {
            let html = orderPool
            .map ((order) =>{
                 return `
-                <div class="order">
-                    <h1> name: ${order.name} </h1>
-                    <h1> restaurant-ID: ${order.restaurantId} </h1>
-                    <h1 class="custId"> order-ID: ${order.uid} </h1>
-                    <h3> destination: ${order.destination} </h3>
-                    <h3 class="status"> status: ${order.status} </h3>
+                <div class="main__active-card">
+                    <h1  class="main__active-name"> name: ${order.name} </h1>
+                    <h1 class="main__active-restaurant"> restaurant-ID: ${order.restaurantId} </h1>
+                    <h1  class="main__active-order-id"> order-ID: ${order.uid} </h1>
+                    <h3  class="main__active-des"> destination: ${order.destination} </h3>
+                    <h3 class="main__active-status"> status: ${order.status} </h3>
                     <button  onclick="pickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
                 </div>
                 `;
