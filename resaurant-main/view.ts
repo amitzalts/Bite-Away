@@ -17,6 +17,7 @@ function renderRestaurantHeader() {
 function renderMenuRest() {
     try {
         const menu = restaurant.menu;
+        console.log("restaurant", restaurant)
         const html = menu
             .map((course) => {
                 return `
@@ -56,15 +57,15 @@ function renderActiveOrders() {
         const activeOrderRoot = document.querySelector("#activeOrderRoot");
 
         const activeOrders = restaurant.orders.filter((activeOrder) => activeOrder.status !== "initialized" || "Picked" || "Droppped");
-
+console.log(activeOrders)
         const html = activeOrders
-            .map((order) => {  
+            .map((order) => {
                 return `
                 <div class="activeOrders__order">order uid: ${order.uid}
                     <div class="activeOrders__order__detail">customer uid: ${order.customerId}</div>
                     <div class="activeOrders__order__detail">order destination: ${order.destination}</div>
                     <div id="coursesRoot" class="activeOrders__order__detail">courses: </div>
-                    <div id="SumRoot" class="activeOrders__order__detail">sum: </div>
+                    <div id="SumRoot" class="activeOrders__order__detail">sum: ${order.sum()} </div>
                     <button onclick="updateStatus('${order.uid}')">${order.status}</button>
                 </div>
                 `

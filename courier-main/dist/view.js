@@ -4,6 +4,7 @@ if (!_courier)
     throw new Error("no _courier found");
 var courier = _courier;
 console.log(courier.name);
+console.log(courier);
 //---------------------------------------------------------
 function renderCourierHeader() {
     try {

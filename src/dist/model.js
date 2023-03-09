@@ -122,8 +122,8 @@ var Order = /** @class */ (function () {
     return Order;
 }());
 // --------------------------- Array ------
-var customers = getInfoFromStorage("customers");
-var restaurants = getInfoFromStorage("restaurants");
+var customers = getCustomersFromStorage();
+var restaurants = getRestaurantsFromStorage();
 var couriers = getInfoFromStorage("couriers");
 var orderPool = getInfoFromStorage("orderPool");
 // --------------------------- LocalStorage ------
@@ -172,7 +172,7 @@ function loggedInUser() {
         var getEmailFromUser = JSON.parse(data);
         var user = getEmailFromUser;
         if (!user) {
-            throw new Error("could not find logged in customer");
+            throw new Error("could not find logged in user");
         }
         else {
             return user;
@@ -189,6 +189,7 @@ function loggedInRestaurant() {
         if (!user_1)
             throw new Error("no user found");
         var restaurant = restaurants.find(function (rest) { return rest.uid === user_1.uid; });
+        console.log(restaurant);
         if (!restaurant)
             throw new Error("no restaurant found");
         return restaurant;
@@ -205,7 +206,7 @@ function loggedInCustomer() {
             throw new Error("no user found");
         var customer = customers.find(function (cust) { return cust.uid === user_2.uid; });
         if (!customer)
-            throw new Error("no restaurant found");
+            throw new Error("no customer found");
         return customer;
     }
     catch (error) {
@@ -220,7 +221,7 @@ function loggedInCourier() {
             throw new Error("no user found");
         var courier = couriers.find(function (cour) { return cour.uid === user_3.uid; });
         if (!courier)
-            throw new Error("no restaurant found");
+            throw new Error("no courier found");
         return courier;
     }
     catch (error) {
@@ -238,6 +239,50 @@ function saveMenu(restaurantUid, menu) {
     }
     catch (error) {
         console.error(error);
+    }
+}
+function getCustomersFromStorage() {
+    try {
+        var dataJson = localStorage.getItem("customers");
+        if (!dataJson)
+            throw new Error("the customers not found in localStorage");
+        var data = JSON.parse(dataJson);
+        console.log("data", data);
+        var customers_1 = data.map(function (customer) {
+            var _customer = new Customer(customer.name, customer.password, customer.email, customer.address);
+            _customer.uid = customer.uid;
+            console.log(_customer);
+            _customer.orders = customer.orders.map(function (order) { return new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination); });
+            console.log(_customer);
+            return _customer;
+        });
+        return customers_1;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+function getRestaurantsFromStorage() {
+    try {
+        var dataJson = localStorage.getItem("restaurants");
+        if (!dataJson)
+            throw new Error("the restaurants not found in localStorage");
+        var data = JSON.parse(dataJson);
+        console.log("data", data);
+        var restaurants_1 = data.map(function (restaurant) {
+            var _restaurant = new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
+            _restaurant.uid = restaurant.uid;
+            console.log(_restaurant);
+            _restaurant.orders = restaurant.orders.map(function (order) { return new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination); });
+            console.log(_restaurant);
+            return _restaurant;
+        });
+        return restaurants_1;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
     }
 }
 /////////////////////////////////// DATA BASE 

@@ -3,7 +3,7 @@ function pickupOrder(uid) {
     try {
         var lastOrder = courier.orders.length;
         console.log("lastOrder", lastOrder);
-        if ((lastOrder === 0) || (courier.orders[lastOrder].status !== "Picked")) {
+        if ((lastOrder === 0) || (courier.orders[lastOrder].status === "ready")) {
             var order = orderPool.find(function (order) { return order.uid === uid; });
             var orderIndex = orderPool.findIndex(function (order) { return order.uid === uid; });
             if (orderIndex === -1)

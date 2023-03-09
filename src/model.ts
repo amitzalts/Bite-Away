@@ -135,8 +135,8 @@ class Order {
 
 // --------------------------- Array ------
 
-const customers = getInfoFromStorage("customers") as Customer[];
-const restaurants = getInfoFromStorage("restaurants") as Restaurant[];
+const customers = getCustomersFromStorage();
+const restaurants = getRestaurantsFromStorage();
 const couriers = getInfoFromStorage("couriers") as Courier[];
 const orderPool = getInfoFromStorage("orderPool") as Order[];
 
@@ -184,11 +184,11 @@ function loggedInUser(): Customer | Restaurant | Courier | undefined {
         const data = localStorage.getItem("userCur");
 
         if (!data) throw new Error("the userEmail data  was not found in local storage");
-        const getEmailFromUser = JSON.parse(data)
+        const getEmailFromUser = JSON.parse(data);
         const user: Customer | Restaurant | Courier = getEmailFromUser;
 
         if (!user) {
-            throw new Error("could not find logged in customer");
+            throw new Error("could not find logged in user");
         } else {
             return user;
         }
@@ -203,6 +203,7 @@ function loggedInRestaurant(): Restaurant | undefined {
         const user = loggedInUser();
         if (!user) throw new Error("no user found");
         const restaurant = restaurants.find(rest => rest.uid === user.uid);
+        console.log(restaurant)
 
         if (!restaurant) throw new Error("no restaurant found");
         return restaurant;
@@ -218,9 +219,10 @@ function loggedInCustomer(): Customer | undefined {
     try {
         const user = loggedInUser();
         if (!user) throw new Error("no user found");
-        const customer = customers.find(cust => cust.uid === user.uid);
+        
+        const customer = customers.find(cust =>cust.uid === user.uid);
 
-        if (!customer) throw new Error("no restaurant found");
+        if (!customer) throw new Error("no customer found");
         return customer;
 
     } catch (error) {
@@ -234,7 +236,7 @@ function loggedInCourier(): Courier | undefined {
         if (!user) throw new Error("no user found");
         const courier = couriers.find(cour => cour.uid === user.uid);
 
-        if (!courier) throw new Error("no restaurant found");
+        if (!courier) throw new Error("no courier found");
         return courier;
 
     } catch (error) {
@@ -254,6 +256,59 @@ function saveMenu(restaurantUid: string, menu: Course[]) { //saves the menu of t
         console.error(error);
     }
 }
+
+function getCustomersFromStorage():Customer[] {
+    try {
+        const dataJson = localStorage.getItem("customers");
+        if (!dataJson) throw new Error(`the customers not found in localStorage`);
+        const data = JSON.parse(dataJson) as Customer[] | Restaurant[] | Courier[] | Course[];
+        console.log("data", data);
+        const customers = data.map((customer)=>{
+
+            const _customer =  new Customer(customer.name, customer.password, customer.email, customer.address);
+            _customer.uid = customer.uid;
+            console.log(_customer);
+            _customer.orders = customer.orders.map(order=> new Order(order.name, order.restaurantId, order.customerId, undefined ,order.destination))
+            console.log(_customer)
+            return _customer;
+        })
+
+        return customers;
+    } catch (error) {
+        console.error(error)
+        return []
+    }
+}
+
+function getRestaurantsFromStorage():Restaurant[] {
+    try {
+        const dataJson = localStorage.getItem("restaurants");
+        if (!dataJson) throw new Error(`the restaurants not found in localStorage`);
+        const data = JSON.parse(dataJson) as Customer[] | Restaurant[] | Courier[] | Course[];
+        console.log("data", data);
+        const restaurants = data.map((restaurant)=>{
+
+            const _restaurant =  new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
+            _restaurant.uid = restaurant.uid;
+            console.log(_restaurant);
+            _restaurant.orders = restaurant.orders.map(order=> new Order(order.name, order.restaurantId, order.customerId, undefined ,order.destination))
+            console.log(_restaurant)
+            return _restaurant;
+        })
+
+        return restaurants;
+    } catch (error) {
+        console.error(error)
+        return []
+    }
+}
+
+
+
+
+
+
+
 
 
 
