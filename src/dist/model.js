@@ -274,7 +274,11 @@ function getRestaurantsFromStorage() {
             var _restaurant = new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
             _restaurant.uid = restaurant.uid;
             _restaurant.menu = restaurant.menu;
-            _restaurant.orders = restaurant.orders.map(function (order) { return new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination, order.status); });
+            _restaurant.orders = restaurant.orders.map(function (order) {
+                var _order = new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination, order.status);
+                _order.courses = order.courses;
+                return _order;
+            });
             console.log("_restaurant", _restaurant);
             return _restaurant;
         });
