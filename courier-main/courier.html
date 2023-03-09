@@ -11,7 +11,7 @@
     <script src="./dist/view.js" defer></script>
     <script src="./dist/control.js" defer></script>
 </head>
-<body onload="renderCourierHeader(), renderPool(), renderDroppedOrders()" class="container-courier">
+<body onload="renderCourierHeader(), renderPool(), renderDroppedOrders(), renderActiveOrders()" class="container-courier">
 	<header class="header">
 		<h1 class="header__title" id="courierHeader">Courier</h1>
 		<h1 class="header__subtitie">Courier Deliveries Manager</h1>
@@ -33,8 +33,8 @@
 		<div class="main__active" id="activeOrdersRoot">
 
 		</div>
-		<h2 class="main__dropp-title">Dropped Orders</h2>
-		<div class="main__dropp" id="droppedOrdersRoot">
+		<h2 class="main__drop-title">Dropped Orders</h2>
+		<div class="main__drop" id="droppedOrdersRoot">
 
 		</div>
 	</main>

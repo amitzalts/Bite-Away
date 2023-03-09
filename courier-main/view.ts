@@ -27,11 +27,11 @@ function renderDroppedOrders() {
            let html = droppedOrders
            .map ((droppedOrders) =>{
                 return `
-                <div class="order">
+                <div class="main__drop">
                     <h1>name: ${droppedOrders.name} </h1>
                     <h1>restId: ${droppedOrders.restaurantId} </h1>
                     <h3> destination: ${droppedOrders.destination} </h3>
-                    <h3 class="status">status: ${droppedOrders.status} </h3>
+                    <h3">status: ${droppedOrders.status} </h3>
                 </div>
                 `;
                 

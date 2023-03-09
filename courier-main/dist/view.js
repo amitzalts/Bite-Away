@@ -24,7 +24,7 @@ function renderDroppedOrders() {
         if (delieveryPool_1) {
             var html = droppedOrders
                 .map(function (droppedOrders) {
-                return "\n                <div class=\"order\">\n                    <h1>name: " + droppedOrders.name + " </h1>\n                    <h1>restId: " + droppedOrders.restaurantId + " </h1>\n                    <h3> destination: " + droppedOrders.destination + " </h3>\n                    <h3 class=\"status\">status: " + droppedOrders.status + " </h3>\n                </div>\n                ";
+                return "\n                <div class=\"main__drop\">\n                    <h1>name: " + droppedOrders.name + " </h1>\n                    <h1>restId: " + droppedOrders.restaurantId + " </h1>\n                    <h3> destination: " + droppedOrders.destination + " </h3>\n                    <h3\">status: " + droppedOrders.status + " </h3>\n                </div>\n                ";
             })
                 .join(" ");
             delieveryPool_1.innerHTML = html;

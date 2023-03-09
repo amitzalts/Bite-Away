@@ -124,7 +124,7 @@ var Order = /** @class */ (function () {
 // --------------------------- Array ------
 var customers = getCustomersFromStorage();
 var restaurants = getRestaurantsFromStorage();
-var couriers = getInfoFromStorage("couriers");
+var couriers = getCouriersFromStorage();
 var orderPool = getInfoFromStorage("orderPool");
 // --------------------------- LocalStorage ------
 function saveInLocalStorage(array, name) {
@@ -271,7 +271,7 @@ function getRestaurantsFromStorage() {
         var data = JSON.parse(dataJson);
         console.log("data", data);
         var restaurants_1 = data.map(function (restaurant) {
-            var _restaurant = new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
+            var _restaurant = new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type, undefined, restaurant.imageUrl);
             _restaurant.uid = restaurant.uid;
             _restaurant.menu = restaurant.menu;
             _restaurant.orders = restaurant.orders.map(function (order) {
@@ -289,20 +289,27 @@ function getRestaurantsFromStorage() {
         return [];
     }
 }
-/////////////////////////////////// DATA BASE 
-function enterLocalStorage() {
-    restaurants.push(new Restaurant("orel", "123", "orel@walla.com ", "haifa", "asian"));
-    restaurants.push(new Restaurant("dor", "i", "j", "k", "l"));
-    restaurants.push(new Restaurant("zalts", "m", "n", "o", "p"));
-    restaurants.push(new Restaurant("book", "u", "v", "w", "x"));
-    restaurants.push(new Restaurant("karako", "q", "r", "s", "t"));
-    var pasta = new Course("pasta", amit, 10);
-    var pizza = new Course("pizza", amit, 20);
-    var ravioli = new Course("ravioli", amit, 30);
-    var teramisu = new Course("teramisu", amit, 40);
-    restaurants[1].menu.push(new Course("eggroll", orel, 50), new Course("pad thai", orel, 60), new Course("sushi", orel, 70), new Course("cake", orel, 80));
-    var customer1 = new Customer("customer1", "134", "email", "destination");
-    var customer2 = new Customer("customer2", "135", "email2", "destination2");
-    customers.push(customer1, customer2);
-    saveInLocalStorage(restaurants, "restaurants");
+function getCouriersFromStorage() {
+    try {
+        var dataJson = localStorage.getItem("couriers");
+        if (!dataJson)
+            throw new Error("the couriers not found in localStorage");
+        var data = JSON.parse(dataJson);
+        console.log("data", data);
+        var couriers_1 = data.map(function (courier) {
+            var _courier = new Courier(courier.name, courier.password, courier.email, courier.area);
+            _courier.uid = courier.uid;
+            _courier.orders = courier.orders.map(function (order) {
+                var _order = new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination, order.status);
+                _order.courses = order.courses;
+                return _order;
+            });
+            return _courier;
+        });
+        return couriers_1;
+    }
+    catch (error) {
+        console.error(error);
+        return [];
+    }
 }

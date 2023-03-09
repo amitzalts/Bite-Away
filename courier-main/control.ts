@@ -7,7 +7,7 @@ function pickupOrder(uid: string) {
         const lastOrder = courier.orders.length;
         console.log("lastOrder", lastOrder);
         
-        if ((lastOrder === 0) || (courier.orders[lastOrder].status === "ready")) {
+        if ((lastOrder === 0) || (courier.orders[lastOrder-1].status !== "Picked")) {
             const order = orderPool.find(order => order.uid === uid);
             const orderIndex = orderPool.findIndex(order => order.uid === uid);
             if (orderIndex === -1) throw new Error("order not found");

@@ -76,12 +76,14 @@
 			min-width: 100vw;
 		}
 
-		&__dropp{
-			overflow: hidden;
-			display: flex;
-			flex-wrap: wrap;
-			min-height: 250px;
-			min-width: 100vw;
+		&__drop{
+			background-color: #f19204ec;
+			text-transform: capitalize;
+			padding: 10px 20px;
+			border: 2px solid black;
+			margin: 10px;
+			width: 200px;
+			height: 250px;
 		}
 
 		&__active-card {
@@ -134,7 +136,7 @@
 			background-color: #2a8f26;
 		}
 
-		&__dropp-title {
+		&__drop-title {
 			background-color: #e9571d;
 		}
 	}
