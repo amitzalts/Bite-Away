@@ -20,6 +20,7 @@ function renderRestaurants() {
 }
 function renderMenu(uid) {
     try {
+        console.log("restaurants", restaurants);
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
             throw new Error("restaurant not found ");

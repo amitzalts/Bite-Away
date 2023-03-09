@@ -30,8 +30,11 @@ function renderRestaurants(): string {
 
 function renderMenu(uid: string): string {
     try {
-        const curRes = restaurants.find(restaurant => restaurant.uid === uid) as Restaurant
-        if (!curRes) throw new Error("restaurant not found ")
+         console.log("restaurants", restaurants);
+        const curRes = restaurants.find(restaurant => restaurant.uid === uid);
+       
+        
+        if (!curRes) throw new Error("restaurant not found ");
         const html = `
         <button class="container-customer__menu-close" onclick="closeMenu()">
         <i class="fa-solid fa-xmark"></i>

@@ -273,9 +273,9 @@ function getRestaurantsFromStorage() {
         var restaurants_1 = data.map(function (restaurant) {
             var _restaurant = new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
             _restaurant.uid = restaurant.uid;
-            console.log(_restaurant);
-            _restaurant.orders = restaurant.orders.map(function (order) { return new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination); });
-            console.log(_restaurant);
+            _restaurant.menu = restaurant.menu;
+            _restaurant.orders = restaurant.orders.map(function (order) { return new Order(order.name, order.restaurantId, order.customerId, undefined, order.destination, order.status); });
+            console.log("_restaurant", _restaurant);
             return _restaurant;
         });
         return restaurants_1;

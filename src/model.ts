@@ -290,9 +290,10 @@ function getRestaurantsFromStorage():Restaurant[] {
 
             const _restaurant =  new Restaurant(restaurant.name, restaurant.password, restaurant.email, restaurant.address, restaurant.type);
             _restaurant.uid = restaurant.uid;
-            console.log(_restaurant);
-            _restaurant.orders = restaurant.orders.map(order=> new Order(order.name, order.restaurantId, order.customerId, undefined ,order.destination))
-            console.log(_restaurant)
+            _restaurant.menu = restaurant.menu;
+            
+            _restaurant.orders = restaurant.orders.map(order=> new Order(order.name, order.restaurantId, order.customerId, undefined ,order.destination, order.status))
+            console.log("_restaurant" ,_restaurant);
             return _restaurant;
         })
 
