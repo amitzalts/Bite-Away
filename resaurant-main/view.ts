@@ -66,7 +66,7 @@ console.log(activeOrders)
                 <div class="activeOrders__order">order uid: ${order.uid}
                     <div class="activeOrders__order__detail">customer uid: ${order.customerId}</div>
                     <div class="activeOrders__order__detail">order destination: ${order.destination}</div>
-                    <div id="coursesRoot" class="activeOrders__order__detail">courses: ${JSON.stringify(order.instanceCounter())} </div>
+                    <div id="coursesRoot" class="activeOrders__order__detail">courses: ${(JSON.stringify(order.instanceCounter())).slice(1, -1)} </div>
                     <div id="SumRoot" class="activeOrders__order__detail">sum: ${order.sum()} </div>
                     <button onclick="updateStatus('${order.uid}')">${order.status}</button>
                 </div>
