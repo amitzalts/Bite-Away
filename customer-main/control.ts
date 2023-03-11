@@ -9,7 +9,7 @@ function openMenu(uid: string) {
         menu.style.display = "block";
 
         const submitOrderBtn: HTMLDivElement | null = document.querySelector("#submitOrderBtn");
-        if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "white";
+        if (submitOrderBtn) submitOrderBtn.style.backgroundColor = "green";
     } catch (error) {
         console.error(error);
     }
@@ -152,4 +152,15 @@ function handleRemoveFromOrder(uid: string) {
     } catch (error) {
         console.error(error);
     }
+}
+
+function handleClickCloseCart(){
+    const cartContainer:HTMLDivElement|null = document.querySelector('.container-customer__cart')!;
+        cartContainer.classList.remove("active")
+
+}
+function handleClickOpenCart(){
+    const cartContainer:HTMLDivElement|null = document.querySelector('.container-customer__cart')!;
+        cartContainer.classList.add("active")
+
 }

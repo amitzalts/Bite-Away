@@ -9,7 +9,7 @@ function openMenu(uid) {
         menu.style.display = "block";
         var submitOrderBtn = document.querySelector("#submitOrderBtn");
         if (submitOrderBtn)
-            submitOrderBtn.style.backgroundColor = "white";
+            submitOrderBtn.style.backgroundColor = "green";
     }
     catch (error) {
         console.error(error);
@@ -146,4 +146,12 @@ function handleRemoveFromOrder(uid) {
     catch (error) {
         console.error(error);
     }
+}
+function handleClickCloseCart() {
+    var cartContainer = document.querySelector('.container-customer__cart');
+    cartContainer.classList.remove("active");
+}
+function handleClickOpenCart() {
+    var cartContainer = document.querySelector('.container-customer__cart');
+    cartContainer.classList.add("active");
 }

@@ -94,9 +94,10 @@ function renderCart(): string {
             .map((course) => {
                 return ` 
             <div class="container-customer__cart__course">
-                <p class="container-customer__cart__course__name">${course.name}</p>
-                <p class="container-customer__cart__course__price">Price:${course.price}</p>
-                <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${course.uid}')">remove</button>
+                <img class="container-customer__cart__course__img" src="${course.imageUrl}">
+                <div>                <p class="container-customer__cart__course__name">${course.name}</p>
+                <p class="container-customer__cart__course__price">Price:${course.price}$</p></div>
+                <button class="container-customer__cart__course__removeBtn" onclick="handleRemoveFromOrder('${course.uid}')"><i class="fa-solid fa-delete-left"></i></button>
             </div>
             `
             })
@@ -116,7 +117,7 @@ function renderCartSum() {
     try {
         const order = customer.orders[customer.orders.length - 1];
         const sumRoot: HTMLElement | null = document.querySelector("#sumRoot");
-        if (sumRoot) sumRoot.innerText = `sum: ${order.sum()} shekels`;
+        if (sumRoot) sumRoot.innerText = `TOTAL: ${order.sum()} $`;
 
         console.log(JSON.stringify(order.instanceCounter()));
         

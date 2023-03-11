@@ -64,7 +64,7 @@ function renderCart() {
     try {
         var html = customer.orders[customer.orders.length - 1].courses
             .map(function (course) {
-            return " \n            <div class=\"container-customer__cart__course\">\n                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "</p>\n                <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + course.uid + "')\">remove</button>\n            </div>\n            ";
+            return " \n            <div class=\"container-customer__cart__course\">\n                <img class=\"container-customer__cart__course__img\" src=\"" + course.imageUrl + "\">\n                <div>                <p class=\"container-customer__cart__course__name\">" + course.name + "</p>\n                <p class=\"container-customer__cart__course__price\">Price:" + course.price + "$</p></div>\n                <button class=\"container-customer__cart__course__removeBtn\" onclick=\"handleRemoveFromOrder('" + course.uid + "')\"><i class=\"fa-solid fa-delete-left\"></i></button>\n            </div>\n            ";
         })
             .join(" ");
         renderCartSum();
@@ -80,7 +80,7 @@ function renderCartSum() {
         var order = customer.orders[customer.orders.length - 1];
         var sumRoot = document.querySelector("#sumRoot");
         if (sumRoot)
-            sumRoot.innerText = "sum: " + order.sum() + " shekels";
+            sumRoot.innerText = "TOTAL: " + order.sum() + " $";
         console.log(JSON.stringify(order.instanceCounter()));
     }
     catch (error) {

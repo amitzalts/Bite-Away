@@ -16,7 +16,20 @@
 </head>
 
 <body onload="renderRestaurants() , renderCustomerHeader()">
-    <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+    <div class="container-customer__cart">
+        <h1 >YOUR CART</h1>
+        <div class="container-customer__cartRoot-close" onclick="handleClickCloseCart()">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="" id="cartRoot">
+            
+        </div>
+        <div id="sumRoot" class="container-customer__cart__sum">sum: 0 shekels</div>
+        <button class="container-customer__cartRoot-submit" id="submitOrderBtn" onclick="submitOrder()">submit order</button>
+        
+   
+    </div>
+    <div class="cart" onclick="handleClickOpenCart()"><i class="fa-solid fa-cart-shopping"></i></div>
 
     <div class="container-customer">
         <div id="customerHeader" class="container-customer__title" >Customer Page</div> 
@@ -30,11 +43,7 @@
             <div class="container-customer__result-root" id="noResultsRoot"></div>
         </div>
 
-        <div class="container-customer__cart">cart
-            <button id="submitOrderBtn" onclick="submitOrder()">submit order</button>
-            <div id="cartRoot"></div>
-            <div id="sumRoot" class="container-customer__cart__sum">sum: 0 shekels</div>
-        </div>
+
     </div>
        
 

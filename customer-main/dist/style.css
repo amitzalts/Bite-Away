@@ -171,28 +171,95 @@ body {
 .container-customer__courses-btn i:hover {
   color: #c7c4c4;
 }
+.container-customer__cart__course__cart__course {
+  width: 100vw;
+  height: 100vh;
+}
 .container-customer__cart {
-  width: 10rem;
-  height: auto;
-  border: 0.1rem solid black;
-  bottom: 44rem;
-  left: 61rem;
-  display: flex;
+  display: none;
+  border-radius: 15px;
+  position: relative;
+  background-color: white;
   flex-direction: column;
+  text-align: center;
+  width: 80vw;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.container-customer__cart h1 {
+  padding: 10px;
+}
+.container-customer__cart.active {
+  display: flex;
+}
+.container-customer__cart__sum {
+  font-size: 1.5rem;
+  padding: 10px 20px;
 }
 .container-customer__cart__course {
-  border: 0.1rem solid black;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.1rem solid black;
 }
 .container-customer__cart__course__name {
+  font-size: 1.4rem;
+  font-weight: bold;
   color: black;
 }
 .container-customer__cart__course__price {
+  padding: 3px 10px;
+  font-weight: 100;
+  background-color: #6c6c6c83;
+  border-radius: 15px;
   color: black;
 }
 .container-customer__cart__course__removeBtn {
-  width: 1rem;
-  height: 1rem;
-  background-color: red;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
+.container-customer__cart__course__removeBtn i {
+  font-size: 1.5rem;
+}
+.container-customer__cart__course__removeBtn i:hover {
+  scale: 1.1;
+}
+.container-customer__cart__course__img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.container-customer__cartRoot-close {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 2rem;
+}
+.container-customer__cartRoot-close:hover {
+  scale: 1.1;
+}
+.container-customer__cartRoot-close:active {
+  scale: 0.9;
+}
+.container-customer__cartRoot-submit {
+  background-color: #005e00;
+  color: #fafafa;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  height: 50px;
+  border-radius: 0 0 15px 15px;
+  font-size: 1.4rem;
 }
 
 .cart {

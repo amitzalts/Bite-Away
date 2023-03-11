@@ -10,10 +10,10 @@ body {
     height: 100vh;
     margin: 0;
     position: relative;
-background-image: url("./../img/background.jpg");
-background-position: center;
-background-repeat: repeat;
-background-size: cover;
+    background-image: url("./../img/background.jpg");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
 }
 
 .container-customer {
@@ -28,7 +28,7 @@ background-size: cover;
 
 
     &__title {
-       width: 100%;
+        width: 100%;
         font-size: 3em;
         margin-bottom: 15px;
         color: rgb(255, 255, 255);
@@ -60,26 +60,26 @@ background-size: cover;
 
     &__restaurant-card {
         overflow: hidden;
-        background:linear-gradient(45deg, rgba(0, 0, 0, 0.829) , rgba(255, 255, 255, 0.733));
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.829), rgba(255, 255, 255, 0.733));
         width: 200px;
         border: 1px solid black;
         border-radius: 15px;
         font-size: 1.5rem;
         margin-top: 0.7rem;
-        
-        p{
+
+        p {
             margin-left: 20px;
             margin-bottom: 10px;
             text-align: start;
             font-size: 1.2rem;
-            color:white
+            color: white
         }
     }
 
     &__title-restaurant {
         text-transform: uppercase;
         text-decoration: underline;
-        color:#fb7e09;
+        color: #fb7e09;
         margin: 5px;
         font-size: 1.5rem;
     }
@@ -118,9 +118,10 @@ background-size: cover;
         transform: translate(-50%, -50%);
         width: 80vw;
         height: 80vh;
-    
+
     }
-    &__menu-close{
+
+    &__menu-close {
         cursor: pointer;
         position: absolute;
         right: 15px;
@@ -128,22 +129,24 @@ background-size: cover;
         font-size: 2rem;
         background-color: inherit;
         border: none;
-        &:hover{
+
+        &:hover {
             color: white;
         }
     }
 
-    &__container-courses{
+    &__container-courses {
         padding: 20px;
         width: 100%;
         height: 100%;
         background-color: darkgray;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
 
     }
-    &__courses-card{
+
+    &__courses-card {
         position: relative;
         border-radius: 15px;
         cursor: pointer;
@@ -151,25 +154,28 @@ background-size: cover;
         background-color: rgba(24, 24, 24, 0.418);
         height: 290px;
 
-        &:hover{
+        &:hover {
             scale: 1.05;
         }
     }
-    &__courses-img{
+
+    &__courses-img {
         width: 150px;
         height: 150px;
         object-fit: cover;
     }
-    &__courses-card-name{
+
+    &__courses-card-name {
         font-size: 20px;
         font-weight: 700;
         text-transform: capitalize;
     }
 
-    &__courses-des{
+    &__courses-des {
         margin: 5px;
     }
-    &__courses-btn{
+
+    &__courses-btn {
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -184,37 +190,120 @@ background-size: cover;
         background-color: #6c6c6c;
 
 
-        i{
+        i {
             font-size: 1.4rem;
             color: rgb(19, 14, 14);
-            &:hover{
+
+            &:hover {
                 color: rgb(199, 196, 196);
+            }
+        }
+
+    }
+
+    &__cart__course__cart__course {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    &__cart {
+        h1{
+            padding: 10px ;
+        }
+        display: none;
+        border-radius: 15px;
+        position: relative;
+        background-color: white;
+        flex-direction: column;
+        text-align: center;
+        width: 80vw;
+
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        &.active{
+            display: flex;
+        }
+        &__sum{
+            font-size: 1.5rem;
+            padding: 10px 20px;
+        }
+        &__course {
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 0.1rem solid black;
+
+            &__name {
+                font-size: 1.4rem;
+                font-weight: bold;
+
+                color: black;
+            }
+
+            &__price {
+                padding: 3px 10px;
+                font-weight: 100;
+                background-color: #6c6c6c83;
+                border-radius: 15px;
+                color: black;
+            }
+
+            &__removeBtn {
+                display: grid;
+                place-items: center;
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                border: none;
+                background-color: inherit;
+                i{
+                    font-size: 1.5rem;
+                    &:hover{
+                        scale: 1.1;
                     }
+                }
+
+                
+            }
+
+            &__img{
+                width: 65px;
+                height: 65px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
         }
     }
-    &__cart{
-        width: 10rem;
-        height: auto;
-        border: 0.1rem solid black;
 
-        bottom: 44rem;
-        left: 61rem;
-        display: flex;
-        flex-direction: column;
-        &__course{
-            border: 0.1rem solid black;
-            &__name{
-                color: black;
-            }
-            &__price{
-                color: black;
-            }
-            &__removeBtn{
-                width: 1rem;
-                height: 1rem;
-                background-color: red;
-            }  
+    &__cartRoot-close{
+        cursor: pointer;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 2rem;
+
+        &:hover{
+            scale: 1.1;
         }
+        &:active{
+            scale: 0.9;
+        }
+    }
+    &__cartRoot-submit{
+   
+        background-color: rgb(0, 94, 0);
+        color: rgb(250, 250, 250);
+        font-weight: 700;
+        cursor: pointer;
+        padding: 10px 20px;
+        border:none;
+        height: 50px;
+        border-radius:0 0 15px 15px;
+        font-size: 1.4rem;
+
     }
 }
 
@@ -222,10 +311,14 @@ background-size: cover;
     cursor: pointer;
     position: absolute;
     top: 15px;
-    right: 15px;
-    i{
 
-        color:gold;
+    right: 15px;
+
+    i {
+
+        color: rgb(255, 215, 0);
         font-size: 2rem;
     }
 }
+
+
