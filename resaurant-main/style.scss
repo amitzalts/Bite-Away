@@ -146,13 +146,14 @@ text-decoration: underline;
 }
 
 &__menu-card{
+    padding-bottom: 35px;
     overflow: hidden;
     border-radius: 15px;
     background:linear-gradient(45deg , rgba(0, 0, 0, 0) , rgba(230, 230, 230, 0.904));
     position: relative;
     border:2px solid black;
     width: 250px;
-    height:420px;
+   
 }
 
 &__menu-update-btn{
@@ -197,6 +198,8 @@ text-decoration: underline;
 }
 
 &__menu-card-details{
+
+
     &:nth-last-child(2){
 font-size: 1rem;
     }
@@ -205,15 +208,15 @@ font-size: 1rem;
         font-weight: 700;
     }
     display: flex;
-    margin: 10px;
+    margin: 2px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    gap: 5px;
     font-size: 1.2rem;
 
 
 }
+
 &__menu-card-remove-btn{
    
     & {
@@ -249,8 +252,107 @@ font-size: 1rem;
 
     }
 }
+&__card-des{
+    
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+       width: 100%;
+
+       
+    }
+    &__card-des-des{
+        font-size: 0.9rem;
+    }
+
+    &__active-order-box{
+    
+        overflow-y: hidden;
+        overflow-x: scroll;
+        position: relative;
+        flex-direction: row-reverse;
+        z-index: 999;
+        display: none;
+        font-size: 0.8rem;
+        background-color: black;
+        padding: 15px;
+        border-radius: 15px;
+        width: 80vw;
+        justify-content: start;
+        
+        button{
+            & {
+                margin-top: 10px;
+      text-transform: capitalize;
+                padding: 2px 4px;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                background-color: #f3ef11f5;
+                cursor: pointer;
+                font-size: 1.3rem;
+                scale: 1;
+                font-size: 0.8rem;
+                font-weight: 400;
+                font-family: 'Poppins', sans-serif;
+                transition: all 0.1s ease;
+                box-shadow: 0.3px 1px 15px 1px rgba(0, 0, 0, 0.589),
+        
+            }
+        
+            &:active {
+                background-color: rgb(15, 13, 15);
+                color: #fff;
+                scale: 0.9;
+            }
+        
+            &:hover {
+                background-color: #fa8f48;
+                color: #fff;
+                scale: 1.1;
+        
+            }
+            
+        }
+    }
+
+    &__active-order-card{
+
+        margin: 10px;
+        padding: 15px;
+        background-color: rgb(73, 63, 62);
+        width: 250px;
+        span{
+
+            display: block;
+            background-color: rgb(255, 92, 27);
+            margin-bottom: 5px;
+    
+        }
+    }
+
+
+
 }
 
+.activeOrders{
+.active-orders{
+    cursor: pointer;
+    gap:10px;
+    display: flex;
+
+    i{
+        font-size: 1.3rem;
+        rotate: 180deg;
+    }
+
+    &.active{
+        i{
+            rotate: 0deg;
+        }
+    }
+}
+}
 
 
 

@@ -172,3 +172,17 @@ function handleOpenForm(){
         btn.style.top = "50%"
     }
 }
+
+
+function handleClickActiveOrder(){
+    const activeOrderDiv:HTMLDivElement|null = document.querySelector('.active-orders');
+    const activeOrderContainer:HTMLDivElement|null = document.querySelector('.container__active-order-box');
+
+    activeOrderDiv?.classList.toggle('active');
+   if(activeOrderDiv?.classList.contains('active')){
+    activeOrderContainer!.style.display = "flex"
+   }else{
+    activeOrderContainer!.style.display = "none"
+   }
+
+}

@@ -30,9 +30,9 @@ function renderMenuRest() {
                         <label>Price:</label>
                         <div id="upadtePrice-${course.uid}" contenteditable="false">${course.price}</div>
                     </div>
-                    <div class="container__menu-card-details">
-                        <label>Description:</label>
-                        <div id="upadteDescription-${course.uid}" contenteditable="false">${course.description}</div>
+                    <div class="container__card-des container__menu-card-details">
+                        <label >Description:</label>
+                        <div class="container__card-des-des" id="upadteDescription-${course.uid}" contenteditable="false">${course.description}</div>
                     </div>
                     <div class="container__menu-card-details">
                         <label>uid:</label>
@@ -60,16 +60,29 @@ function renderActiveOrders() {
 console.log(activeOrders)
         const html = activeOrders
             .map((order) => {
-                console.log(  "order", order);
-                console.log(  "sum", order.sum());
+ 
                 return `
-                <div class="activeOrders__order">order uid: ${order.uid}
-                    <div class="activeOrders__order__detail">customer uid: ${order.customerId}</div>
-                    <div class="activeOrders__order__detail">order destination: ${order.destination}</div>
-                    <div id="coursesRoot" class="activeOrders__order__detail">courses: ${(JSON.stringify(order.instanceCounter())).slice(1, -1)} </div>
-                    <div id="SumRoot" class="activeOrders__order__detail">sum: ${order.sum()} </div>
-                    <button onclick="updateStatus('${order.uid}')">${order.status}</button>
+
+                <div class="container__active-order-card">
+                    <div class="container__active-order-details">
+                    <span>customer uid:</span> 
+                    ${order.customerId}
+                    </div>
+                    <div class="container__active-order-details">
+                    <span>order uid:</span>
+                     ${order.uid}</div>
+                    <div class="container__active-order-details">
+                    <span>order destination:</span> 
+                    ${order.destination}</div>
+                    <div id="coursesRoot" class="container__active-order-details">
+                    <span>courses:</span>
+                     ${(JSON.stringify(order.instanceCounter())).slice(1, -1)} </div>
+                    <div id="SumRoot" class="container__active-order-details">
+                    <span>sum:</span> 
+                    ${order.sum()} </div>
+                    <button  onclick="updateStatus('${order.uid}')">${order.status}</button>
                 </div>
+        
                 `
             })
             .join(" ");

@@ -142,3 +142,14 @@ function handleOpenForm() {
         btn.style.top = "50%";
     }
 }
+function handleClickActiveOrder() {
+    var activeOrderDiv = document.querySelector('.active-orders');
+    var activeOrderContainer = document.querySelector('.container__active-order-box');
+    activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.toggle('active');
+    if (activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.contains('active')) {
+        activeOrderContainer.style.display = "flex";
+    }
+    else {
+        activeOrderContainer.style.display = "none";
+    }
+}
