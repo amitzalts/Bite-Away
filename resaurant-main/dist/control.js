@@ -129,3 +129,16 @@ function saveUpdatedCourse(uid) {
         console.error(error);
     }
 }
+function handleOpenForm() {
+    var menuForm = document.querySelector('.container__formMenu');
+    var btn = document.querySelector('.container__collapse-formMenu');
+    menuForm.classList.toggle('active');
+    if (menuForm.classList.contains("active")) {
+        btn.style.rotate = "180deg";
+        btn.style.top = "0";
+    }
+    else {
+        btn.style.rotate = "0deg";
+        btn.style.top = "50%";
+    }
+}

@@ -21,24 +21,24 @@ function renderMenuRest() {
         const html = menu
             .map((course) => {
                 return `
-                <div class="menu__course">
-                <button id="update-${course.uid}" onclick="handleUpdateCourse('${course.uid}')">udpate</button>   
-                <button style="display:none" id="save-${course.uid}" onclick="saveUpdatedCourse('${course.uid}')">save</button>   
-                    <h3 id="upadteName-${course.uid}" contenteditable="false">${course.name}</h3>
-                    <div class="menu__course__detail">
+                <div class="container__menu-card">
+                <button class="container__menu-update-btn" id="update-${course.uid}" onclick="handleUpdateCourse('${course.uid}')"><i class="fa-solid fa-pen-to-square"></i></button>   
+                <button  class="container__menu-save-btn" style="display:none" id="save-${course.uid}" onclick="saveUpdatedCourse('${course.uid}')"><i class="fa-solid fa-circle-check"></i></button>   
+                <h3 class="container__menu-card-title" id="upadteName-${course.uid}" contenteditable="false">${course.name}</h3>
+                <img class="container__menu-card-img" src="${course.imageUrl}">  
+                    <div class="container__menu-card-details">
                         <label>Price:</label>
                         <div id="upadtePrice-${course.uid}" contenteditable="false">${course.price}</div>
                     </div>
-                    <div class="menu__course__detail">
+                    <div class="container__menu-card-details">
                         <label>Description:</label>
                         <div id="upadteDescription-${course.uid}" contenteditable="false">${course.description}</div>
                     </div>
-                    <div class="menu__course__detail">
+                    <div class="container__menu-card-details">
                         <label>uid:</label>
                         <div>${course.uid}</div>
                     </div>
-                    <img class="menu__course__image" src="${course.imageUrl}">  
-                    <button onclick="handleDeleteItem('${course.uid}')">Remove</button>
+                    <button class="container__menu-card-remove-btn" onclick="handleDeleteItem('${course.uid}')">Remove</button>
                 </div>
                 `;
             })

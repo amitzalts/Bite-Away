@@ -1,37 +1,267 @@
-.menu{
-    width: 20rem;
-    height: auto;
-    border: 0.1rem solid black;
-    &__course{
-        width: 13rem;
-        height: auto;
-        border: 0.1rem solid black;
-        &__detail{
-            width: auto;
-            height: auto;
-            border: 0.1rem solid black;
-            display: flex;
-            flex-direction: row;
-            gap: 5px;
-        }
-        &__image{
-            width: 10rem;
-            height: 10rem;
-            border: 0.1rem solid black;
-        }
-    }
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
 }
 
+body{
+    font-family: 'Poppins', sans-serif;
+width: 100vw;
+background-image: url("./../img/background.jpg");
+background-position: center;
+background-repeat: repeat;
+background-size: cover;
+}
+
+.container {
+    position: relative;
+width: inherit;
+height: inherit;
+text-align: center;
+
+&__restTitle{
+    font-size: 3rem;
+    padding: 10px 20px;
+    color: rgb(221, 221, 221);
+    margin: 10px;
+}
+
+&__formRestImg{
+position: relative;
+border-top:1px solid wheat;
+border-bottom:1px solid wheat;
+    width: 100%;
+    padding: 15px 30px;
+    background-color: rgb(59, 59, 59);
+}
+
+&__imgUrl-input{
+    border-radius: 15px 0 0 15px;
+padding: 10px 20px;
+outline: none;
+border: none;
+font-size: 1.1rem;
+
+&::placeholder{
+    text-transform: capitalize;
+}
+
+}
+
+&__btn-url-input{
+    cursor: pointer;
+    border-radius: 0 15px 15px 0;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+
+    &:hover{
+        
+        scale: 1.019;
+    }
 
 
-.activeOrders{
-    width: 30rem;
-    height: auto;
-    border: 0.1rem solid black;
+}
+&__collapse-formMenu{
     position: absolute;
-    top: 20rem;
-    left: 31rem;
-    &__order{
-        color: red;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 50px;
+    cursor: pointer;
+
+    i{
+        font-size: 2rem;
+        color: rgb(255, 92, 27);
     }
 }
+
+#restaurantProfileImageRoot{
+    position: absolute;
+    top: 5px;
+    width: 75px;
+    height: 75px;
+    right: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+
+
+
+    img{
+        width: 80px;
+        object-fit: cover;
+        height: 80px;
+    }
+
+}
+.activeOrders{
+    color: white;
+    position: absolute;
+    width: 250px;
+    top: 0;
+    left: 25px;
+}
+&__formMenu{
+    display: none;
+margin: 10px;
+width: 100%;
+
+    input{
+        width: 50%;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 15px;
+        border: none ;
+        outline: none;
+
+        &::placeholder{
+            font-size: 1.1rem;
+            font-weight: 200;
+            text-transform: capitalize;
+        }
+    }
+
+    &.active{
+        display: block;
+    }
+}
+
+&__menu-title{
+margin: 10px;
+text-decoration: underline;
+    color: rgb(255, 202, 27);
+    font-size: 2rem;
+}
+
+&__menu-container{
+    padding: 15px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    gap: 20px;
+}
+
+&__menu-card{
+    overflow: hidden;
+    border-radius: 15px;
+    background:linear-gradient(45deg , rgba(0, 0, 0, 0) , rgba(230, 230, 230, 0.904));
+    position: relative;
+    border:2px solid black;
+    width: 250px;
+    height:420px;
+}
+
+&__menu-update-btn{
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: inherit;
+    i{
+        color: rgb(255, 92, 27);
+        font-size: 1.7rem;
+    }
+}
+&__menu-save-btn{
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: inherit;
+    i{
+        color: rgb(255, 92, 27);
+        font-size: 1.7rem;
+    }
+}
+&__menu-card-title{
+    padding: 15px;
+        font-size: 1.5rem;
+        background-color: rgba(255, 198, 123, 0.753);
+
+}
+
+&__menu-card-img{
+    width: 100%;
+    object-fit: cover;
+    height: 150px;
+}
+
+&__menu-card-details{
+    &:nth-last-child(2){
+font-size: 1rem;
+    }
+    label{
+        text-decoration: underline;
+        font-weight: 700;
+    }
+    display: flex;
+    margin: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 1.2rem;
+
+
+}
+&__menu-card-remove-btn{
+   
+    & {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        padding: 2px 4px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background-color: #f3ef11f5;
+        cursor: pointer;
+        font-size: 1.3rem;
+        scale: 1;
+        font-size: 0.8rem;
+        font-weight: 400;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.1s ease;
+        box-shadow: 0.3px 1px 15px 1px rgba(0, 0, 0, 0.589),
+
+    }
+
+    &:active {
+        background-color: rgb(15, 13, 15);
+        color: #fff;
+        scale: 0.9;
+    }
+
+    &:hover {
+        background-color: #fa8f48;
+        color: #fff;
+        scale: 1.1;
+
+    }
+}
+}
+
+
+
+
+// .activeOrders{
+//     width: 30rem;
+//     height: auto;
+//     border: 0.1rem solid black;
+//     position: absolute;
+//     top: 20rem;
+//     left: 31rem;
+//     &__order{
+//         color: red;
+//     }
+// }
