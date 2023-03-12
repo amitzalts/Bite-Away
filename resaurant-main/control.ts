@@ -36,7 +36,7 @@ function handleDeleteItem(uid: string) {
     }
 }
 
-function updateStatus(uid: string) {
+function handleUpdateStatus(uid: string) {
     try {
         const order = restaurant.orders.find(order => order.uid === uid);
         if (!order) throw new Error("order not found");
@@ -58,7 +58,7 @@ function updateStatus(uid: string) {
     }
 }
 
-function restaurantProfileImage(ev: any) {
+function handleRestaurantProfileImage(ev: any) {
     try {
         ev.preventDefault();
 
@@ -92,7 +92,7 @@ function handleUpdateCourse(uid: string) {
         if (!courseDataPrice) throw new Error("course Data Price not found");
         if (!courseDataDescription) throw new Error("course Data Description not found");
 
-        
+
         courseDataName.contentEditable = "true";
         courseDataPrice.contentEditable = "true";
         courseDataDescription.contentEditable = "true";
@@ -109,14 +109,12 @@ function handleUpdateCourse(uid: string) {
         if (!saveButton) throw new Error("save Button not found");
         saveButton.style.display = "block";
 
-
-
     } catch (error) {
         console.error(error);
     }
 }
 
-function saveUpdatedCourse(uid: string) {
+function handleSaveUpdatedCourse(uid: string) {
     try {
 
         const course = restaurant.menu.find(course => course.uid === uid);
@@ -158,31 +156,40 @@ function saveUpdatedCourse(uid: string) {
     }
 }
 
-function handleOpenForm(){
-    const menuForm:HTMLFormElement|null = document.querySelector('.container__formMenu')! ;
-    const btn:HTMLButtonElement|null = document.querySelector('.container__collapse-formMenu')!;
-    
+function handleOpenForm() {
+    try {
+        const menuForm: HTMLFormElement | null = document.querySelector('.container__formMenu')!;
+        const btn: HTMLButtonElement | null = document.querySelector('.container__collapse-formMenu')!;
 
-    menuForm.classList.toggle('active');
-    if(menuForm.classList.contains("active")){
-        btn.style.rotate = "180deg"
-        btn.style.top = "0"
-    } else {
-        btn.style.rotate = "0deg"
-        btn.style.top = "50%"
+        menuForm.classList.toggle('active');
+        if (menuForm.classList.contains("active")) {
+            btn.style.rotate = "180deg"
+            btn.style.top = "0"
+        } else {
+            btn.style.rotate = "0deg"
+            btn.style.top = "50%"
+        }
+    } catch (error) {
+        console.error(error);
     }
+
 }
 
 
-function handleClickActiveOrder(){
-    const activeOrderDiv:HTMLDivElement|null = document.querySelector('.active-orders');
-    const activeOrderContainer:HTMLDivElement|null = document.querySelector('.container__active-order-box');
+function handleClickActiveOrder() {
+    try {
+        const activeOrderDiv: HTMLDivElement | null = document.querySelector('.active-orders');
+        const activeOrderContainer: HTMLDivElement | null = document.querySelector('.container__active-order-box');
 
-    activeOrderDiv?.classList.toggle('active');
-   if(activeOrderDiv?.classList.contains('active')){
-    activeOrderContainer!.style.display = "flex"
-   }else{
-    activeOrderContainer!.style.display = "none"
-   }
+        activeOrderDiv?.classList.toggle('active');
+        if (activeOrderDiv?.classList.contains('active')) {
+            activeOrderContainer!.style.display = "flex"
+        } else {
+            activeOrderContainer!.style.display = "none"
+        }
+    } catch (error) {
+        console.error(error);
+    }
+
 
 }

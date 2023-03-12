@@ -14,7 +14,7 @@ function renderRestaurants(): string {
               </h1>
                 <p>Address: ${restaurant.address} </p>
                  <p>Type: ${restaurant.type} </p>
-             <button class="container-customer__btn-restaurant" onclick="openMenu('${restaurant.uid}')">open menu</button> </div>
+             <button class="container-customer__btn-restaurant" onclick="handleOpenMenu('${restaurant.uid}')">open menu</button> </div>
              `
         ).join(" ");
 
@@ -30,13 +30,11 @@ function renderRestaurants(): string {
 
 function renderMenu(uid: string): string {
     try {
-         console.log("restaurants", restaurants);
         const curRes = restaurants.find(restaurant => restaurant.uid === uid);
        
-        
         if (!curRes) throw new Error("restaurant not found ");
         const html = `
-        <button class="container-customer__menu-close" onclick="closeMenu()">
+        <button class="container-customer__menu-close" onclick="handleCloseMenu()">
         <i class="fa-solid fa-xmark"></i>
         </button> 
         <h1 class="container-customer__menu-title">${curRes.name} Menu</h1>
@@ -81,7 +79,7 @@ function renderCourse(uid: string): string {
 function renderCustomerHeader() {
     try {
         const customerHeader: HTMLElement | null = document.querySelector("#customerHeader");
-        if (customerHeader) customerHeader.innerText = `${customer.name}`;
+        if (customerHeader) customerHeader.innerText = ` Welcome ${customer.name}`;
 
     } catch (error) {
         console.error(error);
@@ -117,9 +115,7 @@ function renderCartSum() {
     try {
         const order = customer.orders[customer.orders.length - 1];
         const sumRoot: HTMLElement | null = document.querySelector("#sumRoot");
-        if (sumRoot) sumRoot.innerText = `TOTAL: ${order.sum()} $`;
-
-        console.log(JSON.stringify(order.instanceCounter()));
+        if (sumRoot) sumRoot.innerText = `TOTAL: ${order.sum()}$`;
         
     } catch (error) {
         console.error(error);

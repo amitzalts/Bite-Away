@@ -8,7 +8,7 @@ function renderRestaurants() {
         if (!restaurantRoot)
             throw new Error("the restaurantRoot no found");
         var html = restaurants.map(function (restaurant) {
-            return "\n              <div class=\"container-customer__restaurant-card\">  <img src=\"" + restaurant.imageUrl + "\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"openMenu('" + restaurant.uid + "')\">open menu</button> </div>\n             ";
+            return "\n              <div class=\"container-customer__restaurant-card\">  <img src=\"" + restaurant.imageUrl + "\" class=\"container-customer__img-restaurant\">\n              <h1 class=\"container-customer__title-restaurant\">\n              " + restaurant.name + " \n              </h1>\n                <p>Address: " + restaurant.address + " </p>\n                 <p>Type: " + restaurant.type + " </p>\n             <button class=\"container-customer__btn-restaurant\" onclick=\"handleOpenMenu('" + restaurant.uid + "')\">open menu</button> </div>\n             ";
         }).join(" ");
         restaurantRoot.innerHTML = html;
         return html;
@@ -20,11 +20,10 @@ function renderRestaurants() {
 }
 function renderMenu(uid) {
     try {
-        console.log("restaurants", restaurants);
         var curRes = restaurants.find(function (restaurant) { return restaurant.uid === uid; });
         if (!curRes)
             throw new Error("restaurant not found ");
-        var html = "\n        <button class=\"container-customer__menu-close\" onclick=\"closeMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n        <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n        <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div>\n        ";
+        var html = "\n        <button class=\"container-customer__menu-close\" onclick=\"handleCloseMenu()\">\n        <i class=\"fa-solid fa-xmark\"></i>\n        </button> \n        <h1 class=\"container-customer__menu-title\">" + curRes.name + " Menu</h1>\n        <div class=\"container-customer__container-courses\">" + renderCourse(uid) + "</div>\n        ";
         return html;
     }
     catch (error) {
@@ -54,7 +53,7 @@ function renderCustomerHeader() {
     try {
         var customerHeader = document.querySelector("#customerHeader");
         if (customerHeader)
-            customerHeader.innerText = "" + customer.name;
+            customerHeader.innerText = " Welcome " + customer.name;
     }
     catch (error) {
         console.error(error);
@@ -80,8 +79,7 @@ function renderCartSum() {
         var order = customer.orders[customer.orders.length - 1];
         var sumRoot = document.querySelector("#sumRoot");
         if (sumRoot)
-            sumRoot.innerText = "TOTAL: " + order.sum() + " $";
-        console.log(JSON.stringify(order.instanceCounter()));
+            sumRoot.innerText = "TOTAL: " + order.sum() + "$";
     }
     catch (error) {
         console.error(error);

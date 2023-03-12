@@ -23,7 +23,7 @@ function renderMenuRest() {
                 return `
                 <div class="container__menu-card">
                 <button class="container__menu-update-btn" id="update-${course.uid}" onclick="handleUpdateCourse('${course.uid}')"><i class="fa-solid fa-pen-to-square"></i></button>   
-                <button  class="container__menu-save-btn" style="display:none" id="save-${course.uid}" onclick="saveUpdatedCourse('${course.uid}')"><i class="fa-solid fa-circle-check"></i></button>   
+                <button  class="container__menu-save-btn" style="display:none" id="save-${course.uid}" onclick="handleSaveUpdatedCourse('${course.uid}')"><i class="fa-solid fa-circle-check"></i></button>   
                 <h3 class="container__menu-card-title" id="upadteName-${course.uid}" contenteditable="false">${course.name}</h3>
                 <img class="container__menu-card-img" src="${course.imageUrl}">  
                     <div class="container__menu-card-details">
@@ -80,7 +80,7 @@ console.log(activeOrders)
                     <div id="SumRoot" class="container__active-order-details">
                     <span>sum:</span> 
                     ${order.sum()} </div>
-                    <button  onclick="updateStatus('${order.uid}')">${order.status}</button>
+                    <button  onclick="handleUpdateStatus('${order.uid}')">${order.status}</button>
                 </div>
         
                 `

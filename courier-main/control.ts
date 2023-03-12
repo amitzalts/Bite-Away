@@ -2,7 +2,7 @@ const pickUpBtns = document.querySelectorAll('.pick-up-btn');
 
 
 
-function pickupOrder(uid: string) {
+function handlePickupOrder(uid: string) {
     try {
         const lastOrder = courier.orders.length;
         console.log("lastOrder", lastOrder);
@@ -33,14 +33,11 @@ function pickupOrder(uid: string) {
     }
 };
 
-function dropOrder() {
+function handleDropOrder() {
     try {
         const lastOrder = courier.orders.length-1;
         const activeOrder = courier.orders[lastOrder];
-        console.log("last order" , lastOrder);
-
-        console.log("activeOrder" ,activeOrder);
-        console.log( "activeOrder.customerId" , activeOrder.customerId);
+       
 
         const customer = customers.find(customer => customer.uid === activeOrder.customerId);
         if (!customer) throw new Error("no customer found");
@@ -55,7 +52,6 @@ function dropOrder() {
         saveInLocalStorage(couriers, "couriers");
     } catch (error) {
         console.log(error);
-
     }
 }
 

@@ -1,5 +1,5 @@
 var pickUpBtns = document.querySelectorAll('.pick-up-btn');
-function pickupOrder(uid) {
+function handlePickupOrder(uid) {
     try {
         var lastOrder = courier.orders.length;
         console.log("lastOrder", lastOrder);
@@ -28,13 +28,10 @@ function pickupOrder(uid) {
     }
 }
 ;
-function dropOrder() {
+function handleDropOrder() {
     try {
         var lastOrder = courier.orders.length - 1;
         var activeOrder_1 = courier.orders[lastOrder];
-        console.log("last order", lastOrder);
-        console.log("activeOrder", activeOrder_1);
-        console.log("activeOrder.customerId", activeOrder_1.customerId);
         var customer = customers.find(function (customer) { return customer.uid === activeOrder_1.customerId; });
         if (!customer)
             throw new Error("no customer found");
