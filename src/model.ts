@@ -1,26 +1,3 @@
-// Costumer (name, uid, password, e-mail, address, credit card number) ..!
-// Restaurant (name, uid, password, e-mail, address, bank account number, type)
-// Courier (name, uid, password, e-mail, area, bank account number, id number, vehicle, age(?))
-
-// Course (name, uid, restaurant, price, description)
-// Order (uid, courses, restaurant, courier, destination, status, date, time of creation, time of approval, time of process start, time ready, time sent, time of delivery)
-
-// customer = 1  , Restaurant = 2 , admin = 0   courier = 3 ;  start number uid
-
-let currentNumber = 0;
-
-const clicked = false
-function count(): void {
-    const intervalId = setInterval(() => {
-        currentNumber++;
-        if (clicked) {
-            clearInterval(intervalId);
-            console.log(currentNumber); // return the sec after clicked
-            return currentNumber
-        }
-    }, 1000);
-}
-
 
 
 // --------------------------- User Classes ------
@@ -340,8 +317,22 @@ function getCouriersFromStorage():Courier[] {
 }
 
 
+// --------------------------- Others ------
 
 
+let currentNumber = 0;
+
+const clicked = false
+function count(): void {
+    const intervalId = setInterval(() => {
+        currentNumber++;
+        if (clicked) {
+            clearInterval(intervalId);
+            console.log(currentNumber); // return the sec after clicked
+            return currentNumber
+        }
+    }, 1000);
+}
 
 
 
