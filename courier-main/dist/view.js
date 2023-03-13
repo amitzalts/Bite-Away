@@ -39,7 +39,7 @@ function renderActiveOrders() {
         if (delieveryPool_2) {
             var html = activeOrders
                 .map(function (activeOrder) {
-                return "\n                <div class=\"main__card\">\n                    <h1 class=\"main__card-name\" >name: " + activeOrder.name + " </h1>\n                    <h1 class=\"main__card-restaurant\">restaurantId: " + activeOrder.restaurantId + " </h1>\n                    <h1  class=\"main__card-order-id\" style=\"display:none;\">orderId: " + activeOrder.uid + " </h1>\n                    <h3 class=\"main__card-des\"> destination: " + activeOrder.destination + " </h3>\n                    <h3 class=\"main__card-status\">status: " + activeOrder.status + " </h3>\n                    <button onclick=\"dropOrder('" + activeOrder.customerId + "')\">Drop</button>\n                </div>\n                ";
+                return "\n                <div class=\"main__card\">\n                    <h1 class=\"main__card-name\" >name: " + activeOrder.name + " </h1>\n                    <h1 class=\"main__card-restaurant\">restaurantId: " + activeOrder.restaurantId + " </h1>\n                    <h1  class=\"main__card-order-id\" style=\"display:none;\">orderId: " + activeOrder.uid + " </h1>\n                    <h3 class=\"main__card-des\"> destination: " + activeOrder.destination + " </h3>\n                    <h3 class=\"main__card-status\">status: " + activeOrder.status + " </h3>\n                    <button onclick=\"handleDropOrder('" + activeOrder.customerId + "')\">Drop</button>\n                </div>\n                ";
             })
                 .join(" ");
             delieveryPool_2.innerHTML = html;
@@ -55,7 +55,7 @@ function renderPool() {
         if (delieveryPool_3) {
             var html = orderPool
                 .map(function (order) {
-                return "\n                <div class=\"main__card\">\n                    <h1  class=\"main__card-name\"> <span>name: </span>" + order.name + " </h1>\n                    <h1 class=\"main__card-restaurant\"> <span>restaurant-ID:</span> " + order.restaurantId + " </h1>\n                    <h1  class=\"main__card-order-id\"><span> order-ID:</span> " + order.uid + " </h1>\n                    <h3  class=\"main__card-des\"> <span>destination:</span> " + order.destination + " </h3>\n                    <h3 class=\"main__card-status\"> <span>status:</span> " + order.status + " </h3>\n                    <button  onclick=\"pickupOrder('" + order.uid + "')\" class=\"pickupBtn\">Pick Up</button>\n                </div>\n                ";
+                return "\n                <div class=\"main__card\">\n                    <h1  class=\"main__card-name\"> <span>name: </span>" + order.name + " </h1>\n                    <h1 class=\"main__card-restaurant\"> <span>restaurant-ID:</span> " + order.restaurantId + " </h1>\n                    <h1  class=\"main__card-order-id\"><span> order-ID:</span> " + order.uid + " </h1>\n                    <h3  class=\"main__card-des\"> <span>destination:</span> " + order.destination + " </h3>\n                    <h3 class=\"main__card-status\"> <span>status:</span> " + order.status + " </h3>\n                    <button  onclick=\"handlePickupOrder('" + order.uid + "')\" class=\"pickupBtn\">Pick Up</button>\n                </div>\n                ";
             })
                 .join(" ");
             delieveryPool_3.innerHTML = html;

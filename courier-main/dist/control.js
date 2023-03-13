@@ -46,6 +46,7 @@ function handleDropOrder() {
         activeOrdersRoot.innerHTML = " ";
         saveInLocalStorage(customers, "customers");
         saveInLocalStorage(couriers, "couriers");
+        renderDroppedOrders();
     }
     catch (error) {
         console.log(error);

@@ -61,6 +61,7 @@ height:100vh;
 
 		&__drop{
 			color: #333;
+			overflow-y: hidden;
 			overflow: scroll;
 			background-color: rgba(24, 23, 23, 0.664);
 			width: 100vw;
@@ -94,7 +95,6 @@ height:100vh;
 		}
 
 		&__order {
-
 			display: flex;
 			justify-content: center;
 			flex-wrap: wrap;
@@ -109,12 +109,10 @@ height:100vh;
 			min-width: 100vw;
 		}
 
-
-
 		&__card {
 			color: aliceblue;
 			font-size: 0.8em;
-position: relative;
+			position: relative;
 			background: linear-gradient(45deg , rgba(12, 12, 12, 0.466) ,rgb(187, 179, 179));
 			text-transform: capitalize;
 			padding: 10px 20px;
@@ -182,7 +180,7 @@ position: relative;
 		&__active-container{
 
 			justify-content: center;
-position: relative;
+			position: relative;
 
 i{
 	transform: translateY(-50%);
@@ -192,7 +190,7 @@ i{
 }
 		}
 		&__drop-container{
-position: relative;
+			position: relative;
 
 
 		}

@@ -59,7 +59,7 @@ function renderActiveOrders() {
                     <h1  class="main__card-order-id" style="display:none;">orderId: ${activeOrder.uid} </h1>
                     <h3 class="main__card-des"> destination: ${activeOrder.destination} </h3>
                     <h3 class="main__card-status">status: ${activeOrder.status} </h3>
-                    <button onclick="dropOrder('${activeOrder.customerId}')">Drop</button>
+                    <button onclick="handleDropOrder('${activeOrder.customerId}')">Drop</button>
                 </div>
                 `;  
             })
@@ -86,7 +86,7 @@ function renderPool() {
                     <h1  class="main__card-order-id"><span> order-ID:</span> ${order.uid} </h1>
                     <h3  class="main__card-des"> <span>destination:</span> ${order.destination} </h3>
                     <h3 class="main__card-status"> <span>status:</span> ${order.status} </h3>
-                    <button  onclick="pickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
+                    <button  onclick="handlePickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
                 </div>
                 `;
             })

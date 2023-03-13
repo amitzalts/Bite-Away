@@ -39,7 +39,7 @@ function renderCourse(uid) {
         newOrder(curRes_1);
         var html = curRes_1.menu
             .map(function (course) {
-            return " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"" + course.imageUrl + "\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\">" + course.name + "</p>\n                <p class=\"container-customer__courses-des\">" + course.description + "</p>\n                <h4 class=\"container-customer__courses-price\">Price:" + course.price + "</h4>\n                <button class=\"container-customer__courses-btn\" onclick=\"handleAddToOrder('" + curRes_1.uid + "', '" + course.uid + "')\">\n                    <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n            </div> ";
+            return " \n            <div class=\"container-customer__courses-card\">\n                <img src=\"" + course.imageUrl + "\" class=\"container-customer__courses-img\">\n                <p class=\"container-customer__courses-card-name\">" + course.name + "</p>\n                <p class=\"container-customer__courses-des\">" + course.description + "</p>\n                <h4 class=\"container-customer__courses-price\">Price:" + course.price + "$</h4>\n                <button class=\"container-customer__courses-btn\" onclick=\"handleAddToOrder('" + curRes_1.uid + "', '" + course.uid + "')\">\n                    <i class=\"fa-solid fa-cart-plus\"></i>\n                </button>\n            </div> ";
         })
             .join(" ");
         return html;

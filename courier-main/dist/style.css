@@ -50,6 +50,7 @@
 }
 .container-courier .main__drop {
   color: #333;
+  overflow-y: hidden;
   overflow: scroll;
   background-color: rgba(24, 23, 23, 0.664);
   width: 100vw;

@@ -60,7 +60,7 @@ function renderCourse(uid: string): string {
                 <img src="${course.imageUrl}" class="container-customer__courses-img">
                 <p class="container-customer__courses-card-name">${course.name}</p>
                 <p class="container-customer__courses-des">${course.description}</p>
-                <h4 class="container-customer__courses-price">Price:${course.price}</h4>
+                <h4 class="container-customer__courses-price">Price:${course.price}$</h4>
                 <button class="container-customer__courses-btn" onclick="handleAddToOrder('${curRes.uid}', '${course.uid}')">
                     <i class="fa-solid fa-cart-plus"></i>
                 </button>
