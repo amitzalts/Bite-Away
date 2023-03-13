@@ -27,11 +27,11 @@ function renderDroppedOrders() {
            let html = droppedOrders
            .map ((droppedOrders) =>{
                 return `
-                <div class="main__drop">
-                    <h1>name: ${droppedOrders.name} </h1>
-                    <h1>restId: ${droppedOrders.restaurantId} </h1>
-                    <h3> destination: ${droppedOrders.destination} </h3>
-                    <h3">status: ${droppedOrders.status} </h3>
+                <div class="main__drop-card">
+                    <h1><span>name:</span> ${droppedOrders.name} </h1>
+                    <h1><span>restId:</span>  ${droppedOrders.restaurantId} </h1>
+                    <h3> <span>destination:</span> ${droppedOrders.destination} </h3>
+                    <h3"><span>status:</span> ${droppedOrders.status} </h3>
                 </div>
                 `;
                 
@@ -56,12 +56,12 @@ function renderActiveOrders() {
            let html = activeOrders
            .map ((activeOrder) =>{
                 return `
-                <div class="main__active-card">
-                    <h1 class="main__active-name" >name: ${activeOrder.name} </h1>
-                    <h1 class="main__active-restaurant">restaurantId: ${activeOrder.restaurantId} </h1>
-                    <h1  class="main__active-order-id" style="display:none;">orderId: ${activeOrder.uid} </h1>
-                    <h3> class="main__active-des" destination: ${activeOrder.destination} </h3>
-                    <h3 class="main__active-status">status: ${activeOrder.status} </h3>
+                <div class="main__card">
+                    <h1 class="main__card-name" >name: ${activeOrder.name} </h1>
+                    <h1 class="main__card-restaurant">restaurantId: ${activeOrder.restaurantId} </h1>
+                    <h1  class="main__card-order-id" style="display:none;">orderId: ${activeOrder.uid} </h1>
+                    <h3 class="main__card-des"> destination: ${activeOrder.destination} </h3>
+                    <h3 class="main__card-status">status: ${activeOrder.status} </h3>
                     <button onclick="dropOrder('${activeOrder.customerId}')">Drop</button>
                 </div>
                 `;  
@@ -83,12 +83,12 @@ function renderPool() {
            let html = orderPool
            .map ((order) =>{
                 return `
-                <div class="main__active-card">
-                    <h1  class="main__active-name"> name: ${order.name} </h1>
-                    <h1 class="main__active-restaurant"> restaurant-ID: ${order.restaurantId} </h1>
-                    <h1  class="main__active-order-id"> order-ID: ${order.uid} </h1>
-                    <h3  class="main__active-des"> destination: ${order.destination} </h3>
-                    <h3 class="main__active-status"> status: ${order.status} </h3>
+                <div class="main__card">
+                    <h1  class="main__card-name"> <span>name: </span>${order.name} </h1>
+                    <h1 class="main__card-restaurant"> <span>restaurant-ID:</span> ${order.restaurantId} </h1>
+                    <h1  class="main__card-order-id"><span> order-ID:</span> ${order.uid} </h1>
+                    <h3  class="main__card-des"> <span>destination:</span> ${order.destination} </h3>
+                    <h3 class="main__card-status"> <span>status:</span> ${order.status} </h3>
                     <button  onclick="pickupOrder('${order.uid}')" class="pickupBtn">Pick Up</button>
                 </div>
                 `;
