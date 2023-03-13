@@ -1,6 +1,3 @@
-// Costumer (name, uid, password, e-mail, address, credit card number) ..!
-// Restaurant (name, uid, password, e-mail, address, bank account number, type)
-// Courier (name, uid, password, e-mail, area, bank account number, id number, vehicle, age(?))
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -12,21 +9,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-// Course (name, uid, restaurant, price, description)
-// Order (uid, courses, restaurant, courier, destination, status, date, time of creation, time of approval, time of process start, time ready, time sent, time of delivery)
-// customer = 1  , Restaurant = 2 , admin = 0   courier = 3 ;  start number uid
-var currentNumber = 0;
-var clicked = false;
-function count() {
-    var intervalId = setInterval(function () {
-        currentNumber++;
-        if (clicked) {
-            clearInterval(intervalId);
-            console.log(currentNumber); // return the sec after clicked
-            return currentNumber;
-        }
-    }, 1000);
-}
 // --------------------------- User Classes ------
 var Customer = /** @class */ (function () {
     function Customer(name, password, email, address, creditCard) {
@@ -312,4 +294,17 @@ function getCouriersFromStorage() {
         console.error(error);
         return [];
     }
+}
+// --------------------------- Others ------
+var currentNumber = 0;
+var clicked = false;
+function count() {
+    var intervalId = setInterval(function () {
+        currentNumber++;
+        if (clicked) {
+            clearInterval(intervalId);
+            console.log(currentNumber); // return the sec after clicked
+            return currentNumber;
+        }
+    }, 1000);
 }

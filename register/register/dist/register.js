@@ -26,7 +26,6 @@ function changeFormByTypeUser(typeUser) {
         var vehicle = form.querySelector('.vehicle');
         var age = form.querySelector('.age');
         var restaurantType = form.querySelector('.restaurant_type');
-        console.log(form);
         switch (typeUser) {
             case "customer":
                 name.classList.add('active');
@@ -112,6 +111,5 @@ function checksIfUserExists(emailUser) {
 }
 function handleLoginPage() {
     var newUrl = "./../../../login/login.html";
-    console.log("12");
     window.location.replace(newUrl);
 }

@@ -1,6 +1,4 @@
-// const sum = customer.orders[customer.orders.length-1].courses.reduce((accumulator, currentValue) => accumulator + currentValue.price, 0, );
-// console.log("sum", sum);
-function openMenu(uid) {
+function handleOpenMenu(uid) {
     try {
         var menu = document.querySelector("#menuRoot");
         if (!menu)
@@ -15,7 +13,7 @@ function openMenu(uid) {
         console.error(error);
     }
 }
-function closeMenu() {
+function handleCloseMenu() {
     try {
         if (confirm("if you close the menu your order will be lost") === true) {
             var menu = document.querySelector("#menuRoot");
@@ -59,7 +57,7 @@ function handleAddToOrder(curResUid, courseUid) {
         console.error(error);
     }
 }
-function submitOrder() {
+function handleSubmitOrder() {
     try {
         var order_1 = customer.orders[customer.orders.length - 1];
         if (!order_1) {
@@ -85,7 +83,7 @@ function submitOrder() {
                 saveInLocalStorage(restaurants, "restaurants");
                 var submitOrderBtn = document.querySelector("#submitOrderBtn");
                 if (submitOrderBtn)
-                    submitOrderBtn.style.backgroundColor = "MediumSeaGreen";
+                    submitOrderBtn.style.display = "none";
                 var cartRoot = document.querySelector("#cartRoot");
                 if (!cartRoot)
                     throw new Error("cart root not found");
@@ -100,7 +98,7 @@ function submitOrder() {
         console.error(error);
     }
 }
-function search() {
+function handleSearch() {
     try {
         var userInput = document.querySelector("#userInput");
         var noResults_1 = document.querySelector("#noResultsRoot");
@@ -121,7 +119,7 @@ function search() {
             for (var i = 0; i < results.length; i++) {
                 if (!allrestaurants[i].innerText.toLowerCase().includes(userInputValue) && noResults_1) {
                     noResults_1.style.display = "";
-                    noResults_1.innerHTML = "Sorry, there isn't a restaurant that icludes <u><b>" + userInputValue + "</b></u> on Bite Away...";
+                    noResults_1.innerHTML = "<div class=\"container-customer__result-root\">Sorry, there isn't a restaurant that icludes <u><b>" + userInputValue + "</b></u> on Bite Away...</div>";
                 }
             }
         });

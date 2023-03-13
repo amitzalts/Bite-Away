@@ -25,7 +25,7 @@
             
         </div>
         <div id="sumRoot" class="container-customer__cart__sum">sum: 0 shekels</div>
-        <button class="container-customer__cartRoot-submit" id="submitOrderBtn" onclick="submitOrder()">submit order</button>
+        <button class="container-customer__cartRoot-submit" id="submitOrderBtn" onclick="handleSubmitOrder()">submit order</button>
         
    
     </div>
@@ -33,7 +33,7 @@
 
     <div class="container-customer">
         <div id="customerHeader" class="container-customer__title" >Customer Page</div> 
-        <input type="text" id="userInput" class="container-customer__searchBox" onkeyup="search()" placeholder="Search restaurants...">
+        <input type="text" id="userInput" class="container-customer__searchBox" onkeyup="handleSearch()" placeholder="Search restaurants...">
     
         <div class="container-customer__result">
             <div class="container-customer__restaurant-root" id="restaurantRoot">

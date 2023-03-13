@@ -32,7 +32,6 @@ function changeFormByTypeUser(typeUser: string) {
         const age = form.querySelector('.age')! as HTMLInputElement
         const restaurantType = form.querySelector('.restaurant_type')! as HTMLInputElement
 
-        console.log(form);
         switch (typeUser) {
             case "customer":
                 name.classList.add('active');
@@ -127,7 +126,6 @@ function checksIfUserExists(emailUser: string): boolean{
 
 function handleLoginPage(){
     let newUrl = "./../../../login/login.html";
-    console.log("12");
     
     window.location.replace(newUrl);
 }

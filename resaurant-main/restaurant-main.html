@@ -28,7 +28,7 @@
 <body onload="renderRestaurantHeader(), renderMenuRest(), renderActiveOrders(), renderRestaurantProfileImage()">
     <div class="container">
         <h1 class="container__restTitle" id="restaurantHeader">restaurant name</h1>
-        <form class="container__formRestImg" onsubmit="restaurantProfileImage(event)">
+        <form class="container__formRestImg" onsubmit="handleRestaurantProfileImage(event)">
             <input class="container__imgUrl-input" type="url" name="imageUrl"
                 placeholder="paste a url of the desired image" size="30">
             <button class="container__btn-url-input" type="submit">update image</button>

@@ -29,7 +29,7 @@ function handleDeleteItem(uid) {
         console.error(error);
     }
 }
-function updateStatus(uid) {
+function handleUpdateStatus(uid) {
     try {
         var order = restaurant.orders.find(function (order) { return order.uid === uid; });
         if (!order)
@@ -46,7 +46,7 @@ function updateStatus(uid) {
         console.error(error);
     }
 }
-function restaurantProfileImage(ev) {
+function handleRestaurantProfileImage(ev) {
     try {
         ev.preventDefault();
         var imageUrl = ev.target.elements.imageUrl.value;
@@ -92,7 +92,7 @@ function handleUpdateCourse(uid) {
         console.error(error);
     }
 }
-function saveUpdatedCourse(uid) {
+function handleSaveUpdatedCourse(uid) {
     try {
         var course = restaurant.menu.find(function (course) { return course.uid === uid; });
         if (!course)
@@ -130,26 +130,36 @@ function saveUpdatedCourse(uid) {
     }
 }
 function handleOpenForm() {
-    var menuForm = document.querySelector('.container__formMenu');
-    var btn = document.querySelector('.container__collapse-formMenu');
-    menuForm.classList.toggle('active');
-    if (menuForm.classList.contains("active")) {
-        btn.style.rotate = "180deg";
-        btn.style.top = "0";
+    try {
+        var menuForm = document.querySelector('.container__formMenu');
+        var btn = document.querySelector('.container__collapse-formMenu');
+        menuForm.classList.toggle('active');
+        if (menuForm.classList.contains("active")) {
+            btn.style.rotate = "180deg";
+            btn.style.top = "0";
+        }
+        else {
+            btn.style.rotate = "0deg";
+            btn.style.top = "50%";
+        }
     }
-    else {
-        btn.style.rotate = "0deg";
-        btn.style.top = "50%";
+    catch (error) {
+        console.error(error);
     }
 }
 function handleClickActiveOrder() {
-    var activeOrderDiv = document.querySelector('.active-orders');
-    var activeOrderContainer = document.querySelector('.container__active-order-box');
-    activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.toggle('active');
-    if (activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.contains('active')) {
-        activeOrderContainer.style.display = "flex";
+    try {
+        var activeOrderDiv = document.querySelector('.active-orders');
+        var activeOrderContainer = document.querySelector('.container__active-order-box');
+        activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.toggle('active');
+        if (activeOrderDiv === null || activeOrderDiv === void 0 ? void 0 : activeOrderDiv.classList.contains('active')) {
+            activeOrderContainer.style.display = "flex";
+        }
+        else {
+            activeOrderContainer.style.display = "none";
+        }
     }
-    else {
-        activeOrderContainer.style.display = "none";
+    catch (error) {
+        console.error(error);
     }
 }

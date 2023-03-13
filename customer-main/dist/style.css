@@ -40,7 +40,7 @@ body {
   border-radius: 15px;
   font-size: 1.5rem;
   background-color: #f8f8f8;
-  color: white;
+  color: black;
 }
 .container-customer__restaurant-root {
   margin-top: 30px;
@@ -51,6 +51,14 @@ body {
   gap: 25px;
   text-align: center;
   flex-wrap: wrap;
+  color: white;
+}
+.container-customer__result-root {
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
 }
 .container-customer__restaurant-card {
   overflow: hidden;
@@ -103,8 +111,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 80vh;
+  width: 50vw;
+  height: auto;
 }
 .container-customer__menu-close {
   cursor: pointer;
@@ -133,7 +141,7 @@ body {
   cursor: pointer;
   width: 150px;
   background-color: rgba(24, 24, 24, 0.418);
-  height: 290px;
+  height: 310px;
 }
 .container-customer__courses-card:hover {
   scale: 1.05;
@@ -170,6 +178,9 @@ body {
 }
 .container-customer__courses-btn i:hover {
   color: #c7c4c4;
+}
+.container-customer__courses-btn i:active {
+  color: orange;
 }
 .container-customer__cart__course__cart__course {
   width: 100vw;
